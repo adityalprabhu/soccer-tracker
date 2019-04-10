@@ -7,9 +7,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  container: any;
+  rightPanelActive: boolean;
+  message: any;
+  constructor() {
+    this.rightPanelActive = false;
+    this.message = 'sddsds';
+  }
 
   ngOnInit() {
   }
 
+  goToSignUp() {
+    this.rightPanelActive = !this.rightPanelActive;
+
+  }
+
+  goToSignIn() {
+    this.rightPanelActive = !this.rightPanelActive;
+  }
+
+  signUp() {
+    console.log('sdsdsd');
+  }
+
+  singIn() {
+
+  }
 }
