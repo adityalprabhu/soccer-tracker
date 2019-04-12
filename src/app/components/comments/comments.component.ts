@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {CommentServiceService} from '../../services/commentService/comment-service.service';
 
 @Component({
   selector: 'app-comments',
@@ -8,27 +9,24 @@ import { Component, OnInit } from '@angular/core';
 export class CommentsComponent implements OnInit {
 
   comments: any;
-  constructor() {
+  constructor(private commentsService: CommentServiceService) {
     this.comments = [
       {
         userId: 1,
         username: 'John',
         comment: 'This is a comment!'
-      },
-      {
-        userId: 2,
-        username: 'Jane',
-        comment: 'This is another comment!'
-      },
-      {
-        userId: 3,
-        username: 'Alice',
-        comment: 'This is yet another comment!'
-      },
+      }
     ];
   }
 
   ngOnInit() {
+    this.findAllComments();
+  }
+
+  findAllComments() {
+    this.commentsService.findAllComments().subscribe(res => {
+      this.comments = res;
+    });
   }
 
 }
