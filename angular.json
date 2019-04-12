@@ -20,10 +20,12 @@
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "../node_modules/font-awesome/fonts"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "../node_modules/font-awesome/css/font-awesome.css"
             ],
             "scripts": [],
             "es5BrowserSupport": true

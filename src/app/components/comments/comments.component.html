@@ -7,7 +7,9 @@
           {{comment.comment}}
         </div>
         <div class="col-3">
-          <img class="card-img float-right" src="http://lorempixel.com/200/200/people" alt="Card image cap">
+          <button *ngIf="comment.username=='NewUser'" class="btn btn-danger" (click)="deleteComment(comment._id)">
+            <i class="fa fa-times" aria-hidden="true"></i>
+          </button>
         </div>
       </div>
     </div>
@@ -15,9 +17,9 @@
 </div>
   <div class="row ml-3 mr-3">
     <div class="col-9" style="padding: 0">
-      <textarea class="form-control"aria-label="With textarea" placeholder="Enter your comment"></textarea>
+      <textarea [(ngModel)]="newComment" class="form-control" placeholder="Enter your comment"></textarea>
     </div>
     <div class="col-3" style="padding-right: 0">
-      <button class="btn btn-block btn-primary">Post</button>
+      <button class="btn btn-block btn-primary" (click)="postComment()">Post</button>
     </div>
   </div>
