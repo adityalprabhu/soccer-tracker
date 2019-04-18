@@ -26,13 +26,6 @@ app.use(function (req, res, next) {
   next();
 });
 
-// app.get("https://api-football-v1.p.rapidapi.com/seasons")
-//   .header("X-RapidAPI-Key", "2c4a4fc99amshe50fdd337dd7144p16d624jsn64cd58af65a9)")
-//   .header("Accept", "application/json")
-//   .end(function (result) {
-//     console.log(result.status, result.headers, result.body);
-//   });
-
 const commentsService = require('./services/comments.service.server');
 const dbService = require('./services/db.service.server');
 
