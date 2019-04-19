@@ -1,6 +1,6 @@
 <div class="row container-fluid d-flex justify-content-center">
 
-  <img src="{{leagueInfo.logo}}">
+  <img src="{{leagueDetails.logo}}">
 
 </div>
 
@@ -21,7 +21,7 @@
   </thead>
   <tbody>
 
-  <tr *ngFor="let row of standings">
+  <tr *ngFor="let row of leagueStandings">
     <td>{{row.rank}}</td>
     <td>{{row.teamName}}</td>
     <td>{{row.matchsPlayed}}</td>

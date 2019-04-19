@@ -9,10 +9,8 @@ const routes: Routes = [
 
   {path: 'login', component: LoginComponent},
   {path: 'comments', component: CommentsComponent},
-  {path: 'leagues', component: LeagueTableComponent},
+  {path: 'leagues/:leagueId', component: LeagueTableComponent},
   {path: 'team/:teamId', component: TeamComponent},
-
-
 ];
 
 @NgModule({
