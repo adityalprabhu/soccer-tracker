@@ -1,3 +1,11 @@
+<div class="row container-fluid d-flex justify-content-center">
+
+  <img src="{{leagueInfo.logo}}">
+
+</div>
+
+
+<div class="container-fluid">
 <table class="table table-hover">
   <thead class="thead-light">
   <tr>
@@ -13,7 +21,7 @@
   </thead>
   <tbody>
 
-  <tr *ngFor="let row of data">
+  <tr *ngFor="let row of standings">
     <td>{{row.rank}}</td>
     <td>{{row.teamName}}</td>
     <td>{{row.matchsPlayed}}</td>
@@ -25,3 +33,4 @@
   </tr>
   </tbody>
 </table>
+</div>
