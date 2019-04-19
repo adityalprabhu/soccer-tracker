@@ -1,0 +1,88 @@
+<div class="team-container ">
+  <div class="teamLogo mt-5 text-center">
+    <img id="teamLogoImg" src={{team.logo}} alt="team logo">
+  </div>
+
+  <div class="teamDetails mt-3">
+    <div>Team Name: <b>{{team.name}}</b></div>
+    <div>League Standing: <b>{{team.leagueStanding}}</b></div>
+  </div>
+
+  <div *ngIf="(team.live | json) != '{}'" class="center-container card text-center w-75 mt-3">
+    <div class="card-header">
+      Live Scores:
+    </div>
+    <div class="card-body">
+      <div>{{team.live.round}}</div>
+      <h5 class="card-title mb-0">{{team.live.homeTeam}} - {{team.live.awayTeam}}</h5>
+      <div class="card-text mt-1">
+        <h5 class="mb-0"><b>{{team.live.goalsHomeTeam}}</b> - <b>{{team.live.goalsAwayTeam}}</b></h5>
+        <div>{{team.live.elapsed}}'</div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="center-container text-center w-75 mt-3">
+    <ul class="center-container text-center nav nav-pills mb-3 row" id="pills-tab" role="tablist">
+      <li class="nav-item col-4">
+        <a class="nav-link active" id="pills-upcomingMatches-tab" data-toggle="pill" href="#pills-upcomingMatches" role="tab" aria-controls="pills-upcomingMatches" aria-selected="true">Upcoming Matches</a>
+      </li>
+      <li class="nav-item col-4">
+        <a class="nav-link" id="pills-pastMatches-tab" data-toggle="pill" href="#pills-pastMatches" role="tab" aria-controls="pills-pastMatches" aria-selected="false">Completed Matches</a>
+      </li>
+      <li class="nav-item col-4">
+        <a class="nav-link" id="pills-roster-tab" data-toggle="pill" href="#pills-roster" role="tab" aria-controls="pills-roster" aria-selected="false">Team Roster</a>
+      </li>
+    </ul>
+
+
+    <div class="tab-content" id="pills-tabContent">
+      <div class="tab-pane fade show active" id="pills-upcomingMatches" role="tabpanel" aria-labelledby="pills-upcomingMatches-tab">
+        <div class="center-container card text-center mt-3 card">
+          <div class="card-header">
+            Upcoming Matches
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item" *ngFor="let match of upcomingMatches">
+              <div>{{match.event_date | date}}</div>
+              <div><b>{{match.homeTeam}} {{match.goalsHomeTeam}}</b> - <b>{{match.goalsAwayTeam}} {{match.awayTeam}}</b></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tab-pane fade" id="pills-pastMatches" role="tabpanel" aria-labelledby="pills-pastMatches-tab">
+        <div class="center-container card text-center mt-3 card">
+          <div class="card-header">
+            Completed Matches
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item" *ngFor="let pmatch of pastMatches">
+              <div>{{pmatch.event_date | date}}</div>
+              <div><b>{{pmatch.homeTeam}} {{pmatch.goalsHomeTeam}}</b> - <b>{{pmatch.goalsAwayTeam}} {{pmatch.awayTeam}}</b></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tab-pane fade" id="pills-roster" role="tabpanel" aria-labelledby="pills-roster-tab">
+        <div class="center-container card mt-3 card">
+          <div class="card-header">
+            Roster
+          </div>
+          <ul class="list-group list-group-flush" id="roster">
+            <li class="list-group-item"><b>Coach</b> : <span *ngFor="let coach of roster.api.coachs">{{coach}}</span>
+            </li>
+
+            <li class="list-group-item" *ngFor="let p of roster.api.players">
+              <div>{{p.player}} - {{p.number}}</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

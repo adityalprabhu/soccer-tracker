@@ -1,0 +1,27 @@
+#teamLogoImg {
+  height: 100px;
+  width: 100px;
+}
+
+.teamDetails {
+  justify-content: space-around;
+  display: flex;
+}
+
+.center-container {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#pills-tab > li {
+  display:inline-block;
+  border: solid 0.5px #d3d3d3;
+  border-radius: 5px;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+ul {
+  text-align: center;
+  list-style: inside;
+}
