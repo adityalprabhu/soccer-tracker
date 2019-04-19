@@ -8,13 +8,15 @@ import { CommentsComponent } from './components/comments/comments.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { LeagueTableComponent } from './components/league-table/league-table.component';
+import { TeamComponent } from './components/team/team.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     CommentsComponent,
-    LeagueTableComponent
+    LeagueTableComponent,
+    TeamComponent
   ],
   imports: [
     BrowserModule,

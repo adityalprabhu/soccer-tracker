@@ -9,4 +9,9 @@ export class ApiUrlsService {
   public static createComment = environment.domain + '/api/comment';
   public static deleteComment = environment.domain + '/api/comment/';
 
+  public static findTeamDetails = environment.fdomain + '/teams/team/';
+  public static findTeamFixtures = environment.fdomain + '/fixtures/team/';
+  public static findLeagueStandings = environment.fdomain + '/leagueTable/';
+  public static findLiveFixtures = environment.fdomain + '/fixtures/live';
+
 }
