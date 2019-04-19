@@ -8,7 +8,8 @@ import { CommentsComponent } from './components/comments/comments.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { LeagueTableComponent } from './components/league-table/league-table.component';
-import { TeamComponent } from './components/team/team.component';
+// import { TeamComponent } from './components/team/team.component';
+import { FixturesComponent } from './components/fixtures/fixtures.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { TeamComponent } from './components/team/team.component';
     LoginComponent,
     CommentsComponent,
     LeagueTableComponent,
-    TeamComponent
+    // TeamComponent,
+    FixturesComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,37 @@
+<div class="container-fluid">
+  <div class="row">
+    <h1>Fixtures List</h1>
+  </div>
+
+  <div id="live-fixtures" class="row" >
+    <h1>
+      LIVE FIXTURES
+    </h1>
+    <table class="table table-hover">
+
+      <thead class="thead-light">
+        <tr>
+          <th scope="col"></th>
+          <th scope="col"></th>
+          <th scope="col">Home Team</th>
+          <th scope="col">Score</th>
+          <th scope="col">Away Team</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+
+
+      <tbody>
+      <tr *ngFor="let fixture of fixtures">
+        <td id="led-box"><div class="led-green"></div></td>
+        <td>logo</td>
+        <td>{{fixture.homeTeam}}</td>
+        <td>{{fixture.goalsHomeTeam}}  -  {{fixture.goalsAwayTeam}}</td>
+        <td>{{fixture.awayTeam}}</td>
+        <td>logo</td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>

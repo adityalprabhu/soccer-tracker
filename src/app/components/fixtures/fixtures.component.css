@@ -1,0 +1,55 @@
+#led-box {
+  width: 2px;
+}
+
+/*div {*/
+/*  border: solid;*/
+/*  border-width: 1px;*/
+/*  border-color: red;*/
+/*}*/
+
+
+#live-fixtures {
+  visibility: hidden;
+}
+
+@-webkit-keyframes blinkGreen {
+  from { background-color: #ABFF00; }
+  50% { background-color: #318a1e; box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #304701 0 -1px 9px, #ABFF00 0 2px 0; }
+  to { background-color: #ABFF00; }
+}
+@-moz-keyframes blinkGreen {
+  from { background-color: #ABFF00; }
+  50% { background-color: #318a1e; box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #304701 0 -1px 9px, #ABFF00 0 2px 0; }
+  to { background-color: #ABFF00; }
+}
+@-ms-keyframes blinkGreen {
+  from { background-color: #ABFF00; }
+  50% { background-color: #318a1e; box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #304701 0 -1px 9px, #ABFF00 0 2px 0; }
+  to { background-color: #ABFF00; }
+}
+@-o-keyframes blinkGreen {
+  from { background-color: #ABFF00; }
+  50% { background-color: #318a1e; box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #304701 0 -1px 9px, #ABFF00 0 2px 0; }
+  to { background-color: #ABFF00; }
+}
+@keyframes blinkGreen {
+  from { background-color: #ABFF00; }
+  50% { background-color: #318a1e; box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #304701 0 -1px 9px, #ABFF00 0 2px 0; }
+  to { background-color: #ABFF00; }
+}
+
+.led-green {
+  margin: 0 auto;
+  width: 24px;
+  height: 24px;
+  background-color: #ABFF00;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #304701 0 -1px 9px, #89FF00 0 2px 12px;
+  -webkit-animation: blinkGreen 1s infinite;
+  -moz-animation: blinkGreen 1s infinite;
+  -ms-animation: blinkGreen 1s infinite;
+  -o-animation: blinkGreen 1s infinite;
+  animation: blinkGreen 1s infinite;
+}
+
