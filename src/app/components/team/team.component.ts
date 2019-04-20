@@ -70,10 +70,10 @@ export class TeamComponent implements OnInit {
       console.log(this.allMatches)
       const entries = Object.entries(this.allMatches.api.fixtures);
       for (let [x,y] of entries){
-        if(today < new Date(y.event_date)){
+        if(today < new Date(y['event']['date'])){
           this.upcomingMatches.push(y);
         }
-        else{
+        else {
           this.pastMatches.push(y);
         }
       }
@@ -3375,9 +3375,9 @@ export class TeamComponent implements OnInit {
       let allLiveFixtures =  Object.values(res['api'].fixtures);
 
       for (let fixture of allLiveFixtures){
-        if (fixture.homeTeam_id == this.teamId || fixture.awayTeam_id == this.teamId){
+        if (fixture['homeTeam_id'] == this.teamId || fixture['awayTeam_id'] == this.teamId){
           this.liveFixture = fixture;
-          console.log(this.liveFixture)
+          console.log(this.liveFixture);
         }
       }
     });
