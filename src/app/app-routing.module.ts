@@ -6,6 +6,7 @@ import {LeagueTableComponent} from './components/league-table/league-table.compo
 import {FixturesComponent} from './components/fixtures/fixtures.component';
 import {TeamComponent} from './components/team/team.component';
 import {HomeComponent} from "./components/home/home.component";
+import {ProfileComponent} from './components/profile/profile.component';
 
 const routes: Routes = [
 
@@ -15,7 +16,8 @@ const routes: Routes = [
   {path: 'fixtures', component: FixturesComponent},
   {path: 'team/:teamId', component: TeamComponent},
   {path: 'league/:leagueId', component: LeagueTableComponent},
-  {path: '', component: HomeComponent}
+  {path: '', component: HomeComponent},
+  {path: 'profile', component: ProfileComponent}
 
 ];
 

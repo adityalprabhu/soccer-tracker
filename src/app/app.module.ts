@@ -11,6 +11,7 @@ import { LeagueTableComponent } from './components/league-table/league-table.com
 import { TeamComponent } from './components/team/team.component';
 import { FixturesComponent } from './components/fixtures/fixtures.component';
 import { HomeComponent } from './components/home/home.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { HomeComponent } from './components/home/home.component';
     LeagueTableComponent,
     TeamComponent,
     FixturesComponent,
-    HomeComponent
+    HomeComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
