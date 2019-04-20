@@ -67,6 +67,7 @@ populateDatabase = () => {
   ];
 
   return userModel.insertMany(users);
+
 };
 
 //////////// User ///////////
