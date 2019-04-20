@@ -37,6 +37,7 @@ export class FixturesComponent implements OnInit {
   monthNames: any;
   topTeams: any[];
   countryFlags: any;
+  logos: any;
 
   constructor(private route: ActivatedRoute,
               private location: Location,
@@ -52,6 +53,7 @@ export class FixturesComponent implements OnInit {
       this.countryFlags = Utils.COUNTRYFLAGS;
 
       this.allGames = [];
+      this.logos = Utils.TEAMLOGOS;
       this.findLiveFixtures();
       this.fillMatchLists();
       this.todayGames = [];
@@ -59,7 +61,6 @@ export class FixturesComponent implements OnInit {
       this.monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
         'July', 'August', 'September', 'October', 'November', 'December'];
       this.findTopTeams();
-
     });
 
 
@@ -312,4 +313,13 @@ export class FixturesComponent implements OnInit {
     }
   }
 
+  getLogo(teamID) {
+    this.teamService.findLeagueStandings(Utils.LEAGUEIDS.german).subscribe(res => {
+      return res;
+    });
+  }
+
+  findLogo(teamID) {
+    return this.logos[parseInt(teamID, 10)];
+  }
 }
