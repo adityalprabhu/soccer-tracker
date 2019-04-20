@@ -13,8 +13,11 @@
         <tr>
           <th scope="col"></th>
           <th scope="col"></th>
+          <th scope="col"></th>
+          <th scope="col"></th>
           <th scope="col">Home Team</th>
           <th scope="col">Score</th>
+          <th scope="col"></th>
           <th scope="col">Away Team</th>
           <th scope="col"></th>
         </tr>
@@ -26,9 +29,21 @@
           <td id="led-box">
             <div class="led-green"></div>
           </td>
+          <td *ngIf="isHypeFixture(fixture);else other_content" width="40">
+            <img src="https://ui-ex.com/images/fire-svg-6.png"
+                 style="width:35px;height:35;"
+                 title="Top Teams Playing">
+          </td>
+          <ng-template #other_content>
+            <td></td>
+          </ng-template>
+          <td><img src="{{countryFlags[fixture['league_id']]}}"
+                   style="width:35px;height:35;">
+          </td>
           <td>logo</td>
           <td><a routerLink="/team/{{fixture.homeTeam_id}}">{{fixture.homeTeam}}</a></td>
           <td><b>{{fixture.goalsHomeTeam}}  -  {{fixture.goalsAwayTeam}}</b></td>
+          <td>{{getTime(fixture)}}</td>
           <td><a routerLink="/team/{{fixture.awayTeam_id}}">{{fixture.awayTeam}}</a></td>
           <td>logo</td>
         </tr>

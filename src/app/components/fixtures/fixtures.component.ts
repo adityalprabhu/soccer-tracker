@@ -182,23 +182,25 @@ export class FixturesComponent implements OnInit {
     this.fixtureService.findLiveFixtures().subscribe(res => {
       var todaysFixtures = [];
       var recentFixtures = Object.values(res['api'].fixtures);
+      console.log(recentFixtures)
 
       for (let fixture of recentFixtures) {
 
         let gameTime = new Date(fixture['event_date']);
 
-        if (gameTime.getDate() === this.today.getDate()
-          && (this.today.getHours() - gameTime.getHours() > 3)
-          && Utils.SUPPORTEDLEAGUES.includes(fixture['league_id'])) {
+        if (
+          Utils.SUPPORTEDLEAGUES.includes(parseInt(fixture['league_id'], 10))) {
           todaysFixtures.push(fixture);
+          console.log(todaysFixtures)
         }
       }
 
       this.fixtures = todaysFixtures;
+      console.log(this.fixtures)
 
-      if (this.fixtures.length !== 0) {
-        let hideLiveScores = document.getElementById('live-fixtures');
-        hideLiveScores.style.display = 'inline';
+      if (todaysFixtures.length !== 0) {
+        let showLiveScores = document.getElementById('live-fixtures');
+        showLiveScores.style.display = 'inline';
       } else {
         let showNoLiveMatches = document.getElementById('no-live-fixtures');
         showNoLiveMatches.style.display = 'inline';
@@ -285,17 +287,4 @@ export class FixturesComponent implements OnInit {
     return '\'' + fixture['elapsed'];
   }
 
-  getCountryFlag(fixture){
-    if(fixture['league_id'] === Utils.LEAGUEIDS.german){
-      return this.countryFlags['germany'];
-    } else if(fixture['league_id'] === Utils.LEAGUEIDS.spanish){
-      return this.countryFlags['spain'];
-    } else if(fixture['league_id'] === Utils.LEAGUEIDS.italy){
-      return this.countryFlags['italy'];
-    } else if(fixture['league_id'] === Utils.LEAGUEIDS.french){
-      return this.countryFlags['france'];
-    } else if(fixture['league_id'] === Utils.LEAGUEIDS.english){
-      return this.countryFlags['england'];
-    }
-  }
 }
