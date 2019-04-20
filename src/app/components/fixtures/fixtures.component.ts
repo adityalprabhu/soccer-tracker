@@ -188,14 +188,18 @@ export class FixturesComponent implements OnInit {
 
         let gameTime = new Date(fixture['event_date']);
 
-        if (
-          Utils.SUPPORTEDLEAGUES.includes(parseInt(fixture['league_id'], 10))) {
+        if (gameTime.getDate() === this.today.getDate()
+          && Utils.SUPPORTEDLEAGUES.includes(parseInt(fixture['league_id'], 10))) {
           todaysFixtures.push(fixture);
           console.log(todaysFixtures)
         }
       }
 
+      todaysFixtures.sort((a, b) => {
+        return parseInt(b['elapsed'], 10) - parseInt(a['elapsed'], 10) ;
+      });
       this.fixtures = todaysFixtures;
+
       console.log(this.fixtures)
 
       if (todaysFixtures.length !== 0) {
@@ -285,6 +289,11 @@ export class FixturesComponent implements OnInit {
     }
 
     return '\'' + fixture['elapsed'];
+  }
+
+  checkIfDone(fixture) {
+    var date = new Date(fixture['event_date']);
+    return fixture['statusShort'] === 'FT' && date.getDate() === this.today.getDate();
   }
 
 }

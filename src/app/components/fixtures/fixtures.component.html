@@ -55,6 +55,51 @@
       <h3>No Live Matches!</h3>
     </div>
 
+    <!-- Earlier Today's fixtures -->
+    <div>
+
+      <h3>Earlier Today - {{monthNames[today.getMonth()]}} {{today.getDate()}}, {{today.getFullYear()}}</h3>
+      <table class="table table-striped">
+        <thead class="thead-dark">
+        <tr>
+          <th scope="col"></th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+          <th scope="col">Home Team</th>
+          <th scope="col">Score</th>
+          <th scope="col"></th>
+          <th scope="col">Away Team</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <ng-container *ngFor="let fixture of allGames">
+          <tr *ngIf="checkIfDone(fixture)">
+            <td *ngIf="isHypeFixture(fixture);else other_content" width="40">
+              <img src="https://ui-ex.com/images/fire-svg-6.png"
+                   style="width:35px;height:35;"
+                   title="Top Teams Playing">
+            </td>
+            <ng-template #other_content>
+              <td></td>
+            </ng-template>
+            <td><img src="{{countryFlags[fixture['league_id']]}}"
+                     style="width:35px;height:35;">
+            </td>
+            <td>logo</td>
+            <td><a routerLink="/team/{{fixture.homeTeam_id}}">{{fixture.homeTeam}}</a></td>
+            <td><b>{{fixture.goalsHomeTeam}}  -  {{fixture.goalsAwayTeam}}</b></td>
+            <td>{{fixture['statusShort']}}</td>
+            <td><a routerLink="/team/{{fixture.awayTeam_id}}">{{fixture.awayTeam}}</a></td>
+            <td>logo</td>
+          </tr>
+        </ng-container>
+        </tbody>
+      </table>
+    </div>
+
 
     <!-- Today's fixtures -->
     <div>
