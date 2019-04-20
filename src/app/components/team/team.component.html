@@ -44,7 +44,7 @@
           </div>
           <ul *ngIf="(upcomingMatches | json) != '{}'" class="list-group list-group-flush">
             <li  class="list-group-item" *ngFor="let match of upcomingMatches">
-              <div>{{match['event_date'] | date}}</div>
+              <div>{{match['event_date'] | date: 'long'}}</div>
               <div><b>{{match['homeTeam']}} {{match['goalsHomeTeam']}}</b> - <b>{{match['goalsAwayTeam']}} {{match['awayTeam']}}</b></div>
             </li>
           </ul>
@@ -65,21 +65,23 @@
         </div>
       </div>
 
-      <!--<div class="tab-pane fade" id="pills-roster" role="tabpanel" aria-labelledby="pills-roster-tab">-->
-        <!--<div class="center-container card mt-3 card">-->
-          <!--<div class="card-header">-->
-            <!--Roster-->
-          <!--</div>-->
-          <!--<ul class="list-group list-group-flush" id="roster">-->
-            <!--<li class="list-group-item"><b>Coach</b> : <span *ngFor="let coach of roster.api.coachs">{{coach}}</span>-->
-            <!--</li>-->
 
-            <!--<li class="list-group-item" *ngFor="let p of roster.api.players">-->
-              <!--<div>{{p.player}} - {{p.number}}</div>-->
-            <!--</li>-->
-          <!--</ul>-->
-        <!--</div>-->
-      <!--</div>-->
+
+      <div class="tab-pane fade" id="pills-roster" role="tabpanel" aria-labelledby="pills-roster-tab">
+        <div class="center-container card mt-3 card">
+          <div class="card-header">
+            Roster
+          </div>
+          <ul class="list-group list-group-flush" id="roster">
+            <li class="list-group-item"><b>Coach</b> : <span *ngFor="let coach of roster.api.coachs">{{coach}}</span>
+            </li>
+
+            <li class="list-group-item" *ngFor="let p of roster.api.players">
+              <div>{{p.player}}  {{p.number}}</div>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
 
   </div>
