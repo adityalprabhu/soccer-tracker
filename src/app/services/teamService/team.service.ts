@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { ApiUrlsService } from '../apiUrlsService';
-import { HttpHeaders } from '@angular/common/http';
-import { Utils } from '../../../assets/utils'
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {ApiUrlsService} from '../apiUrlsService';
+import {HttpHeaders} from '@angular/common/http';
+import {Utils} from '../../../assets/utils';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'X-RapidAPI-Key':  Utils.RAPIDKEY
+    'X-RapidAPI-Key': Utils.RAPIDKEY
   })
 };
 
@@ -22,6 +22,8 @@ export class TeamService {
   findLiveFixturesApiUrl: string;
   findLeagueDetailsApiUrl: string;
   findTeamRosterApiUrl: string;
+  findTeamLogoApiUrl: string;
+  findLeagueLogoApiUrl: string;
 
   constructor(private httpClient: HttpClient) {
     this.findTeamDetailsApiUrl = ApiUrlsService.findTeamDetails;
@@ -30,6 +32,8 @@ export class TeamService {
     this.findLiveFixturesApiUrl = ApiUrlsService.findLiveFixtures;
     this.findLeagueDetailsApiUrl = ApiUrlsService.findLeagueDetails;
     this.findTeamRosterApiUrl = ApiUrlsService.findTeamRoster;
+    this.findLeagueLogoApiUrl = ApiUrlsService.findLeagueLogo;
+    this.findTeamLogoApiUrl = ApiUrlsService.findTeamLogo;
   }
 
   public findTeamDetails(teamId) {
@@ -54,6 +58,14 @@ export class TeamService {
 
   public findTeamRoster(teamId) {
     return this.httpClient.get(this.findTeamRosterApiUrl + teamId, httpOptions);
+  }
+
+  public findTeamLogo(teamId) {
+    return this.httpClient.get(this.findTeamLogoApiUrl + teamId);
+  }
+
+  public findLeagueLogo(leagueId) {
+    return this.httpClient.get(this.findLeagueLogoApiUrl + leagueId);
   }
 
 }
