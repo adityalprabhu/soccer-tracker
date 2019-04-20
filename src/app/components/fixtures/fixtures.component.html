@@ -26,11 +26,22 @@
         <td id="led-box"><div class="led-green"></div></td>
         <td>logo</td>
         <td><a routerLink="/team/{{fixture.homeTeam_id}}">{{fixture.homeTeam}}</a></td>
-        <td>{{fixture.goalsHomeTeam}}  -  {{fixture.goalsAwayTeam}}</td>
+        <td><b>{{fixture.goalsHomeTeam}}  -  {{fixture.goalsAwayTeam}}</b></td>
         <td><a routerLink="/team/{{fixture.awayTeam_id}}">{{fixture.awayTeam}}</a></td>
         <td>logo</td>
       </tr>
       </tbody>
     </table>
   </div>
-</div>
+
+  <div id="no-live-fixtures" class="row" style="text-align: center">
+    <h3>No Live Matches!</h3>
+  </div>
+
+
+
+
+
+
+
+  </div>

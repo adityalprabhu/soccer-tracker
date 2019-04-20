@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import {Location} from "@angular/common";
-import {FixtureService} from "../../services/fixtureService/fixture.service";
-import {Utils} from "../../../assets/utils";
+import {ActivatedRoute, Router} from '@angular/router';
+import {Location} from '@angular/common';
+import {FixtureService} from '../../services/fixtureService/fixture.service';
+import {Utils} from '../../../assets/utils';
+import {element} from 'protractor';
 
 
 @Component({
@@ -13,8 +14,6 @@ import {Utils} from "../../../assets/utils";
 export class FixturesComponent implements OnInit {
 
 
-
-
   fixtures: any;
   leagueIDs: any;
   today: Date;
@@ -22,7 +21,14 @@ export class FixturesComponent implements OnInit {
   spanishLeague: true;
   germanLeague: true;
   frenchLeague: true;
-  italianLeague: true;
+  italianLeague: true
+
+  englishGames: any;
+  spanishGames: any;
+  germanGames: any;
+  frenchGamesy;
+  italianGames: any;
+
 
   constructor(private route: ActivatedRoute,
               private location: Location,
@@ -33,12 +39,14 @@ export class FixturesComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.findLiveFixtures();
       this.today = new Date();
+      this.findLiveFixtures();
     });
 
 
   }
+
+
 
 
   findLiveFixtures() {
@@ -48,18 +56,23 @@ export class FixturesComponent implements OnInit {
 
       for (let fixture of recentFixtures) {
 
-        let date = new Date(fixture['event_date']);
+        let gameTime = new Date(fixture['event_date']);
 
-        if (date.getDate() === this.today.getDate() && Utils.SUPPORTEDLEAGUES.includes(fixture['league_id'])) {
+        if (gameTime.getDate() === this.today.getDate()
+          && (gameTime.getHours() - 2 > 0)
+          && Utils.SUPPORTEDLEAGUES.includes(fixture['league_id'])) {
           todaysFixtures.push(fixture);
         }
       }
 
-      this.fixtures = recentFixtures;
+      this.fixtures = todaysFixtures;
 
       if (this.fixtures.length !== 0) {
-        let element = document.getElementById('live-fixtures');
-        element.style.visibility = 'visible';
+        let hideLiveScores = document.getElementById('live-fixtures');
+        hideLiveScores.style.display = 'inline';
+      } else {
+        let showNoLiveMatches = document.getElementById('no-live-fixtures');
+        showNoLiveMatches.style.display = 'inline';
       }
     });
   }

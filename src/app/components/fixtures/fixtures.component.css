@@ -10,7 +10,11 @@
 
 
 #live-fixtures {
-  visibility: hidden;
+  display: none;
+}
+
+#no-live-fixtures {
+  display: none;
 }
 
 @-webkit-keyframes blinkGreen {
