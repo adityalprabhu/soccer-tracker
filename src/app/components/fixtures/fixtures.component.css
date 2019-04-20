@@ -8,6 +8,13 @@
 /*  border-color: red;*/
 /*}*/
 
+#wrapper {
+  margin-bottom: 20px;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top: 20px;
+
+}
 
 /*Center rows*/
 .table td {
@@ -17,6 +24,13 @@
 /*Center headers*/
 .table th {
   text-align: center;
+}
+
+.table {
+  border-width: 3px;
+  border-style: solid;
+  border-radius: 10px;
+
 }
 
 #live-fixtures {

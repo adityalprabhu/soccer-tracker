@@ -36,7 +36,7 @@ export class FixturesComponent implements OnInit {
 
   monthNames: any;
   topTeams: any[];
-
+  countryFlags: any;
 
   constructor(private route: ActivatedRoute,
               private location: Location,
@@ -49,6 +49,8 @@ export class FixturesComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.today = new Date();
+      this.countryFlags = Utils.COUNTRYFLAGS;
+
       this.allGames = [];
       this.findLiveFixtures();
       this.fillMatchLists();
@@ -57,6 +59,7 @@ export class FixturesComponent implements OnInit {
       this.monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
         'July', 'August', 'September', 'October', 'November', 'December'];
       this.findTopTeams();
+
     });
 
 
@@ -280,5 +283,19 @@ export class FixturesComponent implements OnInit {
     }
 
     return '\'' + fixture['elapsed'];
+  }
+
+  getCountryFlag(fixture){
+    if(fixture['league_id'] === Utils.LEAGUEIDS.german){
+      return this.countryFlags['germany'];
+    } else if(fixture['league_id'] === Utils.LEAGUEIDS.spanish){
+      return this.countryFlags['spain'];
+    } else if(fixture['league_id'] === Utils.LEAGUEIDS.italy){
+      return this.countryFlags['italy'];
+    } else if(fixture['league_id'] === Utils.LEAGUEIDS.french){
+      return this.countryFlags['france'];
+    } else if(fixture['league_id'] === Utils.LEAGUEIDS.english){
+      return this.countryFlags['england'];
+    }
   }
 }
