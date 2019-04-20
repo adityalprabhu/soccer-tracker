@@ -25,12 +25,12 @@ module.exports = app => {
 
   let findLogoUrlByTeam = (req, res) => {
     logoDao.findLogoUrlByTeam(req.params['tid'])
-      .then(response => res.json(response));
+      .then(response => res.json(response[0]['logoUrl']));
   };
 
   let findLogoUrlByLeague = (req, res) => {
     logoDao.findLogoUrlByLeague(req.params['lid'])
-      .then(response => res.json(response));
+      .then(response => res.json(response[0]['logoUrl']));
   };
 
   let truncateLogos = (req, res) => {
