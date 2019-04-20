@@ -82,6 +82,9 @@ export class FixturesComponent implements OnInit {
         }
       }
       this.englishGames = closeFixtures;
+      this.allGames.sort((a, b) => {
+        return parseInt(a['event_timestamp'], 10) - parseInt(b['event_timestamp'], 10) ;
+      });
 
     });
     this.fixtureService.findLeagueFixtures(Utils.LEAGUEIDS.spanish).subscribe(res => {
@@ -101,6 +104,9 @@ export class FixturesComponent implements OnInit {
         }
       }
       this.spanishGames = closeFixtures;
+      this.allGames.sort((a, b) => {
+        return parseInt(a['event_timestamp'], 10) - parseInt(b['event_timestamp'], 10) ;
+      });
     });
     this.fixtureService.findLeagueFixtures(Utils.LEAGUEIDS.german).subscribe(res => {
       var closeFixtures = [];
@@ -119,6 +125,9 @@ export class FixturesComponent implements OnInit {
         }
       }
       this.germanGames = closeFixtures;
+      this.allGames.sort((a, b) => {
+        return parseInt(a['event_timestamp'], 10) - parseInt(b['event_timestamp'], 10) ;
+      });
     });
     this.fixtureService.findLeagueFixtures(Utils.LEAGUEIDS.italy).subscribe(res => {
       var closeFixtures = [];
@@ -137,6 +146,9 @@ export class FixturesComponent implements OnInit {
         }
       }
       this.italianGames = closeFixtures;
+      this.allGames.sort((a, b) => {
+        return parseInt(a['event_timestamp'], 10) - parseInt(b['event_timestamp'], 10) ;
+      });
     });
     this.fixtureService.findLeagueFixtures(Utils.LEAGUEIDS.french).subscribe(res => {
       var closeFixtures = [];
@@ -155,7 +167,11 @@ export class FixturesComponent implements OnInit {
         }
       }
       this.frenchGames = closeFixtures;
+      this.allGames.sort((a, b) => {
+        return parseInt(a['event_timestamp'], 10) - parseInt(b['event_timestamp'], 10) ;
+      });
     });
+
   }
 
 
@@ -217,13 +233,7 @@ export class FixturesComponent implements OnInit {
   }
 
   isHypeFixture(fixture) {
-    console.log("tried hype")
-    console.log(this.topTeams)
-    let hype = this.topTeams.includes(fixture['homeTeam']) && this.topTeams.includes(fixture['awayTeam']);
-    if (hype) {
-      console.log('found hype' + fixture);
-    }
-    return hype;
+    return this.topTeams.includes(fixture['homeTeam']) && this.topTeams.includes(fixture['awayTeam']);
 
   }
 
@@ -258,7 +268,17 @@ export class FixturesComponent implements OnInit {
         this.topTeams.push(leagueStandings[i]['teamName']);
       }
     });
+  }
 
 
+  getTime(fixture) {
+    if (fixture['statusShort'] === 'NS') {
+      var date = new Date(fixture['event_date']);
+      var dateString = date.toTimeString().substr(0, 5);
+
+      return dateString;
+    }
+
+    return '\'' + fixture['elapsed'];
   }
 }
