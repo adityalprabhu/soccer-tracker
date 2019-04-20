@@ -13,6 +13,8 @@ import {Location} from '@angular/common';
 export class LeagueTableComponent implements OnInit {
 
   leagueId;
+  leagueName;
+  leagueSeasonNext;
   leagueStandings;
   leagueDetails;
 
@@ -29,6 +31,23 @@ export class LeagueTableComponent implements OnInit {
 
     this.findLeagueStandings(this.leagueId);
     this.findLeagueDetails(this.leagueId);
+    this.findLeagueName(this.leagueId);
+  }
+
+  findLeagueName(leagueId) {
+    if (leagueId === '2') {
+      this.leagueName = 'English';
+    } else if (leagueId === '4') {
+      this.leagueName = 'French';
+    } else if (leagueId === '87') {
+      this.leagueName = 'Spanish';
+    } else if (leagueId === '8') {
+      this.leagueName = 'German';
+    } else if (leagueId === '94') {
+      this.leagueName = 'Italian';
+    } else {
+      this.leagueName = '';
+    }
   }
 
   findLeagueStandings(leagueId) {
@@ -40,7 +59,7 @@ export class LeagueTableComponent implements OnInit {
   findLeagueDetails(leagueId) {
     this.teamService.findLeagueDetails(leagueId).subscribe(res => {
       this.leagueDetails = res['api']['leagues'][leagueId];
-      console.log(this.leagueDetails);
+      this.leagueSeasonNext = parseInt(this.leagueDetails.season, 10) + 1;
     });
   }
 

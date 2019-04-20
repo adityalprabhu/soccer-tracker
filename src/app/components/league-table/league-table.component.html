@@ -1,36 +1,42 @@
-<div class="row container-fluid d-flex justify-content-center">
+<div class="container-fluid d-flex flex-row align-items-center justify-content-between">
 
-  <img src="{{leagueDetails.logo}}">
+  <img src="{{leagueDetails.logo}}" class="resize">
+  <h1>{{leagueName}} {{leagueDetails.name}} Standings</h1>
+
+  <div>
+    <h5>Season</h5>
+    <h1>{{leagueDetails.season}} - {{leagueSeasonNext}}</h1>
+  </div>
 
 </div>
 
 
 <div class="container-fluid">
-<table class="table table-hover">
-  <thead class="thead-light">
-  <tr>
-    <th scope="col">Rank</th>
-    <th scope="col">Team</th>
-    <th scope="col">Matches Played</th>
-    <th scope="col">Wins</th>
-    <th scope="col">Draws</th>
-    <th scope="col">Losses</th>
-    <th scope="col">Goal Difference</th>
-    <th scope="col">Points</th>
-  </tr>
-  </thead>
-  <tbody>
+  <table class="table table-hover table-striped">
+    <thead class="thead-dark">
+    <tr>
+      <th scope="col">Rank</th>
+      <th scope="col">Team</th>
+      <th scope="col">Matches Played</th>
+      <th scope="col">Wins</th>
+      <th scope="col">Draws</th>
+      <th scope="col">Losses</th>
+      <th scope="col">Goal Difference</th>
+      <th scope="col">Points</th>
+    </tr>
+    </thead>
+    <tbody>
 
-  <tr *ngFor="let row of leagueStandings">
-    <td>{{row.rank}}</td>
-    <td>{{row.teamName}}</td>
-    <td>{{row.matchsPlayed}}</td>
-    <td>{{row.win}}</td>
-    <td>{{row.draw}}</td>
-    <td>{{row.lose}}</td>
-    <td>{{row.goalsDiff}}</td>
-    <td>{{row.points}}</td>
-  </tr>
-  </tbody>
-</table>
+    <tr *ngFor="let row of leagueStandings">
+      <th>{{row.rank}}</th>
+      <td><a routerLink="/team/{{row.team_id}}">{{row.teamName}}</a></td>
+      <td>{{row.matchsPlayed}}</td>
+      <td>{{row.win}}</td>
+      <td>{{row.draw}}</td>
+      <td>{{row.lose}}</td>
+      <td>{{row.goalsDiff}}</td>
+      <td>{{row.points}}</td>
+    </tr>
+    </tbody>
+  </table>
 </div>

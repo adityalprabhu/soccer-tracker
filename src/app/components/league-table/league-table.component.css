@@ -1,6 +1,24 @@
 /*resize proportionally*/
 img.resize {
-  width:100px;
   height: auto;
+  width: auto;
+  max-width: 300px;
+  max-height: 100px;
 }
+
+/*Center rows*/
+.table td {
+  text-align: center;
+}
+
+/*Center headers*/
+.table th {
+  text-align: center;
+}
+
+#teamLogoImg {
+  height: 100px;
+  width: 100px;
+}
+
 
