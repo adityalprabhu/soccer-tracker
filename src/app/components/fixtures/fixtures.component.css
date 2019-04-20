@@ -10,11 +10,17 @@
 
 #wrapper {
   margin-bottom: 20px;
-  margin-left: 60px;
-  margin-right: 60px;
+  margin-left: 80px;
+  margin-right: 80px;
   margin-top: 20px;
 
 }
+
+
+.countryFlag {
+  border: .5px solid lightgrey;
+}
+
 
 /*Center rows*/
 .table td {
