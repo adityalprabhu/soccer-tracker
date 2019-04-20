@@ -18,7 +18,7 @@ export class FixturesComponent implements OnInit {
   fixtures: any;
   leagueIDs: any;
   today: Date;
-  englishLeague: true;
+  englishLeague: boolean;
   spanishLeague: true;
   germanLeague: true;
   frenchLeague: true;
@@ -86,7 +86,7 @@ export class FixturesComponent implements OnInit {
       }
       this.englishGames = closeFixtures;
       this.allGames.sort((a, b) => {
-        return parseInt(a['event_timestamp'], 10) - parseInt(b['event_timestamp'], 10) ;
+        return parseInt(a['event_timestamp'], 10) - parseInt(b['event_timestamp'], 10);
       });
 
     });
@@ -108,7 +108,7 @@ export class FixturesComponent implements OnInit {
       }
       this.spanishGames = closeFixtures;
       this.allGames.sort((a, b) => {
-        return parseInt(a['event_timestamp'], 10) - parseInt(b['event_timestamp'], 10) ;
+        return parseInt(a['event_timestamp'], 10) - parseInt(b['event_timestamp'], 10);
       });
     });
     this.fixtureService.findLeagueFixtures(Utils.LEAGUEIDS.german).subscribe(res => {
@@ -129,7 +129,7 @@ export class FixturesComponent implements OnInit {
       }
       this.germanGames = closeFixtures;
       this.allGames.sort((a, b) => {
-        return parseInt(a['event_timestamp'], 10) - parseInt(b['event_timestamp'], 10) ;
+        return parseInt(a['event_timestamp'], 10) - parseInt(b['event_timestamp'], 10);
       });
     });
     this.fixtureService.findLeagueFixtures(Utils.LEAGUEIDS.italy).subscribe(res => {
@@ -150,7 +150,7 @@ export class FixturesComponent implements OnInit {
       }
       this.italianGames = closeFixtures;
       this.allGames.sort((a, b) => {
-        return parseInt(a['event_timestamp'], 10) - parseInt(b['event_timestamp'], 10) ;
+        return parseInt(a['event_timestamp'], 10) - parseInt(b['event_timestamp'], 10);
       });
     });
     this.fixtureService.findLeagueFixtures(Utils.LEAGUEIDS.french).subscribe(res => {
@@ -171,7 +171,7 @@ export class FixturesComponent implements OnInit {
       }
       this.frenchGames = closeFixtures;
       this.allGames.sort((a, b) => {
-        return parseInt(a['event_timestamp'], 10) - parseInt(b['event_timestamp'], 10) ;
+        return parseInt(a['event_timestamp'], 10) - parseInt(b['event_timestamp'], 10);
       });
     });
 
@@ -182,7 +182,7 @@ export class FixturesComponent implements OnInit {
     this.fixtureService.findLiveFixtures().subscribe(res => {
       var todaysFixtures = [];
       var recentFixtures = Object.values(res['api'].fixtures);
-      console.log(recentFixtures)
+      console.log(recentFixtures);
 
       for (let fixture of recentFixtures) {
 
@@ -191,16 +191,16 @@ export class FixturesComponent implements OnInit {
         if (gameTime.getDate() === this.today.getDate()
           && Utils.SUPPORTEDLEAGUES.includes(parseInt(fixture['league_id'], 10))) {
           todaysFixtures.push(fixture);
-          console.log(todaysFixtures)
+          console.log(todaysFixtures);
         }
       }
 
       todaysFixtures.sort((a, b) => {
-        return parseInt(b['elapsed'], 10) - parseInt(a['elapsed'], 10) ;
+        return parseInt(b['elapsed'], 10) - parseInt(a['elapsed'], 10);
       });
       this.fixtures = todaysFixtures;
 
-      console.log(this.fixtures)
+      console.log(this.fixtures);
 
       if (todaysFixtures.length !== 0) {
         let showLiveScores = document.getElementById('live-fixtures');
@@ -242,7 +242,11 @@ export class FixturesComponent implements OnInit {
   }
 
   isHypeFixture(fixture) {
+
+    // var bool = this.topTeams.includes(fixture['homeTeam']) && this.topTeams.includes(fixture['awayTeam']);
+
     return this.topTeams.includes(fixture['homeTeam']) && this.topTeams.includes(fixture['awayTeam']);
+    ;
 
   }
 
@@ -294,6 +298,18 @@ export class FixturesComponent implements OnInit {
   checkIfDone(fixture) {
     var date = new Date(fixture['event_date']);
     return fixture['statusShort'] === 'FT' && date.getDate() === this.today.getDate();
+  }
+
+  toggleEnglishLeague() {
+
+    if (this.englishLeague) {
+      console.log('filtering english games');
+      this.englishLeague = false;
+    } else {
+      console.log('adding english games');
+      this.englishLeague = true;
+
+    }
   }
 
 }

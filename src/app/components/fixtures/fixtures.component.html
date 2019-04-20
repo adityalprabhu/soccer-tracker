@@ -4,6 +4,14 @@
       <h1>Matches</h1>
     </div>
 
+
+
+
+    <input
+      type="checkbox"
+      [checked]="englishLeague"
+      (change)="toggleEnglishLeague()"/> Premier League
+
     <div id="live-fixtures" class="row" style="text-align: center">
       <h3>
         Live Scores
@@ -102,217 +110,427 @@
     </div>
 
 
-    <!-- Today's fixtures -->
-    <div>
+    <div class="center-container text-center">
+      <ul class="center-container text-center nav nav-pills mb-2 row" id="pills-tab" role="tablist">
+        <li class="nav-item col-6">
+          <a class="nav-link active" id="pills-upcomingMatches-tab" data-toggle="pill" href="#pills-upcomingMatches"
+             role="tab" aria-controls="pills-upcomingMatches" aria-selected="true">Upcoming Matches</a>
+        </li>
+        <li class="nav-item col-6">
+          <a class="nav-link" id="pills-pastMatches-tab" data-toggle="pill" href="#pills-pastMatches" role="tab"
+             aria-controls="pills-pastMatches" aria-selected="false">Past Matches</a>
+        </li>
+      </ul>
 
-      <h3>Later Today - {{monthNames[today.getMonth()]}} {{today.getDate()}}, {{today.getFullYear()}}</h3>
-      <table class="table table-striped">
-        <thead class="thead-dark">
-        <tr>
-          <th scope="col"></th>
-          <th scope="col"></th>
-          <th scope="col"></th>
-          <th scope="col">Home Team</th>
-          <th scope="col">Time</th>
-          <th scope="col">Away Team</th>
-          <th scope="col"></th>
+      <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-upcomingMatches" role="tabpanel"
+             aria-labelledby="pills-upcomingMatches-tab">
 
 
-        </tr>
-        </thead>
+          <!--Future fixtures-->
+          <div>
 
-        <tbody>
-        <ng-container *ngFor="let fixture of allGames">
-          <tr *ngIf="checkTodayDate(fixture)">
-            <td *ngIf="isHypeFixture(fixture);else other_content" width="40">
-              <img src="https://ui-ex.com/images/fire-svg-6.png"
-                   style="width:35px;height:35;"
-                   title="Top Teams Playing">
-            </td>
-            <ng-template #other_content>
-              <td></td>
-            </ng-template>
-            <td><img class="countryFlag" src="{{countryFlags[fixture['league_id']]}}"
-                     style="width:35px;height:35;">
-            </td>
-            <td>logo</td>
-            <td><a routerLink="/team/{{fixture.homeTeam_id}}">{{fixture.homeTeam}}</a></td>
-            <td>{{getTime(fixture)}}</td>
-            <td><a routerLink="/team/{{fixture.awayTeam_id}}">{{fixture.awayTeam}}</a></td>
-            <td>logo</td>
-          </tr>
-        </ng-container>
-        </tbody>
-      </table>
+            <!-- Later Today's fixtures -->
+            <div>
+
+              <h3>Later Today - {{monthNames[today.getMonth()]}} {{today.getDate()}}, {{today.getFullYear()}}</h3>
+              <table class="table table-striped">
+                <thead class="thead-dark">
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                  <th scope="col">Home Team</th>
+                  <th scope="col">Time</th>
+                  <th scope="col">Away Team</th>
+                  <th scope="col"></th>
+
+
+                </tr>
+                </thead>
+
+                <tbody>
+                <ng-container *ngFor="let fixture of allGames">
+                  <tr *ngIf="checkTodayDate(fixture)">
+                    <td *ngIf="isHypeFixture(fixture);else other_content" width="40">
+                      <img src="https://ui-ex.com/images/fire-svg-6.png"
+                           style="width:35px;height:35;"
+                           title="Top Teams Playing">
+                    </td>
+                    <ng-template #other_content>
+                      <td></td>
+                    </ng-template>
+                    <td><img class="countryFlag" src="{{countryFlags[fixture['league_id']]}}"
+                             style="width:35px;height:35;">
+                    </td>
+                    <td>logo</td>
+                    <td><a routerLink="/team/{{fixture.homeTeam_id}}">{{fixture.homeTeam}}</a></td>
+                    <td>{{getTime(fixture)}}</td>
+                    <td><a routerLink="/team/{{fixture.awayTeam_id}}">{{fixture.awayTeam}}</a></td>
+                    <td>logo</td>
+                  </tr>
+                </ng-container>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Today +1 fixtures -->
+            <div>
+              <h3>{{adjustMonth(1)}} {{adjustDate(1)}}, {{adjustYear(1)}}</h3>
+              <table class="table  table-striped">
+                <thead class="thead-dark">
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                  <th scope="col">Home Team</th>
+                  <th scope="col">Time</th>
+                  <th scope="col">Away Team</th>
+                  <th scope="col"></th>
+
+                </tr>
+                </thead>
+
+                <tbody>
+                <ng-container *ngFor="let fixture of allGames">
+                  <tr *ngIf="checkDate(fixture.event_date, 1)">
+                    <td *ngIf="isHypeFixture(fixture);else other_content" width="40">
+                      <img src="https://ui-ex.com/images/fire-svg-6.png"
+                           style="width:35px;height:35;"
+                           title="Top Teams Playing">
+                    </td>
+                    <ng-template #other_content>
+                      <td></td>
+                    </ng-template>
+                    <td><img class="countryFlag" src="{{countryFlags[fixture['league_id']]}}"
+                             style="width:35px;height:35;">
+                    </td>
+                    <td>logo</td>
+                    <td><a routerLink="/team/{{fixture.homeTeam_id}}">{{fixture.homeTeam}}</a></td>
+                    <td>{{getTime(fixture)}}</td>
+                    <td><a routerLink="/team/{{fixture.awayTeam_id}}">{{fixture.awayTeam}}</a></td>
+                    <td>logo</td>
+                  </tr>
+                </ng-container>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Today +2 fixtures -->
+            <div>
+              <h3>{{adjustMonth(2)}} {{adjustDate(2)}}, {{adjustYear(2)}}</h3>
+              <table class="table  table-striped">
+                <thead class="thead-dark">
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                  <th scope="col">Home Team</th>
+                  <th scope="col">Time</th>
+                  <th scope="col">Away Team</th>
+                  <th scope="col"></th>
+
+                </tr>
+                </thead>
+
+                <tbody>
+                <ng-container *ngFor="let fixture of allGames">
+                  <tr *ngIf="checkDate(fixture.event_date, 2)">
+                    <td *ngIf="isHypeFixture(fixture);else other_content" width="40">
+                      <img src="https://ui-ex.com/images/fire-svg-6.png"
+                           style="width:35px;height:35;"
+                           title="Top Teams Playing">
+                    </td>
+                    <ng-template #other_content>
+                      <td></td>
+                    </ng-template>
+                    <td><img class="countryFlag" src="{{countryFlags[fixture['league_id']]}}"
+                             style="width:35px;height:35;">
+                    </td>
+                    <td>logo</td>
+                    <td><a routerLink="/team/{{fixture.homeTeam_id}}">{{fixture.homeTeam}}</a></td>
+                    <td>{{getTime(fixture)}}</td>
+                    <td><a routerLink="/team/{{fixture.awayTeam_id}}">{{fixture.awayTeam}}</a></td>
+                    <td>logo</td>
+                  </tr>
+                </ng-container>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Today +3 fixtures -->
+            <div>
+              <h3>{{adjustMonth(3)}} {{adjustDate(3)}}, {{adjustYear(3)}}</h3>
+              <table class="table  table-striped">
+                <thead class="thead-dark">
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                  <th scope="col">Home Team</th>
+                  <th scope="col">Time</th>
+                  <th scope="col">Away Team</th>
+                  <th scope="col"></th>
+
+                </tr>
+                </thead>
+
+                <tbody>
+                <ng-container *ngFor="let fixture of allGames">
+                  <tr *ngIf="checkDate(fixture.event_date, 3)">
+                    <td *ngIf="isHypeFixture(fixture);else other_content" width="40">
+                      <img src="https://ui-ex.com/images/fire-svg-6.png"
+                           style="width:35px;height:35;"
+                           title="Top Teams Playing">
+                    </td>
+                    <ng-template #other_content>
+                      <td></td>
+                    </ng-template>
+                    <td><img class="countryFlag" src="{{countryFlags[fixture['league_id']]}}"
+                             style="width:35px;height:35;">
+                    </td>
+                    <td>logo</td>
+                    <td><a routerLink="/team/{{fixture.homeTeam_id}}">{{fixture.homeTeam}}</a></td>
+                    <td>{{getTime(fixture)}}</td>
+                    <td><a routerLink="/team/{{fixture.awayTeam_id}}">{{fixture.awayTeam}}</a></td>
+                    <td>logo</td>
+                  </tr>
+                </ng-container>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Today +4 fixtures -->
+            <div>
+              <h3>{{adjustMonth(4)}} {{adjustDate(4)}}, {{adjustYear(4)}}</h3>
+              <table class="table  table-striped">
+                <thead class="thead-dark">
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                  <th scope="col">Home Team</th>
+                  <th scope="col">Time</th>
+                  <th scope="col">Away Team</th>
+                  <th scope="col"></th>
+
+                </tr>
+                </thead>
+
+                <tbody>
+                <ng-container *ngFor="let fixture of allGames">
+                  <tr *ngIf="checkDate(fixture.event_date, 4)">
+                    <td *ngIf="isHypeFixture(fixture);else other_content" width="40">
+                      <img src="https://ui-ex.com/images/fire-svg-6.png"
+                           style="width:35px;height:35;"
+                           title="Top Teams Playing">
+                    </td>
+                    <ng-template #other_content>
+                      <td></td>
+                    </ng-template>
+                    <td><img class="countryFlag" src="{{countryFlags[fixture['league_id']]}}"
+                             style="width:35px;height:35;">
+                    </td>
+                    <td>logo</td>
+                    <td><a routerLink="/team/{{fixture.homeTeam_id}}">{{fixture.homeTeam}}</a></td>
+                    <td>{{getTime(fixture)}}</td>
+                    <td><a routerLink="/team/{{fixture.awayTeam_id}}">{{fixture.awayTeam}}</a></td>
+                    <td>logo</td>
+                  </tr>
+                </ng-container>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-pane fade" id="pills-pastMatches" role="tabpanel" aria-labelledby="pills-pastMatches-tab">
+          <!--Past fixtures-->
+          <div>
+            <!-- Today -1 fixtures -->
+            <div>
+              <h3>{{adjustMonth(-1)}} {{adjustDate(-1)}}, {{adjustYear(-1)}}</h3>
+              <table class="table table-striped">
+                <thead class="thead-dark">
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                  <th scope="col">Home Team</th>
+                  <th scope="col">Score</th>
+                  <th scope="col"></th>
+                  <th scope="col">Away Team</th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <ng-container *ngFor="let fixture of allGames">
+                  <tr *ngIf="checkDate(fixture.event_date, -1)">
+                    <td *ngIf="isHypeFixture(fixture);else other_content" width="40">
+                      <img src="https://ui-ex.com/images/fire-svg-6.png"
+                           style="width:35px;height:35;"
+                           title="Top Teams Playing">
+                    </td>
+                    <ng-template #other_content>
+                      <td></td>
+                    </ng-template>
+                    <td><img class="countryFlag" src="{{countryFlags[fixture['league_id']]}}"
+                             style="width:35px;height:35;">
+                    </td>
+                    <td>logo</td>
+                    <td><a routerLink="/team/{{fixture.homeTeam_id}}">{{fixture.homeTeam}}</a></td>
+                    <td><b>{{fixture.goalsHomeTeam}}  -  {{fixture.goalsAwayTeam}}</b></td>
+                    <td>{{fixture['statusShort']}}</td>
+                    <td><a routerLink="/team/{{fixture.awayTeam_id}}">{{fixture.awayTeam}}</a></td>
+                    <td></td>
+                    <td>logo</td>
+                  </tr>
+                </ng-container>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Today -2 fixtures -->
+            <div>
+              <h3>{{adjustMonth(-2)}} {{adjustDate(-2)}}, {{adjustYear(-2)}}</h3>
+              <table class="table table-striped">
+                <thead class="thead-dark">
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                  <th scope="col">Home Team</th>
+                  <th scope="col">Score</th>
+                  <th scope="col"></th>
+                  <th scope="col">Away Team</th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <ng-container *ngFor="let fixture of allGames">
+                  <tr *ngIf="checkDate(fixture.event_date, -2)">
+                    <td *ngIf="isHypeFixture(fixture);else other_content" width="40">
+                      <img src="https://ui-ex.com/images/fire-svg-6.png"
+                           style="width:35px;height:35;"
+                           title="Top Teams Playing">
+                    </td>
+                    <ng-template #other_content>
+                      <td></td>
+                    </ng-template>
+                    <td><img class="countryFlag" src="{{countryFlags[fixture['league_id']]}}"
+                             style="width:35px;height:35;">
+                    </td>
+                    <td>logo</td>
+                    <td><a routerLink="/team/{{fixture.homeTeam_id}}">{{fixture.homeTeam}}</a></td>
+                    <td><b>{{fixture.goalsHomeTeam}}  -  {{fixture.goalsAwayTeam}}</b></td>
+                    <td>{{fixture['statusShort']}}</td>
+                    <td><a routerLink="/team/{{fixture.awayTeam_id}}">{{fixture.awayTeam}}</a></td>
+                    <td></td>
+                    <td>logo</td>
+                  </tr>
+                </ng-container>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Today -3 fixtures -->
+            <div>
+              <h3>{{adjustMonth(-3)}} {{adjustDate(-3)}}, {{adjustYear(-3)}}</h3>
+              <table class="table table-striped">
+                <thead class="thead-dark">
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                  <th scope="col">Home Team</th>
+                  <th scope="col">Score</th>
+                  <th scope="col"></th>
+                  <th scope="col">Away Team</th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <ng-container *ngFor="let fixture of allGames">
+                  <tr *ngIf="checkDate(fixture.event_date, -3)">
+                    <td *ngIf="isHypeFixture(fixture);else other_content" width="40">
+                      <img src="https://ui-ex.com/images/fire-svg-6.png"
+                           style="width:35px;height:35;"
+                           title="Top Teams Playing">
+                    </td>
+                    <ng-template #other_content>
+                      <td></td>
+                    </ng-template>
+                    <td><img class="countryFlag" src="{{countryFlags[fixture['league_id']]}}"
+                             style="width:35px;height:35;">
+                    </td>
+                    <td>logo</td>
+                    <td><a routerLink="/team/{{fixture.homeTeam_id}}">{{fixture.homeTeam}}</a></td>
+                    <td><b>{{fixture.goalsHomeTeam}}  -  {{fixture.goalsAwayTeam}}</b></td>
+                    <td>{{fixture['statusShort']}}</td>
+                    <td><a routerLink="/team/{{fixture.awayTeam_id}}">{{fixture.awayTeam}}</a></td>
+                    <td></td>
+                    <td>logo</td>
+                  </tr>
+                </ng-container>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Today -4 fixtures -->
+            <div>
+              <h3>{{adjustMonth(-4)}} {{adjustDate(-4)}}, {{adjustYear(-4)}}</h3>
+              <table class="table table-striped">
+                <thead class="thead-dark">
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                  <th scope="col">Home Team</th>
+                  <th scope="col">Score</th>
+                  <th scope="col"></th>
+                  <th scope="col">Away Team</th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <ng-container *ngFor="let fixture of allGames">
+                  <tr *ngIf="checkDate(fixture.event_date, -4)">
+                    <td *ngIf="isHypeFixture(fixture);else other_content" width="40">
+                      <img src="https://ui-ex.com/images/fire-svg-6.png"
+                           style="width:35px;height:35;"
+                           title="Top Teams Playing">
+                    </td>
+                    <ng-template #other_content>
+                      <td></td>
+                    </ng-template>
+                    <td><img class="countryFlag" src="{{countryFlags[fixture['league_id']]}}"
+                             style="width:35px;height:35;">
+                    </td>
+                    <td>logo</td>
+                    <td><a routerLink="/team/{{fixture.homeTeam_id}}">{{fixture.homeTeam}}</a></td>
+                    <td><b>{{fixture.goalsHomeTeam}}  -  {{fixture.goalsAwayTeam}}</b></td>
+                    <td>{{fixture['statusShort']}}</td>
+                    <td><a routerLink="/team/{{fixture.awayTeam_id}}">{{fixture.awayTeam}}</a></td>
+                    <td></td>
+                    <td>logo</td>
+                  </tr>
+                </ng-container>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
 
-    <!-- Today +1 fixtures -->
-    <div>
-      <h3>{{adjustMonth(1)}} {{adjustDate(1)}}, {{adjustYear(1)}}</h3>
-      <table class="table  table-striped">
-        <thead class="thead-dark">
-        <tr>
-          <th scope="col"></th>
-          <th scope="col"></th>
-          <th scope="col"></th>
-          <th scope="col">Home Team</th>
-          <th scope="col">Time</th>
-          <th scope="col">Away Team</th>
-          <th scope="col"></th>
-
-        </tr>
-        </thead>
-
-        <tbody>
-        <ng-container *ngFor="let fixture of allGames">
-          <tr *ngIf="checkDate(fixture.event_date, 1)">
-            <td *ngIf="isHypeFixture(fixture);else other_content" width="40">
-              <img src="https://ui-ex.com/images/fire-svg-6.png"
-                   style="width:35px;height:35;"
-                   title="Top Teams Playing">
-            </td>
-            <ng-template #other_content>
-              <td></td>
-            </ng-template>
-            <td><img class="countryFlag" src="{{countryFlags[fixture['league_id']]}}"
-                     style="width:35px;height:35;">
-            </td>
-            <td>logo</td>
-            <td><a routerLink="/team/{{fixture.homeTeam_id}}">{{fixture.homeTeam}}</a></td>
-            <td>{{getTime(fixture)}}</td>
-            <td><a routerLink="/team/{{fixture.awayTeam_id}}">{{fixture.awayTeam}}</a></td>
-            <td>logo</td>
-          </tr>
-        </ng-container>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Today +2 fixtures -->
-    <div>
-      <h3>{{adjustMonth(2)}} {{adjustDate(2)}}, {{adjustYear(2)}}</h3>
-      <table class="table  table-striped">
-        <thead class="thead-dark">
-        <tr>
-          <th scope="col"></th>
-          <th scope="col"></th>
-          <th scope="col"></th>
-          <th scope="col">Home Team</th>
-          <th scope="col">Time</th>
-          <th scope="col">Away Team</th>
-          <th scope="col"></th>
-
-        </tr>
-        </thead>
-
-        <tbody>
-        <ng-container *ngFor="let fixture of allGames">
-          <tr *ngIf="checkDate(fixture.event_date, 2)">
-            <td *ngIf="isHypeFixture(fixture);else other_content" width="40">
-              <img src="https://ui-ex.com/images/fire-svg-6.png"
-                   style="width:35px;height:35;"
-                   title="Top Teams Playing">
-            </td>
-            <ng-template #other_content>
-              <td></td>
-            </ng-template>
-            <td><img class="countryFlag" src="{{countryFlags[fixture['league_id']]}}"
-                     style="width:35px;height:35;">
-            </td>
-            <td>logo</td>
-            <td><a routerLink="/team/{{fixture.homeTeam_id}}">{{fixture.homeTeam}}</a></td>
-            <td>{{getTime(fixture)}}</td>
-            <td><a routerLink="/team/{{fixture.awayTeam_id}}">{{fixture.awayTeam}}</a></td>
-            <td>logo</td>
-          </tr>
-        </ng-container>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Today +3 fixtures -->
-    <div>
-      <h3>{{adjustMonth(3)}} {{adjustDate(3)}}, {{adjustYear(3)}}</h3>
-      <table class="table  table-striped">
-        <thead class="thead-dark">
-        <tr>
-          <th scope="col"></th>
-          <th scope="col"></th>
-          <th scope="col"></th>
-          <th scope="col">Home Team</th>
-          <th scope="col">Time</th>
-          <th scope="col">Away Team</th>
-          <th scope="col"></th>
-
-        </tr>
-        </thead>
-
-        <tbody>
-        <ng-container *ngFor="let fixture of allGames">
-          <tr *ngIf="checkDate(fixture.event_date, 3)">
-            <td *ngIf="isHypeFixture(fixture);else other_content" width="40">
-              <img src="https://ui-ex.com/images/fire-svg-6.png"
-                   style="width:35px;height:35;"
-                   title="Top Teams Playing">
-            </td>
-            <ng-template #other_content>
-              <td></td>
-            </ng-template>
-            <td><img class="countryFlag" src="{{countryFlags[fixture['league_id']]}}"
-                     style="width:35px;height:35;">
-            </td>
-            <td>logo</td>
-            <td><a routerLink="/team/{{fixture.homeTeam_id}}">{{fixture.homeTeam}}</a></td>
-            <td>{{getTime(fixture)}}</td>
-            <td><a routerLink="/team/{{fixture.awayTeam_id}}">{{fixture.awayTeam}}</a></td>
-            <td>logo</td>
-          </tr>
-        </ng-container>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Today +4 fixtures -->
-    <div>
-      <h3>{{adjustMonth(4)}} {{adjustDate(4)}}, {{adjustYear(4)}}</h3>
-      <table class="table  table-striped">
-        <thead class="thead-dark">
-        <tr>
-          <th scope="col"></th>
-          <th scope="col"></th>
-          <th scope="col"></th>
-          <th scope="col">Home Team</th>
-          <th scope="col">Time</th>
-          <th scope="col">Away Team</th>
-          <th scope="col"></th>
-
-        </tr>
-        </thead>
-
-        <tbody>
-        <ng-container *ngFor="let fixture of allGames">
-          <tr *ngIf="checkDate(fixture.event_date, 4)">
-            <td *ngIf="isHypeFixture(fixture);else other_content" width="40">
-              <img src="https://ui-ex.com/images/fire-svg-6.png"
-                   style="width:35px;height:35;"
-                   title="Top Teams Playing">
-            </td>
-            <ng-template #other_content>
-              <td></td>
-            </ng-template>
-            <td><img class="countryFlag" src="{{countryFlags[fixture['league_id']]}}"
-                     style="width:35px;height:35;">
-            </td>
-            <td>logo</td>
-            <td><a routerLink="/team/{{fixture.homeTeam_id}}">{{fixture.homeTeam}}</a></td>
-            <td>{{getTime(fixture)}}</td>
-            <td><a routerLink="/team/{{fixture.awayTeam_id}}">{{fixture.awayTeam}}</a></td>
-            <td>logo</td>
-          </tr>
-        </ng-container>
-        </tbody>
-      </table>
-    </div>
   </div>
-
 </div>
