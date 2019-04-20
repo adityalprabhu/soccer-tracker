@@ -36,7 +36,6 @@
       </li>
     </ul>
 
-
     <div class="tab-content" id="pills-tabContent">
       <div class="tab-pane fade show active" id="pills-upcomingMatches" role="tabpanel" aria-labelledby="pills-upcomingMatches-tab">
         <div class="center-container card text-center mt-3 card">
@@ -45,8 +44,8 @@
           </div>
           <ul *ngIf="(upcomingMatches | json) != '{}'" class="list-group list-group-flush">
             <li  class="list-group-item" *ngFor="let match of upcomingMatches">
-              <div>{{match.event_date | date}}</div>
-              <div><b>{{match.homeTeam}} {{match.goalsHomeTeam}}</b> - <b>{{match.goalsAwayTeam}} {{match.awayTeam}}</b></div>
+              <div>{{match['event_date'] | date}}</div>
+              <div><b>{{match['homeTeam']}} {{match['goalsHomeTeam']}}</b> - <b>{{match['goalsAwayTeam']}} {{match['awayTeam']}}</b></div>
             </li>
           </ul>
         </div>
@@ -59,8 +58,8 @@
           </div>
           <ul *ngIf="(pastMatches | json) != '{}'" class="list-group list-group-flush">
             <li  class="list-group-item" *ngFor="let pmatch of pastMatches">
-              <div>{{pmatch.event_date | date}}</div>
-              <div><b>{{pmatch.homeTeam}} {{pmatch.goalsHomeTeam}}</b> - <b>{{pmatch.goalsAwayTeam}} {{pmatch.awayTeam}}</b></div>
+              <div>{{pmatch['event_date'] | date}}</div>
+              <div><b>{{pmatch['homeTeam']}} {{pmatch['goalsHomeTeam']}}</b> - <b>{{pmatch['goalsAwayTeam']}} {{pmatch['awayTeam']}}</b></div>
             </li>
           </ul>
         </div>
