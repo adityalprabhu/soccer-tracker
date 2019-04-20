@@ -7,4 +7,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'soccer-tracker';
+  loggedIn = true;
+  leagues = ["English", "Spanish", "French", "German", "Italy"]
 }

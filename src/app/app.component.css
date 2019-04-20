@@ -1,0 +1,36 @@
+
+.btn-outline-st {
+  color: #17a2b8;
+  border-color: #17a2b8;
+}
+
+.btn-outline-st:hover {
+  color: #fff;
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+}
+
+.btn-outline-st:focus, .btn-outline-st.focus {
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+}
+
+
+.dropdown-item:hover, .dropdown-item:focus {
+  color: #ffffff;
+  text-decoration: none;
+  background-color: #17a2b8;
+}
+
+.nav-link:hover, .nav-link:focus {
+  color: #17a2b8 !important;
+}
+
+nav-item:active{
+  color: #17a2b8 !important;
+}
+
+.navbar-dark .navbar-nav .active>.nav-link, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show>.nav-link{
+  color: #17a2b8 !important;
+}
+
+
