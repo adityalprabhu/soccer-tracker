@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ApiUrlsService } from '../apiUrlsService';
 import { HttpHeaders } from '@angular/common/http';
+import { Utils } from '../../../assets/utils'
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'X-RapidAPI-Key':  '2c4a4fc99amshe50fdd337dd7144p16d624jsn64cd58af65a9'
+    'X-RapidAPI-Key':  Utils.RAPIDKEY
   })
 };
 
@@ -20,6 +21,7 @@ export class TeamService {
   findLeagueStandingsApiUrl: string;
   findLiveFixturesApiUrl: string;
   findLeagueDetailsApiUrl: string;
+  findTeamRosterApiUrl: string;
 
   constructor(private httpClient: HttpClient) {
     this.findTeamDetailsApiUrl = ApiUrlsService.findTeamDetails;
@@ -27,6 +29,7 @@ export class TeamService {
     this.findLeagueStandingsApiUrl = ApiUrlsService.findLeagueStandings;
     this.findLiveFixturesApiUrl = ApiUrlsService.findLiveFixtures;
     this.findLeagueDetailsApiUrl = ApiUrlsService.findLeagueDetails;
+    this.findTeamRosterApiUrl = ApiUrlsService.findTeamRoster;
   }
 
   public findTeamDetails(teamId) {
@@ -49,6 +52,9 @@ export class TeamService {
     return this.httpClient.get(this.findLeagueDetailsApiUrl + leagueId, httpOptions);
   }
 
+  public findTeamRoster(teamId) {
+    return this.httpClient.get(this.findTeamRosterApiUrl + teamId, httpOptions);
+  }
 
 }
 
