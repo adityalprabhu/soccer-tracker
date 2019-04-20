@@ -1,10 +1,19 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
+import {Utils} from '../../../assets/utils';
+
+
+const httpOptions = {
+  headers: new HttpHeaders(),
+  withCredentials: true
+};
 
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class ProfileService {
 
 
@@ -15,15 +24,12 @@ export class ProfileService {
   }
 
   public findCurrentUser() {
-     return this.httpClient.get(environment.local5000 + '/api/currentUser');
+     return this.httpClient.get(environment.local5000 + '/api/currentUser', httpOptions);
   }
 
   public login(user) {
-    console.log(user)
-    this.httpClient.post(environment.local5000 + '/api/login', user).subscribe(res => {
-      console.log(res)
-      return res;
-    })
+    console.log(user);
+    return this.httpClient.post(environment.local5000 + '/api/login', user, httpOptions);
   }
 
 }
