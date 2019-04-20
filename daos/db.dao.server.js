@@ -71,14 +71,17 @@ populateDatabase = () => {
 
 //////////// User ///////////
 
-createUser = user =>
+register = user =>
   userModel.create(user);
+
+findUserByEmail = email =>
+  userModel.findOne({email: email});
 
 updateUser = (userId, user) =>
   userModel.update({_id: userId}, {$set: user});
 
 deleteUser = userId =>
-  userId.remove({_id: userId});
+  userModel.remove({_id: userId});
 
 findAllUsers = () =>
   userModel.find();
@@ -86,30 +89,32 @@ findAllUsers = () =>
 findUserById = userId =>
   userModel.findById(userId);
 
+findUserByCredentials = (email, password) =>
+  userModel.findOne({email: email, password: password});
+
 createComment = comment =>
-{
-  console.log(comment);
-  return commentsModel.create(comment);
-};
+   commentsModel.create(comment);
 
 findAllComments = () =>  commentsModel.find();
 
 findCommentsById = commentId => commentsModel.findById(commentId);
 
 deleteComment = commentId =>
-commentsModel.remove({_id: commentId});
-
+  commentsModel.remove({_id: commentId});
 
 module.exports = {
   truncateDatabase,
   populateDatabase,
-  createComment,
   findAllComments,
   findCommentsById,
   deleteComment,
-  createUser,
+  register,
   updateUser,
   deleteUser,
   findAllUsers,
-  findUserById
+  findUserById,
+  findUserByCredentials,
+  findUserByEmail,
+  createComment
+
 };
