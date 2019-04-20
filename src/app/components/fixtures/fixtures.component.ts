@@ -50,14 +50,14 @@ export class FixturesComponent implements OnInit {
 
         let date = new Date(fixture['event_date']);
 
-        if (date.getDate() === this.today.getDate()&& Utils.SUPPORTEDLEAGUES.includes(fixture['league_id'])) {
+        if (date.getDate() === this.today.getDate() && Utils.SUPPORTEDLEAGUES.includes(fixture['league_id'])) {
           todaysFixtures.push(fixture);
         }
       }
 
       this.fixtures = recentFixtures;
 
-      if (this.fixtures.length != 0) {
+      if (this.fixtures.length !== 0) {
         let element = document.getElementById('live-fixtures');
         element.style.visibility = 'visible';
       }
