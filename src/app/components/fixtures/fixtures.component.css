@@ -9,6 +9,16 @@
 /*}*/
 
 
+/*Center rows*/
+.table td {
+  text-align: center;
+}
+
+/*Center headers*/
+.table th {
+  text-align: center;
+}
+
 #live-fixtures {
   display: none;
 }
