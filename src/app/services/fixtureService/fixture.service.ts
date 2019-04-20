@@ -17,13 +17,18 @@ const httpOptions = {
 export class FixtureService {
 
   findLiveFixturesApiUrl: string;
+  findLeagueFixturesUrl: string;
 
 
   constructor(private httpClient: HttpClient) {
     this.findLiveFixturesApiUrl = ApiUrlsService.findLiveFixtures;
+    this.findLeagueFixturesUrl = ApiUrlsService.findLeagueFixtures;
 
   }
 
+  public findLeagueFixtures(leagueID) {
+    return this.httpClient.get(this.findLeagueFixturesUrl + leagueID, httpOptions);
+  }
 
   public findLiveFixtures() {
     return this.httpClient.get(this.findLiveFixturesApiUrl, httpOptions);
