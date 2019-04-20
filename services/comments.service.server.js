@@ -1,4 +1,4 @@
-const commentsDao = require('../daos/comments.dao.server');
+const commentsDao = require('../daos/db.dao.server');
 
 module.exports = app => {
   createComment = (req, res) =>

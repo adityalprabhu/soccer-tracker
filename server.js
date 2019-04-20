@@ -32,4 +32,4 @@ const dbService = require('./services/db.service.server');
 commentsService(app);
 dbService(app);
 
-app.listen(process.env.PORT || 3000);
+app.listen(process.env.PORT || 5000);

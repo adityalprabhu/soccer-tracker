@@ -1,11 +1,20 @@
-const dao = require('../daos/comments.dao.server');
+const dao = require('../daos/db.dao.server');
 
 module.exports = app => {
-  populateDatabase = (req, res) =>
-  res.json(dao.populateDatabase());
 
-  truncateDatabase = (req, res) =>
-  res.json(dao.truncateDatabase());
+  let populateDatabase = (req, res) => {
+    res.json(dao.populateDatabase());
+  };
+
+  let truncateDatabase = (req, res) => {
+    dao.truncateDatabase();
+    res.send("DB Truncated!");
+  };
+
+  let findAllUsers = (req, res) => {
+    dao.findAllUsers()
+      .then(response => res.json(response));
+  }
 
   // findStudentById = (req, res) =>
   //     res.json(
@@ -25,6 +34,8 @@ module.exports = app => {
   // app.put('/api/student/:studentId', updateStudent)
   // app.delete('/api/student/:studentId', deleteStudent)
   // app.get('/api/student/:studentId', findStudentById)
+
   app.post('/api/populate', populateDatabase);
-  app.delete('/api/all', truncateDatabase)
+  app.get('/api/user', findAllUsers);
+  app.delete('/api/all', truncateDatabase);
 };
