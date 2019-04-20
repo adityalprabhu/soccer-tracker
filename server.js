@@ -53,9 +53,8 @@ function setSession(req, res) {
 }
 
 function getSession(req, res) {
-  var name = req.params['name'];
-  var value = req.session[name];
-  res.send(value);
+  var name = req.params['currentUser'];
+  res.send(name);
 }
 
 function getSessionAll(req, res) {

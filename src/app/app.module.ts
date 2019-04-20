@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { LeagueTableComponent } from './components/league-table/league-table.component';
 import { TeamComponent } from './components/team/team.component';
 import { FixturesComponent } from './components/fixtures/fixtures.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { FixturesComponent } from './components/fixtures/fixtures.component';
     CommentsComponent,
     LeagueTableComponent,
     TeamComponent,
-    FixturesComponent
+    FixturesComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
