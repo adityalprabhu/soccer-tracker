@@ -1,9 +1,11 @@
 const dao = require('../daos/db.dao.server');
+const logoDao = require('../daos/logo.dao.server');
 
 module.exports = app => {
 
   let populateDatabase = (req, res) => {
-    res.json(dao.populateDatabase());
+    dao.populateDatabase();
+    res.send('DB Populated!');
   };
 
   let truncateDatabase = (req, res) => {
@@ -14,7 +16,32 @@ module.exports = app => {
   let findAllUsers = (req, res) => {
     dao.findAllUsers()
       .then(response => res.json(response));
-  }
+  };
+
+  let populateLogos = (req, res) => {
+    logoDao.populateLogos();
+    res.send("Logos Populated!");
+  };
+
+  let findLogoUrlByTeam = (req, res) => {
+    logoDao.findLogoUrlByTeam(req.params['tid'])
+      .then(response => res.json(response));
+  };
+
+  let findLogoUrlByLeague = (req, res) => {
+    logoDao.findLogoUrlByLeague(req.params['lid'])
+      .then(response => res.json(response));
+  };
+
+  let truncateLogos = (req, res) => {
+    logoDao.truncateLogos();
+    res.send("Logos Truncated!");
+  };
+
+  let findAllLogos = (req, res) => {
+    logoDao.findAllLogos()
+      .then(response => res.json(response));
+  };
 
   // findStudentById = (req, res) =>
   //     res.json(
@@ -34,6 +61,13 @@ module.exports = app => {
   // app.put('/api/student/:studentId', updateStudent)
   // app.delete('/api/student/:studentId', deleteStudent)
   // app.get('/api/student/:studentId', findStudentById)
+
+  // Logos
+  app.get('/api/logo/team/:tid', findLogoUrlByTeam);
+  app.get('/api/logo/league/:lid', findLogoUrlByLeague);
+  app.post('/api/populate_logos', populateLogos);
+  app.delete('/api/logo/delete', truncateLogos);
+  app.get('/api/logo', findAllLogos);
 
   app.post('/api/populate', populateDatabase);
   app.get('/api/user', findAllUsers);
