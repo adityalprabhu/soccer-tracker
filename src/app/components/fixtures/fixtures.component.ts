@@ -249,31 +249,31 @@ export class FixturesComponent implements OnInit {
   findTopTeams() {
     this.teamService.findLeagueStandings(Utils.LEAGUEIDS.english).subscribe(res => {
       let leagueStandings = res['api'].standings[0];
-      for (let i = 0; i < 6; i++) {
+      for (let i = 0; i < 7; i++) {
         this.topTeams.push(leagueStandings[i]['teamName']);
       }
     });
     this.teamService.findLeagueStandings(Utils.LEAGUEIDS.spanish).subscribe(res => {
       let leagueStandings = res['api'].standings[0];
-      for (let i = 0; i < 6; i++) {
+      for (let i = 0; i < 4; i++) {
         this.topTeams.push(leagueStandings[i]['teamName']);
       }
     });
     this.teamService.findLeagueStandings(Utils.LEAGUEIDS.italy).subscribe(res => {
       let leagueStandings = res['api'].standings[0];
-      for (let i = 0; i < 6; i++) {
+      for (let i = 0; i < 5; i++) {
         this.topTeams.push(leagueStandings[i]['teamName']);
       }
     });
     this.teamService.findLeagueStandings(Utils.LEAGUEIDS.french).subscribe(res => {
       let leagueStandings = res['api'].standings[0];
-      for (let i = 0; i < 6; i++) {
+      for (let i = 0; i < 5; i++) {
         this.topTeams.push(leagueStandings[i]['teamName']);
       }
     });
     this.teamService.findLeagueStandings(Utils.LEAGUEIDS.german).subscribe(res => {
       let leagueStandings = res['api'].standings[0];
-      for (let i = 0; i < 6; i++) {
+      for (let i = 0; i < 5; i++) {
         this.topTeams.push(leagueStandings[i]['teamName']);
       }
     });
@@ -288,7 +288,7 @@ export class FixturesComponent implements OnInit {
       return dateString;
     }
 
-    return '\'' + fixture['elapsed'];
+    return fixture['elapsed'] + '\'';
   }
 
   checkIfDone(fixture) {
