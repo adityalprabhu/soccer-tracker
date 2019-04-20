@@ -13,5 +13,5 @@ export class ApiUrlsService {
   public static findTeamFixtures = environment.fdomain + '/fixtures/team/';
   public static findLeagueStandings = environment.fdomain + '/leagueTable/';
   public static findLiveFixtures = environment.fdomain + '/fixtures/live';
-
+  public static findLeagueDetails = environment.fdomain + '/leagues/league/';
 }
