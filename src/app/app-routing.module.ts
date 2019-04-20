@@ -10,15 +10,11 @@ const routes: Routes = [
 
   {path: 'login', component: LoginComponent},
   {path: 'comments', component: CommentsComponent},
-
   {path: 'leagues', component: LeagueTableComponent},
   {path: 'fixtures', component: FixturesComponent},
-  {path: 'team/:teamId', component: TeamComponent}
-
-
-
-  {path: 'leagues/:leagueId', component: LeagueTableComponent},
   {path: 'team/:teamId', component: TeamComponent},
+  {path: 'leagues/:leagueId', component: LeagueTableComponent},
+  {path: 'team/:teamId', component: TeamComponent}
 
 ];
 
