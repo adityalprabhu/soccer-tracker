@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
 import {Router} from '@angular/router';
 import {TeamService} from '../../services/teamService/team.service';
+import {Utils} from "../../../assets/utils";
 
 @Component({
   selector: 'app-team',
@@ -20,6 +21,8 @@ export class TeamComponent implements OnInit {
   teamData: any;
   leagueId: number;
   liveFixture: any;
+  logos: any;
+  countryFlags: any;
 
   constructor(private route: ActivatedRoute,
               private location: Location,
@@ -36,6 +39,8 @@ export class TeamComponent implements OnInit {
       this.findAllTeamMatches(this.teamId);
       this.findRoster(this.teamId);
       this.findLiveFixtures();
+      this.logos = Utils.TEAMLOGOS;
+      this.countryFlags = Utils.COUNTRYFLAGS;
     });
   }
 

@@ -51,13 +51,6 @@ export class HomeComponent implements OnInit {
 
       console.log(this.liveFixtures);
 
-      // if (todaysFixtures.length !== 0) {
-      //   let showLiveScores = document.getElementById('live-fixtures');
-      //   showLiveScores.style.display = 'inline';
-      // } else {
-      //   let showNoLiveMatches = document.getElementById('no-live-fixtures');
-      //   showNoLiveMatches.style.display = 'inline';
-      // }
     });
   }
 }

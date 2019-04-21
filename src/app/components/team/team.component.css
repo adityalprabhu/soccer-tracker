@@ -1,6 +1,6 @@
 #teamLogoImg {
-  height: 100px;
-  width: 100px;
+  height: 100px !important;
+  width: 100px !important;
 }
 
 .teamDetails {
@@ -24,4 +24,57 @@
 ul {
   text-align: center;
   list-style: inside;
+}
+
+#led-box {
+  width: 2px;
+}
+
+/*td {*/
+/*  border: solid;*/
+/*  border-width: 1px;*/
+/*  border-color: red;*/
+/*}*/
+
+#wrapper {
+  margin-bottom: 20px;
+  margin-left: 80px;
+  margin-right: 80px;
+  margin-top: 20px;
+}
+
+
+
+.center-container img {
+  display: block;
+  max-width:35px;
+  max-height:35px;
+  width: auto;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+.score {
+  width: 50px;
+}
+
+.countryFlag {
+  border: .5px solid lightgrey;
+}
+
+.logotd {
+  width: 45px;
+
+}
+
+/*.logo {*/
+/*  width:35px;*/
+/*  height:35px;*/
+/*}*/
+
+.center-container .row {
+   margin-right: 0 !important;
+   margin-left: 0 !important;
 }

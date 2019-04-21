@@ -14,7 +14,10 @@
     </div>
     <div class="card-body">
       <div>{{liveFixture.round}}</div>
-      <h5 class="card-title mb-0">{{liveFixture.homeTeam}} - {{liveFixture.awayTeam}}</h5>
+      <h5 class="row"><img class="logo" src="{{logos[liveFixture['homeTeam_id']]}}"
+                            style="width:35px;height:35;"><b>{{liveFixture['homeTeam']}}</b> - <b>{{liveFixture['awayTeam']}}</b>
+        <img class="logo" src="{{logos[liveFixture['awayTeam_id']]}}"
+             style="width:35px;height:35;"></h5>
       <div class="card-text mt-1">
         <h5 class="mb-0"><b>{{liveFixture.goalsHomeTeam}}</b> - <b>{{liveFixture.goalsAwayTeam}}</b></h5>
         <div>{{liveFixture.elapsed}}'</div>
@@ -39,13 +42,25 @@
     <div class="tab-content" id="pills-tabContent">
       <div class="tab-pane fade show active" id="pills-upcomingMatches" role="tabpanel" aria-labelledby="pills-upcomingMatches-tab">
         <div class="center-container card text-center mt-3 card">
-          <div class="card-header">
-            Upcoming Matches
+          <div class="card-header row text-center">
+            <div class="col-4">Home Team</div>
+            <div class="col-4">Upcoming Matches</div>
+            <div class="col-4">Away Team</div>
           </div>
           <ul *ngIf="(upcomingMatches | json) != '{}'" class="list-group list-group-flush">
             <li  class="list-group-item" *ngFor="let match of upcomingMatches">
-              <div>{{match['event_date'] | date: 'long'}}</div>
-              <div><b>{{match['homeTeam']}} {{match['goalsHomeTeam']}}</b> - <b>{{match['goalsAwayTeam']}} {{match['awayTeam']}}</b></div>
+              <div>{{match['event_date'] | date: 'medium'}}</div>
+              <div class="row">
+                <div class="col-4">
+                  <img class="logo" src="{{logos[match['homeTeam_id']]}}" style="width:35px;height:35;">
+                </div>
+                <div class="col-4">
+                  <b>{{match['homeTeam']}} {{match['goalsHomeTeam']}}</b> - <b>{{match['goalsAwayTeam']}} {{match['awayTeam']}}</b>
+                </div>
+                <div class="col-4">
+                  <img class="logo" src="{{logos[match['awayTeam_id']]}}" style="width:35px;height:35;">
+                </div>
+              </div>
             </li>
           </ul>
         </div>
@@ -53,13 +68,25 @@
 
       <div class="tab-pane fade" id="pills-pastMatches" role="tabpanel" aria-labelledby="pills-pastMatches-tab">
         <div class="center-container card text-center mt-3 card">
-          <div class="card-header">
-            Completed Matches
+          <div class="card-header row text-center">
+            <div class="col-4">Home Team</div>
+            <div class="col-4">Completed Matches</div>
+            <div class="col-4">Away Team</div>
           </div>
           <ul *ngIf="(pastMatches | json) != '{}'" class="list-group list-group-flush">
-            <li  class="list-group-item" *ngFor="let pmatch of pastMatches">
-              <div>{{pmatch['event_date'] | date}}</div>
-              <div><b>{{pmatch['homeTeam']}} {{pmatch['goalsHomeTeam']}}</b> - <b>{{pmatch['goalsAwayTeam']}} {{pmatch['awayTeam']}}</b></div>
+            <li  class="list-group-item" *ngFor="let match of pastMatches">
+              <div>{{match['event_date'] | date}}</div>
+              <div class="row">
+                <div class="col-3">
+                  <img class="logo" src="{{logos[match['homeTeam_id']]}}" style="width:35px;height:35;">
+                </div>
+                <div class="col-6">
+                  <b>{{match['homeTeam']}} {{match['goalsHomeTeam']}}</b> - <b>{{match['goalsAwayTeam']}} {{match['awayTeam']}}</b>
+                </div>
+                <div class="col-3">
+                  <img class="logo" src="{{logos[match['awayTeam_id']]}}" style="width:35px;height:35;">
+                </div>
+              </div>
             </li>
           </ul>
         </div>
@@ -85,5 +112,6 @@
     </div>
 
   </div>
+
 
 </div>
