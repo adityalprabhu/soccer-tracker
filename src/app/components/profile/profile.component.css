@@ -13,3 +13,15 @@ img.resize {
   height: 60px;
   width: 60px;
 }
+
+/*Center rows*/
+.table td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+/*Center headers*/
+.table th {
+  text-align: center;
+  vertical-align: middle;
+}

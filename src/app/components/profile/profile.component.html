@@ -41,7 +41,7 @@
     </div>
 
     <div class="container-fluid col-sm-4 border border-dark rounded border-2">
-      <h3 class="d-flex justify-content-center row">Favorite Team: Liverpool</h3>
+      <h3 class="d-flex justify-content-center row">Favorite Team: {{favTeamData['name']}}</h3>
 
       <div class="row">
         <div class="col-sm-6">
@@ -49,7 +49,9 @@
         </div>
 
         <div class="col-sm-6">
-          <h5>Statistics</h5>
+          <h5 class="d-flex justify-content-center row">Statistics</h5>
+          <h6 class="d-flex justify-content-center row">League
+            Standing:<b>{{favTeamData['leagueStanding']}}</b></h6>
         </div>
       </div>
 
@@ -59,19 +61,20 @@
       <h3 class="d-flex justify-content-center">Followed Teams</h3>
       <table class="table table-hover table-striped">
         <thead class="thead-dark">
-        <tr>
-          <th scope="col"></th>
-          <th scope="col">Team</th>
-          <th scope="col">League</th>
-        </tr>
+
         </thead>
         <tbody>
 
         <tr *ngFor="let row of teams">
-          <th><a routerLink="/team/{{row.team_id}}"><img src="{{teamLogos[row]}}" class="teamLogoImg"></a></th>
-          <td>1</td>
-          <th>1</th>
+          <th>
+            <a routerLink="/team/{{row}}">
+              <img src="{{teamLogos[row]}}" class="teamLogoImg">
+              <h4>{{row}}</h4>
+            </a>
+          </th>
         </tr>
+        <button type="submit" class="btn btn-outline-success form-control m-1">Follow a Team
+        </button>
         </tbody>
       </table>
     </div>
