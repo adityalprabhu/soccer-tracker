@@ -17,7 +17,10 @@ export class ProfileComponent implements OnInit {
   password: any;
   firstName: any;
   lastName: any;
+  favoriteTeam: any;
   teams: any;
+  teamLogos;
+  leagueLogos;
 
   constructor(private route: ActivatedRoute,
               private location: Location,
@@ -29,21 +32,24 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.getCurrentUser();
-
     });
+
+    this.teamLogos = Utils.TEAMLOGOS;
+    this.leagueLogos = Utils.LEAGUELOGOS;
 
   }
 
   getCurrentUser() {
     this.profileService.findCurrentUser()
       .subscribe(res => {
-        console.log(res)
+        console.log(res);
         this.user = res;
 
         this.email = this.user.email;
         this.password = this.user.password;
         this.firstName = this.user.firstName;
         this.lastName = this.user.lastName;
+        this.favoriteTeam = this.user.favoriteTeam;
         this.teams = this.user.teams;
       })
   }
