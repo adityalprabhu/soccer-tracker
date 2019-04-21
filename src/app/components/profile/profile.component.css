@@ -1,0 +1,27 @@
+img.resize {
+  height: auto;
+  width: auto;
+  max-width: 300px;
+  max-height: 300px;
+}
+
+.border-2 {
+  border-width:2px !important;
+}
+
+.teamLogoImg {
+  height: 60px;
+  width: 60px;
+}
+
+/*Center rows*/
+.table td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+/*Center headers*/
+.table th {
+  text-align: center;
+  vertical-align: middle;
+}

@@ -21,4 +21,6 @@ export class ApiUrlsService {
   public static findTeamLogo = environment.local5000 + '/api/logo/team/';
   public static findLeagueLogo = environment.local5000 + '/api/logo/league/';
 
+  public static findTeamStats = environment.fdomain + '/statistics/';
+
 }

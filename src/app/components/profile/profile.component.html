@@ -1,6 +1,84 @@
-<p>
-  profile works!
-</p>
+<div class="container-fluid">
+
+  <div class="container-fluid bg-secondary mt-1">
+    <h1 class="d-flex justify-content-center text-white">{{firstName}}'s Dashboard</h1>
+  </div>
+
+  <div class="container-fluid row bg-light">
+    <div class="col-sm-3 border border-dark rounded border-2">
+      <h3 class="d-flex justify-content-center">Profile</h3>
+      <form class="border-dark">
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text" class="form-control" [(ngModel)]="firstName"
+                 [ngModelOptions]="{standalone: true}"/>
+        </div>
+
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" class="form-control" [(ngModel)]="lastName"
+                 [ngModelOptions]="{standalone: true}"/>
+        </div>
+
+        <div class="form-group">
+          <label>Email</label>
+          <input type="text" class="form-control" [(ngModel)]="email"
+                 [ngModelOptions]="{standalone: true}"/>
+        </div>
+
+        <div class="form-group">
+          <label>Password</label>
+          <input type="text" class="form-control" [(ngModel)]="password"
+                 [ngModelOptions]="{standalone: true}"/>
+        </div>
+
+        <button type="submit" class="btn btn-outline-success form-control m-1">Update Profile
+        </button>
+
+        <button type="submit" class="btn btn-outline-info form-control m-1">Logout</button>
+
+      </form>
+    </div>
+
+    <div class="container-fluid col-sm-4 border border-dark rounded border-2">
+      <h3 class="d-flex justify-content-center row">Favorite Team: {{favTeamData['name']}}</h3>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <img src="{{teamLogos[favoriteTeam]}}" class="resize">
+        </div>
+
+        <div class="col-sm-6">
+          <h5 class="d-flex justify-content-center row">Statistics</h5>
+          <h6 class="d-flex justify-content-center row">League
+            Standing:<b>{{favTeamData['leagueStanding']}}</b></h6>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="container-fluid m-1 col-sm-4 border border-dark rounded border-2">
+      <h3 class="d-flex justify-content-center">Followed Teams</h3>
+      <table class="table table-hover table-striped">
+        <thead class="thead-dark">
+
+        </thead>
+        <tbody>
+
+        <tr *ngFor="let row of teams">
+          <th>
+            <a routerLink="/team/{{row}}">
+              <img src="{{teamLogos[row]}}" class="teamLogoImg">
+              <h4>{{row}}</h4>
+            </a>
+          </th>
+        </tr>
+        <button type="submit" class="btn btn-outline-success form-control m-1">Follow a Team
+        </button>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 
 
-<p>{{user | json}}</p>
