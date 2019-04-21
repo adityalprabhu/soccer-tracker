@@ -1,36 +1,81 @@
-<div class="container">
-  <h1>{{firstName}}'s Profile</h1>
-  <form>
-    <div class="form-group">
-      <label>First Name</label>
-      <input type="text" class="form-control" [(ngModel)]="firstName" [ngModelOptions]="{standalone: true}"/>
+<div class="container-fluid">
+
+  <div class="container-fluid bg-secondary mt-1">
+    <h1 class="d-flex justify-content-center text-white">{{firstName}}'s Dashboard</h1>
+  </div>
+
+  <div class="container-fluid row bg-light">
+    <div class="col-sm-3 border border-dark rounded border-2">
+      <h3 class="d-flex justify-content-center">Profile</h3>
+      <form class="border-dark">
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text" class="form-control" [(ngModel)]="firstName"
+                 [ngModelOptions]="{standalone: true}"/>
+        </div>
+
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" class="form-control" [(ngModel)]="lastName"
+                 [ngModelOptions]="{standalone: true}"/>
+        </div>
+
+        <div class="form-group">
+          <label>Email</label>
+          <input type="text" class="form-control" [(ngModel)]="email"
+                 [ngModelOptions]="{standalone: true}"/>
+        </div>
+
+        <div class="form-group">
+          <label>Password</label>
+          <input type="text" class="form-control" [(ngModel)]="password"
+                 [ngModelOptions]="{standalone: true}"/>
+        </div>
+
+        <button type="submit" class="btn btn-outline-success form-control m-1">Update Profile
+        </button>
+
+        <button type="submit" class="btn btn-outline-info form-control m-1">Logout</button>
+
+      </form>
     </div>
 
-    <div class="form-group">
-      <label>Last Name</label>
-      <input type="text" class="form-control" [(ngModel)]="lastName" [ngModelOptions]="{standalone: true}"/>
+    <div class="container-fluid col-sm-4 border border-dark rounded border-2">
+      <h3 class="d-flex justify-content-center row">Favorite Team: Liverpool</h3>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <img src="{{teamLogos[favoriteTeam]}}" class="resize">
+        </div>
+
+        <div class="col-sm-6">
+          <h5>Statistics</h5>
+        </div>
+      </div>
+
     </div>
 
-    <div class="form-group">
-      <label>Email</label>
-      <input type="text" class="form-control" [(ngModel)]="email" [ngModelOptions]="{standalone: true}"/>
+    <div class="container-fluid m-1 col-sm-4 border border-dark rounded border-2">
+      <h3 class="d-flex justify-content-center">Followed Teams</h3>
+      <table class="table table-hover table-striped">
+        <thead class="thead-dark">
+        <tr>
+          <th scope="col"></th>
+          <th scope="col">Team</th>
+          <th scope="col">League</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr *ngFor="let row of teams">
+          <th><a routerLink="/team/{{row.team_id}}"><img src="{{teamLogos[row]}}" class="teamLogoImg"></a></th>
+          <td>1</td>
+          <th>1</th>
+        </tr>
+        </tbody>
+      </table>
     </div>
-
-    <div class="form-group">
-      <label>Password</label>
-      <input type="text" class="form-control" [(ngModel)]="password" [ngModelOptions]="{standalone: true}"/>
-    </div>
-
-    <div class="form-group">
-      <label>Teams</label>
-      <input type="text" class="form-control" [(ngModel)]="teams" [ngModelOptions]="{standalone: true}"/>
-    </div>
-
-    <button type="submit" class="btn btn-success form-control m-1">Update Profile</button>
-
-    <button type="submit" class="btn btn-primary form-control m-1">Logout</button>
-
-  </form>
+  </div>
 </div>
 
 

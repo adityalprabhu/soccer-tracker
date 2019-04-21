@@ -40,30 +40,13 @@ populateDatabase = () => {
   const users = [
     {
       _id: 1,
-      email: 'gabe@soccertracker.com',
-      password: 'babe',
-      firstName: 'Gabe',
-      lastName: 'B',
-      teams: ['42', '157']
-    },
-
-    {
-      _id: 2,
-      email: 'hk@soccertracker.com',
-      password: '12345',
+      email: 'test',
+      password: 'test',
       firstName: 'Hassan',
       lastName: 'K',
-      teams: ['529', '32']
+      favoriteTeam: '40',
+      teams: ['529', '42', '34', '40', '85']
     },
-
-    {
-      _id: 3,
-      email: 'aditya@soccertracker.com',
-      password: '0987',
-      firstName: 'Aditya',
-      lastName: 'P',
-      teams: ['34', '165']
-    }
   ];
 
   return userModel.insertMany(users);
@@ -94,9 +77,9 @@ findUserByCredentials = (email, password) =>
   userModel.findOne({email: email, password: password});
 
 createComment = comment =>
-   commentsModel.create(comment);
+  commentsModel.create(comment);
 
-findAllComments = () =>  commentsModel.find();
+findAllComments = () => commentsModel.find();
 
 findCommentsById = commentId => commentsModel.findById(commentId);
 
