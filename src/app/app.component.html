@@ -18,7 +18,7 @@
         </a>
 
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" *ngFor="let league of leagues" href="{{league}}">{{league}}</a>
+          <a class="dropdown-item" *ngFor="let league of leagues | keyvalue" href="/league/{{league.key}}">{{league.value}}</a>
         </div>
       </li>
       <li *ngIf="loggedIn" class="nav-item dropdown">
@@ -30,6 +30,9 @@
           <a class="dropdown-item" href="#">Favorites</a>
           <a class="dropdown-item" href="#">Edit Profile</a>
         </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="fixtures">Fixtures</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="login">Login</a>

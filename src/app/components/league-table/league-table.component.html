@@ -11,7 +11,7 @@
 </div>
 
 
-<div class="container-fluid">
+<div class="container-fluid m-1">
   <table class="table table-hover table-striped">
     <thead class="thead-dark">
     <tr>
@@ -30,14 +30,14 @@
 
     <tr *ngFor="let row of leagueStandings">
       <th>{{row.rank}}</th>
-      <td><img src="{{teamLogos[row.team_id]}}" class="teamLogoImg"></td>
-      <td><a routerLink="/team/{{row.team_id}}">{{row.teamName}}</a></td>
+      <td><a routerLink="/team/{{row.team_id}}"><img src="{{teamLogos[row.team_id]}}" class="teamLogoImg"></a></td>
+      <th><a routerLink="/team/{{row.team_id}}">{{row.teamName}}</a></th>
       <td>{{row.matchsPlayed}}</td>
       <td>{{row.win}}</td>
       <td>{{row.draw}}</td>
       <td>{{row.lose}}</td>
       <td>{{row.goalsDiff}}</td>
-      <td>{{row.points}}</td>
+      <th>{{row.points}}</th>
     </tr>
     </tbody>
   </table>

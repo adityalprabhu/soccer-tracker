@@ -5,7 +5,7 @@
 
   <div class="teamDetails mt-3">
     <div>Team Name: <b>{{team.name}}</b></div>
-    <div>League Standing: <b>{{team.leagueStanding}}</b></div>
+    <div><a routerLink="/league/{{leagueId}}">League Standing: </a><b>{{team.leagueStanding}}</b></div>
   </div>
 
   <div *ngIf="(liveFixture | json) != '{}'" class="center-container card text-center w-75 mt-3">
