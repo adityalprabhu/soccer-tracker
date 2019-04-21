@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
 
@@ -13,6 +13,11 @@ import {Utils} from '../../../assets/utils';
 export class ProfileComponent implements OnInit {
 
   user: any;
+  email: any;
+  password: any;
+  firstName: any;
+  lastName: any;
+  teams: any;
 
   constructor(private route: ActivatedRoute,
               private location: Location,
@@ -26,13 +31,20 @@ export class ProfileComponent implements OnInit {
       this.getCurrentUser();
 
     });
+
   }
 
-  getCurrentUser(){
+  getCurrentUser() {
     this.profileService.findCurrentUser()
       .subscribe(res => {
         console.log(res)
         this.user = res;
+
+        this.email = this.user.email;
+        this.password = this.user.password;
+        this.firstName = this.user.firstName;
+        this.lastName = this.user.lastName;
+        this.teams = this.user.teams;
       })
   }
 
