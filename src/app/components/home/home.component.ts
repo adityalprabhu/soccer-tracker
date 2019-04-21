@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FixtureService} from "../../services/fixtureService/fixture.service";
 import {Utils} from "../../../assets/utils";
+import {isNullOrUndefined} from "util";
 
 @Component({
   selector: 'app-home',
@@ -13,10 +14,16 @@ export class HomeComponent implements OnInit {
   examples: any
   today: any;
   constructor(private fixtureService: FixtureService) { }
+  user: any;
 
   ngOnInit() {
     this.today = new Date();
     this.findLiveFixtures();
+    this.user = localStorage.getItem('user');
+    if(!isNullOrUndefined(this.user)){
+      console.log(this.user);
+      this.user = JSON.parse(this.user).firstName;
+    }
   }
 
   findLiveFixtures(){
