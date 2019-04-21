@@ -61,7 +61,5 @@ module.exports = app => {
   app.get('/api/currentUser', getLoggedInUser);
   app.post('/api/logout', logout);
   app.post('/api/login', login)
-
-
 };
 
