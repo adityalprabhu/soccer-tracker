@@ -2,9 +2,10 @@
   <div class="form-container sign-up-container">
     <form action="#">
       <h1>Create Account</h1>
-      <input type="text" placeholder="Name" />
-      <input type="email" placeholder="Email" />
-      <input type="password" placeholder="Password" />
+      <input type="text" [(ngModel)]="firstName" [ngModelOptions]="{standalone: true}"/>
+      <input type="text" [(ngModel)]="lastName" [ngModelOptions]="{standalone: true}"/>
+      <input type="email" [(ngModel)]="email" [ngModelOptions]="{standalone: true}"/>
+      <input type="password" [(ngModel)]="password" [ngModelOptions]="{standalone: true}"/>
       <button (click)="signUp()">Sign Up</button>
     </form>
   </div>
