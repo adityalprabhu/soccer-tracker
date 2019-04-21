@@ -62,6 +62,10 @@ export class TeamService {
     return this.httpClient.get(this.findTeamRosterApiUrl + teamId, httpOptions);
   }
 
+  public findTeamStats(leagueId, teamId) {
+    return this.httpClient.get(this.findTeamStatsApiUrl + leagueId + '/' + teamId, httpOptions);
+  }
+
   public findTeamLogo(teamId) {
     return this.httpClient.get(this.findTeamLogoApiUrl + teamId);
   }
@@ -70,9 +74,6 @@ export class TeamService {
     return this.httpClient.get(this.findLeagueLogoApiUrl + leagueId);
   }
 
-  public findTeamStats(leagueId, teamId) {
-    return this.httpClient.get(this.findLeagueLogoApiUrl + leagueId + '/' + teamId);
-  }
 
 }
 

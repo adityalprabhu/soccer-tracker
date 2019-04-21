@@ -85,6 +85,7 @@ export class ProfileComponent implements OnInit {
         this.leagueId = res['api'].fixtures[Object.keys(res['api'].fixtures)[0]].league_id;
 
         this.findLeagueStandings(this.leagueId);
+        this.findTeamStats(this.leagueId, teamId);
       }
     });
   }
@@ -96,13 +97,20 @@ export class ProfileComponent implements OnInit {
       for (let team of leagueStandings) {
         if (team.team_id == this.favoriteTeam) {
           this.favTeamData['leagueStanding'] = team.rank;
-          console.log(this.favTeamData['leagueStanding']);
         }
       }
     });
   }
 
   findTeamStats(leagueId, teamId) {
-    this.teamService.findTeamStats(leagueId, teamId);
+    this.teamService.findTeamStats(leagueId, teamId).subscribe(res => {
+
+      this.favTeamData['matchesPlayed'] = res['api']['stats']['matchs']['matchsPlayed']['total'];
+      this.favTeamData['wins'] = res['api']['stats']['matchs']['wins']['total'];
+      this.favTeamData['draws'] = res['api']['stats']['matchs']['draws']['total'];
+      this.favTeamData['losses'] = res['api']['stats']['matchs']['loses']['total'];
+      this.favTeamData['goalsFor'] = res['api']['stats']['goals']['goalsFor']['total'];
+      this.favTeamData['goalsAgainst'] = res['api']['stats']['goals']['goalsAgainst']['total'];
+    });
   }
 }

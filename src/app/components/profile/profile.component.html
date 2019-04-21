@@ -50,8 +50,78 @@
 
         <div class="col-sm-6">
           <h5 class="d-flex justify-content-center row">Statistics</h5>
-          <h6 class="d-flex justify-content-center row">League
-            Standing:<b>{{favTeamData['leagueStanding']}}</b></h6>
+
+          <table class="table table-hover">
+
+            <tbody>
+
+            <tr>
+              <td>
+                League Standing:
+              </td>
+              <th>
+                {{favTeamData['leagueStanding']}}
+              </th>
+            </tr>
+
+            <tr>
+              <td>
+                Matches Played:
+              </td>
+              <th>
+                {{favTeamData['matchesPlayed']}}
+              </th>
+            </tr>
+
+            <tr>
+              <td>
+                Wins:
+              </td>
+              <th>
+                {{favTeamData['wins']}}
+              </th>
+            </tr>
+
+            <tr>
+              <td>
+                Draws:
+              </td>
+              <th>
+                {{favTeamData['draws']}}
+              </th>
+            </tr>
+
+            <tr>
+              <td>
+                Losses:
+              </td>
+              <th>
+                {{favTeamData['losses']}}
+              </th>
+            </tr>
+
+            <tr>
+              <td>
+                Goals For:
+              </td>
+              <th>
+                {{favTeamData['goalsFor']}}
+              </th>
+            </tr>
+
+            <tr>
+              <td>
+                Goals Against:
+              </td>
+              <th>
+                {{favTeamData['goalsAgainst']}}
+              </th>
+            </tr>
+
+            </tbody>
+
+          </table>
+
         </div>
       </div>
 
@@ -60,9 +130,7 @@
     <div class="container-fluid m-1 col-sm-4 border border-dark rounded border-2">
       <h3 class="d-flex justify-content-center">Followed Teams</h3>
       <table class="table table-hover table-striped">
-        <thead class="thead-dark">
 
-        </thead>
         <tbody>
 
         <tr *ngFor="let row of teams">
@@ -73,10 +141,13 @@
             </a>
           </th>
         </tr>
-        <button type="submit" class="btn btn-outline-success form-control m-1">Follow a Team
-        </button>
+
         </tbody>
+
       </table>
+
+      <button type="submit" class="btn btn-outline-success form-control m-1">Follow a Team</button>
+
     </div>
   </div>
 </div>
