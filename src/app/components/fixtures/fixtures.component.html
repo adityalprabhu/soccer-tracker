@@ -133,7 +133,6 @@
                 <tr>
                   <th scope="col"></th>
                   <th scope="col"></th>
-                  <th scope="col"></th>
                   <th scope="col">Home Team</th>
                   <th scope="col"></th>
                   <th scope="col">Time</th>
@@ -155,10 +154,11 @@
                     <td><img class="countryFlag" src="{{countryFlags[fixture['league_id']]}}"
                              style="width:35px;height:35;">
                     </td>
-                    <td class="logotd"><img class="logo" src="{{findLogo(fixture['homeTeam_id'])}}"></td>                    <td><a routerLink="/team/{{fixture.homeTeam_id}}">{{fixture.homeTeam}}</a></td>
+                    <td><a routerLink="/team/{{fixture.homeTeam_id}}">{{fixture.homeTeam}}</a></td>
+                    <td class="logotd"><img class="logo" src="{{findLogo(fixture['homeTeam_id'])}}"></td>
                     <td>{{getTime(fixture)}}</td>
-                    <td><a routerLink="/team/{{fixture.awayTeam_id}}">{{fixture.awayTeam}}</a></td>
                     <td class="logotd"><img class="logo" src="{{findLogo(fixture['awayTeam_id'])}}"></td>
+                    <td><a routerLink="/team/{{fixture.awayTeam_id}}">{{fixture.awayTeam}}</a></td>
                   </tr>
                 </ng-container>
                 </tbody>
@@ -347,7 +347,7 @@
                 </thead>
                 <tbody>
                 <ng-container *ngFor="let fixture of allGames">
-                  <tr *ngIf="checkIfDone(fixture)">
+                  <tr *ngIf="checkDate(fixture.event_date, -1)">
                     <td *ngIf="isHypeFixture(fixture);else other_content" width="40">
                       <img src="https://ui-ex.com/images/fire-svg-6.png"
                            style="width:35px;height:35;"
@@ -388,7 +388,7 @@
 
                 <tbody>
                 <ng-container *ngFor="let fixture of allGames">
-                  <tr *ngIf="checkIfDone(fixture)">
+                  <tr *ngIf="checkDate(fixture.event_date, -2)">
                     <td *ngIf="isHypeFixture(fixture);else other_content" width="40">
                       <img src="https://ui-ex.com/images/fire-svg-6.png"
                            style="width:35px;height:35;"
@@ -429,7 +429,7 @@
 
                 <tbody>
                 <ng-container *ngFor="let fixture of allGames">
-                  <tr *ngIf="checkIfDone(fixture)">
+                  <tr *ngIf="checkDate(fixture.event_date, -3)">
                     <td *ngIf="isHypeFixture(fixture);else other_content" width="40">
                       <img src="https://ui-ex.com/images/fire-svg-6.png"
                            style="width:35px;height:35;"
@@ -470,7 +470,7 @@
 
                 <tbody>
                 <ng-container *ngFor="let fixture of allGames">
-                  <tr *ngIf="checkIfDone(fixture)">
+                  <tr *ngIf="checkDate(fixture.event_date, -4)">
                     <td *ngIf="isHypeFixture(fixture);else other_content" width="40">
                       <img src="https://ui-ex.com/images/fire-svg-6.png"
                            style="width:35px;height:35;"

@@ -69,18 +69,18 @@ export class FixturesComponent implements OnInit {
 
   fillMatchLists() {
     this.fixtureService.findLeagueFixtures(Utils.LEAGUEIDS.english).subscribe(res => {
-      var closeFixtures = [];
-      var allFixtures = Object.values(res['api'].fixtures);
+      let closeFixtures = [];
+      let allFixtures = Object.values(res['api'].fixtures);
 
       for (let fixture of allFixtures) {
 
-        const fiveDays = 1000 * 60 * 60 * 24 * 5;
+        const numberOfDays = 5;
+        const fiveDaysMS = 1000 * 60 * 60 * 24 * numberOfDays;
 
         const gameTime = new Date(fixture['event_date']);
-        const dateCeiling = new Date(this.today.getTime() + 1000 * 60 * 60 * 24 * 5);
-        const dateFloor = new Date(this.today.getTime() - 1000 * 60 * 60 * 24 * 5);
-        if (this.today.getTime() - gameTime.getTime() < fiveDays &&
-          this.today.getTime() - gameTime.getTime() > (-1 * fiveDays)) {
+
+        if (this.today.getTime() - gameTime.getTime() < fiveDaysMS &&
+          this.today.getTime() - gameTime.getTime() > (-1 * fiveDaysMS)) {
           closeFixtures.push(fixture);
           this.allGames.push(fixture);
         }
