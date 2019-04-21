@@ -26,8 +26,12 @@ export class ProfileService {
   }
 
   public login(user) {
-    console.log(user);
     return this.httpClient.post(environment.local5000 + '/api/login', user, httpOptions);
   }
+
+  public register(user) {
+    return this.httpClient.post(environment.local5000 + '/api/register', user, httpOptions);
+  }
+
 
 }

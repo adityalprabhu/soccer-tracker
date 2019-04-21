@@ -8,5 +8,5 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'soccer-tracker';
   loggedIn = true;
-  leagues = ["English", "Spanish", "French", "German", "Italy"]
+  leagues = {2: 'English', 87: 'Spanish', 4: 'French', 8: 'German', 94: 'Italian'};
 }
