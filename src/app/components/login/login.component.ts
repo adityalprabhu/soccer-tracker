@@ -16,6 +16,8 @@ export class LoginComponent implements OnInit {
 
   email: string;
   password: string;
+  firstName: string;
+  lastName: string;
 
   constructor(private route: ActivatedRoute,
               private location: Location,
@@ -23,7 +25,9 @@ export class LoginComponent implements OnInit {
               private profileService: ProfileService) {
     this.rightPanelActive = false;
     this.message = 'sddsds';
-    this.email = "example@example.com"
+    this.email = "example@example.com";
+    this.firstName ="John";
+    this.lastName = "Doe";
     this.password = "password"
 
   }
@@ -41,14 +45,18 @@ export class LoginComponent implements OnInit {
   }
 
   signUp() {
-    console.log('sdsdsd');
+    let user = {_id: (new Date().getTime() / 1000), email: this.email, password: this.password, firstName: this.firstName, lastName: this.lastName}
+    this.profileService.register(user).subscribe(res => {
+      console.log(res)
+    })
   }
 
   signIn() {
-
     console.log(this.email)
     console.log(this.password)
     let user = {email: this.email, password: this.password}
-    this.profileService.login(user)
+    this.profileService.login(user).subscribe(res => {
+      console.log(res)
+    })
   }
 }
