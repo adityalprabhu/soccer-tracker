@@ -1,6 +1,36 @@
-<p>
-  profile works!
-</p>
+<div class="container">
+  <h1>{{firstName}}'s Profile</h1>
+  <form>
+    <div class="form-group">
+      <label>First Name</label>
+      <input type="text" class="form-control" [(ngModel)]="firstName" [ngModelOptions]="{standalone: true}"/>
+    </div>
+
+    <div class="form-group">
+      <label>Last Name</label>
+      <input type="text" class="form-control" [(ngModel)]="lastName" [ngModelOptions]="{standalone: true}"/>
+    </div>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input type="text" class="form-control" [(ngModel)]="email" [ngModelOptions]="{standalone: true}"/>
+    </div>
+
+    <div class="form-group">
+      <label>Password</label>
+      <input type="text" class="form-control" [(ngModel)]="password" [ngModelOptions]="{standalone: true}"/>
+    </div>
+
+    <div class="form-group">
+      <label>Teams</label>
+      <input type="text" class="form-control" [(ngModel)]="teams" [ngModelOptions]="{standalone: true}"/>
+    </div>
+
+    <button type="submit" class="btn btn-success form-control m-1">Update Profile</button>
+
+    <button type="submit" class="btn btn-primary form-control m-1">Logout</button>
+
+  </form>
+</div>
 
 
-<p>{{user | json}}</p>
