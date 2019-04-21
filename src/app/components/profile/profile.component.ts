@@ -26,6 +26,8 @@ export class ProfileComponent implements OnInit {
   team: any;
   leagueId: any;
 
+  teamNames: any;
+
   teamData;
 
   constructor(private route: ActivatedRoute,
@@ -45,7 +47,6 @@ export class ProfileComponent implements OnInit {
     this.teamLogos = Utils.TEAMLOGOS;
     this.leagueLogos = Utils.LEAGUELOGOS;
 
-
   }
 
   getCurrentUser() {
@@ -62,6 +63,8 @@ export class ProfileComponent implements OnInit {
 
         this.findTeamsDetails(this.favoriteTeam);
         this.findLeagueId(this.favoriteTeam);
+        this.findTeamNames(this.teams);
+
       });
   }
 
@@ -112,5 +115,18 @@ export class ProfileComponent implements OnInit {
       this.favTeamData['goalsFor'] = res['api']['stats']['goals']['goalsFor']['total'];
       this.favTeamData['goalsAgainst'] = res['api']['stats']['goals']['goalsAgainst']['total'];
     });
+  }
+
+  findTeamNames(teamIds) {
+
+    this.teamNames = {};
+
+    for (let i = 0; i < teamIds.length; i++) {
+      this.teamService.findTeamDetails(teamIds[i]).subscribe(res => {
+        console.log(res['api']['teams'][teamIds[i].toString()]['name']);
+        this.teamNames[teamIds[i]] = res['api']['teams'][teamIds[i].toString()]['name'];
+        console.log(this.teamNames);
+      });
+    }
   }
 }
