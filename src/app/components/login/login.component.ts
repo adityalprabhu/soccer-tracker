@@ -52,11 +52,11 @@ export class LoginComponent implements OnInit {
   }
 
   signIn() {
-    console.log(this.email)
-    console.log(this.password)
-    let user = {email: this.email, password: this.password}
+    let user = {email: this.email, password: this.password};
     this.profileService.login(user).subscribe(res => {
-      console.log(res)
+      console.log(res);
+      localStorage.setItem('user', JSON.stringify(res));
+      this.router.navigate(['/']);
     })
   }
 }
