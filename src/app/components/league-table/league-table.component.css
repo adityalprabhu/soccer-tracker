@@ -3,22 +3,24 @@ img.resize {
   height: auto;
   width: auto;
   max-width: 300px;
-  max-height: 100px;
+  max-height: 120px;
 }
 
 /*Center rows*/
 .table td {
   text-align: center;
+  vertical-align: middle;
 }
 
 /*Center headers*/
 .table th {
   text-align: center;
+  vertical-align: middle;
 }
 
-#teamLogoImg {
-  height: 100px;
-  width: 100px;
+.teamLogoImg {
+  height: 60px;
+  width: 60px;
 }
 
 

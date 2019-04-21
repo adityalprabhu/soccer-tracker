@@ -1,6 +1,6 @@
-<div class="container-fluid d-flex flex-row align-items-center justify-content-between">
+<div class="container-fluid d-flex align-items-center justify-content-between">
 
-  <img src="{{leagueDetails.logo}}" class="resize">
+  <img src="{{findLeagueLogo(leagueId)}}" class="resize">
   <h2>{{leagueName}} {{leagueDetails.name}} Standings</h2>
 
   <div>
@@ -16,6 +16,7 @@
     <thead class="thead-dark">
     <tr>
       <th scope="col">Rank</th>
+      <th scope="col"></th>
       <th scope="col">Team</th>
       <th scope="col">Matches Played</th>
       <th scope="col">Wins</th>
@@ -29,6 +30,7 @@
 
     <tr *ngFor="let row of leagueStandings">
       <th>{{row.rank}}</th>
+      <td><img src="{{teamLogos[row.team_id]}}" class="teamLogoImg"></td>
       <td><a routerLink="/team/{{row.team_id}}">{{row.teamName}}</a></td>
       <td>{{row.matchsPlayed}}</td>
       <td>{{row.win}}</td>
