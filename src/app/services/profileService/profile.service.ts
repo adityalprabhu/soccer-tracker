@@ -37,7 +37,7 @@ export class ProfileService {
   }
 
   public logout() {
-    return this.httpClient.post(environment.local5000 + '/api/logout', httpOptions, {responseType: 'text'});
+    return this.httpClient.post(environment.local5000 + '/api/logout', {responseType: 'text'}, httpOptions);
 
   }
 

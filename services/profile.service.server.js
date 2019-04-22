@@ -30,19 +30,24 @@ module.exports = app => {
       })
       .then(function (user) {
         req.session['currentUser'] = user;
-        res.send(user);
+        res.send({email: email});
       });
   }
 
 
   function getLoggedInUser(req, res){
-    res.send(req.session['currentUser'])
+    if(req.session['currentUser']){
+      res.send({email: req.session['currentUser'].email})
+    }else{
+      res.send(null);
+    }
+
   }
 
   function logout(req, res) {
     req.session.cookie.expires = new Date().getTime();
-    //req.session.destroy();
-    res.send(200);
+    req.session.destroy();
+    res.send({status: "Logged out"});
   }
 
   function login(req, res) {
@@ -52,7 +57,7 @@ module.exports = app => {
       .then(function (user) {
         if(user) {
           req.session['currentUser'] = user;
-          res.send(user);
+          res.send({email: email});
         } else {
           res.send(null);}});
   }

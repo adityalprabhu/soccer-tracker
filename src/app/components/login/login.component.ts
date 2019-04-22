@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {ProfileService} from '../../services/profileService/profile.service';
+import { Output, EventEmitter } from '@angular/core';
+import {AppComponent} from "../../app.component";
 
 @Component({
   selector: 'app-login',
@@ -9,6 +11,7 @@ import {ProfileService} from '../../services/profileService/profile.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  @Output() login: EventEmitter<any> = new EventEmitter();
 
   container: any;
   rightPanelActive: boolean;
@@ -37,7 +40,6 @@ export class LoginComponent implements OnInit {
 
   goToSignUp() {
     this.rightPanelActive = !this.rightPanelActive;
-
   }
 
   goToSignIn() {
@@ -48,6 +50,7 @@ export class LoginComponent implements OnInit {
     let user = {_id: (new Date().getTime() / 1000), email: this.email, password: this.password, firstName: this.firstName, lastName: this.lastName}
     this.profileService.register(user).subscribe(res => {
       console.log(res)
+      this.rightPanelActive = !this.rightPanelActive;
     })
   }
 
@@ -56,6 +59,7 @@ export class LoginComponent implements OnInit {
     this.profileService.login(user).subscribe(res => {
       console.log(res);
       localStorage.setItem('user', JSON.stringify(res));
+      this.login.emit(res);
       this.router.navigate(['/']);
     })
   }

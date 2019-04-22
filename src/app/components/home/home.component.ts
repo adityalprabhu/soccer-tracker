@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FixtureService} from "../../services/fixtureService/fixture.service";
 import {Utils} from "../../../assets/utils";
 import {isNullOrUndefined} from "util";
+import {ProfileService} from "../../services/profileService/profile.service";
 
 @Component({
   selector: 'app-home',
@@ -13,24 +14,36 @@ export class HomeComponent implements OnInit {
   liveFixtures: any;
   examples: any
   today: any;
-  constructor(private fixtureService: FixtureService) { }
+  loggedIn: boolean;
+
+  constructor(private fixtureService: FixtureService,
+              private profileService: ProfileService) { }
   user: any;
 
   ngOnInit() {
+    this.loggedIn = false;
     this.today = new Date();
     this.findLiveFixtures();
-    this.user = localStorage.getItem('user');
-    if(!isNullOrUndefined(this.user)){
-      console.log(this.user);
-      this.user = JSON.parse(this.user).firstName;
-    }
+
+    this.getCurrentUser();
+
+  }
+
+  getCurrentUser() {
+    this.profileService.findCurrentUser().subscribe(res => {
+      this.user = res;
+      if(!isNullOrUndefined(this.user)){
+        this.loggedIn = true;
+        console.log(this.user);
+        this.user = this.user.firstName;
+      }
+    });
   }
 
   findLiveFixtures(){
     this.fixtureService.findLiveFixtures().subscribe(res => {
       var todaysFixtures = [];
       var recentFixtures = Object.values(res['api'].fixtures);
-      console.log(recentFixtures);
       this.examples = recentFixtures;
 
       for (let fixture of recentFixtures) {

@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">
+  <a class="navbar-brand" routerLink="">
     <img src="https://img.icons8.com/cotton/64/000000/football-kick.png">
     Soccer Tracker
   </a>
@@ -10,32 +10,35 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home</a>
+        <a class="nav-link" routerLink="">Home</a>
       </li>
-      <li *ngIf="loggedIn" class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Leagues
         </a>
 
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" *ngFor="let league of leagues | keyvalue" href="/league/{{league.key}}">{{league.value}}</a>
+          <a class="dropdown-item" *ngFor="let league of leagues | keyvalue" routerLink="/league/{{league.key}}">{{league.value}}</a>
         </div>
       </li>
       <li *ngIf="loggedIn" class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Profile
         </a>
 
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Favorites</a>
-          <a class="dropdown-item" href="/profile">Edit Profile</a>
+          <a class="dropdown-item" routerLink="#">Favorites</a>
+          <a class="dropdown-item" routerLink="/profile">Edit Profile</a>
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="fixtures">Fixtures</a>
+        <a class="nav-link" routerLink="/fixtures">Fixtures</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="login">Login</a>
+      <li class="nav-item" *ngIf="!loggedIn">
+        <a class="nav-link" routerLink="/login">Login</a>
+      </li>
+      <li class="nav-item" *ngIf="loggedIn">
+        <a class="nav-link" (click)="logout()">Logout</a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
@@ -45,4 +48,4 @@
   </div></nav>
 
 
-<router-outlet></router-outlet>
+<router-outlet (activate)="onActivate($event)"></router-outlet>

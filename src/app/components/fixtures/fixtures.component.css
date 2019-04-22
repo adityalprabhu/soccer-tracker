@@ -125,3 +125,20 @@
   animation: blinkGreen 1s infinite;
 }
 
+
+
+.nav-link.active {
+  color: white !important;
+  background-color: #17a2b8 !important;
+}
+
+.nav-link:hover {
+  color: #333333 !important;
+}
+
+.nav-link {
+  color: #17a2b8 !important;
+  border: 0.5px solid #d3d3d3;
+}
+
+
