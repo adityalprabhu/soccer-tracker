@@ -41,8 +41,8 @@
 
     <div class="tab-content" id="pills-tabContent">
       <div class="tab-pane fade show active" id="pills-upcomingMatches" role="tabpanel" aria-labelledby="pills-upcomingMatches-tab">
-        <div class="center-container card text-center mt-3 card">
-          <div class="card-header row text-center">
+        <div class="center-container card text-center mt-3 card bg-dark">
+          <div class="card-header row text-center text-white">
             <div class="col-4">Home Team</div>
             <div class="col-4">Upcoming Matches</div>
             <div class="col-4">Away Team</div>
@@ -51,13 +51,13 @@
             <li  class="list-group-item" *ngFor="let match of upcomingMatches">
               <div>{{match['event_date'] | date: 'medium'}}</div>
               <div class="row">
-                <div class="col-4">
+                <div class="col-3">
                   <img class="logo" src="{{logos[match['homeTeam_id']]}}" style="width:35px;height:35;">
                 </div>
-                <div class="col-4">
+                <div class="col-6">
                   <b>{{match['homeTeam']}} {{match['goalsHomeTeam']}}</b> - <b>{{match['goalsAwayTeam']}} {{match['awayTeam']}}</b>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                   <img class="logo" src="{{logos[match['awayTeam_id']]}}" style="width:35px;height:35;">
                 </div>
               </div>
@@ -67,8 +67,8 @@
       </div>
 
       <div class="tab-pane fade" id="pills-pastMatches" role="tabpanel" aria-labelledby="pills-pastMatches-tab">
-        <div class="center-container card text-center mt-3 card">
-          <div class="card-header row text-center">
+        <div class="center-container card text-center mt-3 card bg-dark ">
+          <div class="card-header row text-center text-white">
             <div class="col-4">Home Team</div>
             <div class="col-4">Completed Matches</div>
             <div class="col-4">Away Team</div>
@@ -96,7 +96,7 @@
 
       <div class="tab-pane fade" id="pills-roster" role="tabpanel" aria-labelledby="pills-roster-tab">
         <div class="center-container card mt-3 card">
-          <div class="card-header">
+          <div class="card-header bg-dark text-white">
             Roster
           </div>
           <ul class="list-group list-group-flush" id="roster">

@@ -12,6 +12,7 @@ import { TeamComponent } from './components/team/team.component';
 import { FixturesComponent } from './components/fixtures/fixtures.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ProfileComponent } from './components/profile/profile.component';
     TeamComponent,
     FixturesComponent,
     HomeComponent,
-    ProfileComponent
+    ProfileComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
