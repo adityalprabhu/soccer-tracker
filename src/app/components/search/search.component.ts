@@ -61,9 +61,11 @@ export class SearchComponent implements OnInit {
     this.teams = localStorage.getItem("allTeams");
 
     if (isNullOrUndefined(this.teams)) {
+      this.teams = [];
       for (let league of this.leagues) {
 
         this.teamService.findTeamsByLeagueId(league.id).subscribe(res => {
+          // console.log(league.id, Object.values(res['api'].teams))
           this.teams = this.teams.concat(Object.values(res['api'].teams));
           count--;
           if (count == 0) {
@@ -75,6 +77,7 @@ export class SearchComponent implements OnInit {
 
       }
     }else{
+      this.teams = JSON.parse(this.teams)
       this.search();
     }
   }
@@ -84,7 +87,6 @@ export class SearchComponent implements OnInit {
       return value.name.toLowerCase().indexOf(this.searchCriteria.toLowerCase()) >= 0;
     });
 
-    this.teams = JSON.parse(this.teams);
     console.log(this.teams)
     this.teamResults = this.teams.filter(value => {
       return value.name.toLowerCase().indexOf(this.searchCriteria.toLowerCase()) >= 0;
