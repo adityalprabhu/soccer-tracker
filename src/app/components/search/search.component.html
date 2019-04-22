@@ -1,0 +1,22 @@
+<div class="center-container text-center">
+  <div class="center-container card text-center mt-3 card w-75">
+    <div class="card-header text-center bg-dark text-white">
+      <div>Search Results</div>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item" *ngFor="let result of results">
+        <a routerLink="{{result.id ? '/league/'+result.id : '/team/'+ result['team_id']}}">
+          <div class="row">
+            <div class="col-3">
+              <img class="logoImg" src="{{result.id ? logos[result.id] : logos[result['team_id']]}}">
+            </div>
+            <div class="col-9">
+              {{result.name}}
+            </div>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+</div>

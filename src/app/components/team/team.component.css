@@ -78,3 +78,21 @@ ul {
    margin-right: 0 !important;
    margin-left: 0 !important;
 }
+
+
+.nav-link.active {
+  color: white !important;
+  background-color: #17a2b8 !important;
+}
+
+.nav-link:hover {
+  color: #333333 !important;
+}
+
+.nav-link {
+  color: #17a2b8 !important;
+}
+
+.text-blue {
+  color: #17a2b8 !important;
+}
