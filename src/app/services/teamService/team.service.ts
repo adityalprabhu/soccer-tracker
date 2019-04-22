@@ -26,6 +26,7 @@ export class TeamService {
   findLeagueLogoApiUrl: string;
   findTeamStatsApiUrl: string;
   findTeamsByLeagueIdApiUrl: string;
+  findUserByTeamIdApiUrl: string;
 
   constructor(private httpClient: HttpClient) {
     this.findTeamDetailsApiUrl = ApiUrlsService.findTeamDetails;
@@ -38,6 +39,7 @@ export class TeamService {
     this.findTeamLogoApiUrl = ApiUrlsService.findTeamLogo;
     this.findTeamStatsApiUrl = ApiUrlsService.findTeamStats;
     this.findTeamsByLeagueIdApiUrl = ApiUrlsService.findTeamByLeagueId;
+    this.findUserByTeamIdApiUrl = ApiUrlsService.findUserByTeamIdApi;
   }
 
   public findTeamDetails(teamId) {
@@ -77,7 +79,11 @@ export class TeamService {
   }
 
   public findTeamsByLeagueId(leagueId) {
-    return this.httpClient.get(this.findTeamsByLeagueIdApiUrl + leagueId, httpOptions)
+    return this.httpClient.get(this.findTeamsByLeagueIdApiUrl + leagueId, httpOptions);
+  }
+
+  public findUsersByTeams(teamId) {
+    return this.httpClient.get(this.findUserByTeamIdApiUrl + teamId);
   }
 
 

@@ -34,7 +34,9 @@ export class SearchComponent implements OnInit {
     }];
   searchCriteria: any;
   teams: any;
-  results: any;
+  leagueResults: any;
+  teamResults: any;
+  userResults: any;
   logos: any;
 
 
@@ -78,17 +80,24 @@ export class SearchComponent implements OnInit {
   }
 
   search(){
-    var results = this.leagues.filter(value => {
+    this.leagueResults = this.leagues.filter(value => {
       return value.name.toLowerCase().indexOf(this.searchCriteria.toLowerCase()) >= 0;
     });
 
-    this.teams = JSON.parse(this.teams)
+    this.teamResults = JSON.parse(this.teams);
     var teamSearchResults = this.teams.filter(value => {
       return value.name.toLowerCase().indexOf(this.searchCriteria.toLowerCase()) >= 0;
     });
 
-    this.results = results.concat(teamSearchResults);
-    console.log(this.results)
+    var teamId="";
+
+    if(teamId!=""){
+      this.teamService.findUsersByTeams(teamId).subscribe(res => {
+        console.log(res)
+      })
+
+    }
+    // console.log(this.results)
   }
 
 }

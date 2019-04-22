@@ -4,6 +4,7 @@ import {Location} from '@angular/common';
 import {ProfileService} from '../../services/profileService/profile.service';
 import { Output, EventEmitter } from '@angular/core';
 import {AppComponent} from "../../app.component";
+import {isNullOrUndefined} from "util";
 
 @Component({
   selector: 'app-login',
@@ -21,6 +22,8 @@ export class LoginComponent implements OnInit {
   password: string;
   firstName: string;
   lastName: string;
+  showLoginError: boolean;
+  showSignUpError: boolean;
 
   constructor(private route: ActivatedRoute,
               private location: Location,
@@ -31,7 +34,9 @@ export class LoginComponent implements OnInit {
     this.email = "example@example.com";
     this.firstName ="John";
     this.lastName = "Doe";
-    this.password = "password"
+    this.password = "password";
+    this.showLoginError = false;
+    this.showSignUpError = false;
 
   }
 
@@ -39,18 +44,25 @@ export class LoginComponent implements OnInit {
   }
 
   goToSignUp() {
+    this.showSignUpError = false;
     this.rightPanelActive = !this.rightPanelActive;
   }
 
   goToSignIn() {
+    this.showLoginError = false;
     this.rightPanelActive = !this.rightPanelActive;
   }
 
   signUp() {
     let user = {_id: (new Date().getTime() / 1000), email: this.email, password: this.password, firstName: this.firstName, lastName: this.lastName}
     this.profileService.register(user).subscribe(res => {
-      console.log(res)
+      console.log(res);
+      if(!isNullOrUndefined(res)){
       this.rightPanelActive = !this.rightPanelActive;
+      this.showSignUpError = false;
+      }else{
+        this.showSignUpError = true;
+      }
     })
   }
 
@@ -58,9 +70,14 @@ export class LoginComponent implements OnInit {
     let user = {email: this.email, password: this.password};
     this.profileService.login(user).subscribe(res => {
       console.log(res);
-      localStorage.setItem('user', JSON.stringify(res));
-      this.login.emit(res);
-      this.router.navigate(['/']);
+      if(!isNullOrUndefined(res)){
+        this.showLoginError = false;
+        localStorage.setItem('user', JSON.stringify(res));
+        this.login.emit(res);
+        this.router.navigate(['/']);
+      }else{
+        this.showLoginError = true;
+      }
     })
   }
 }
