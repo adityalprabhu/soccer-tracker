@@ -84,8 +84,9 @@ export class SearchComponent implements OnInit {
       return value.name.toLowerCase().indexOf(this.searchCriteria.toLowerCase()) >= 0;
     });
 
-    this.teamResults = JSON.parse(this.teams);
-    var teamSearchResults = this.teams.filter(value => {
+    this.teams = JSON.parse(this.teams);
+    console.log(this.teams)
+    this.teamResults = this.teams.filter(value => {
       return value.name.toLowerCase().indexOf(this.searchCriteria.toLowerCase()) >= 0;
     });
 
