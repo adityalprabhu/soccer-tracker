@@ -1,14 +1,14 @@
 <div class="center-container text-center">
   <div class="center-container card text-center mt-3 card w-75">
     <div class="card-header text-center bg-dark text-white">
-      <div>Search Results</div>
+      <div>Search Results for Leagues</div>
     </div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item" *ngFor="let result of results">
-        <a routerLink="{{result.id ? '/league/'+result.id : '/team/'+ result['team_id']}}">
+      <li class="list-group-item" *ngFor="let result of leagueResults">
+        <a routerLink="{{'/league/'+result.id }}">
           <div class="row">
             <div class="col-3">
-              <img class="logoImg" src="{{result.id ? logos[result.id] : logos[result['team_id']]}}">
+              <img class="logoImg" src="{{logos[result.id]}}">
             </div>
             <div class="col-9">
               {{result.name}}
@@ -19,4 +19,23 @@
     </ul>
   </div>
 
+  <div class="center-container card text-center mt-3 card w-75">
+    <div class="card-header text-center bg-dark text-white">
+      <div>Search Results for Teams</div>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item" *ngFor="let result of teamResults">
+        <a routerLink="{{'/team/'+ result['team_id'] }}">
+          <div class="row">
+            <div class="col-3">
+              <img class="logoImg" src="{{logos[result['team_id']]}}">
+            </div>
+            <div class="col-9">
+              {{result.name}}
+            </div>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </div>
 </div>
