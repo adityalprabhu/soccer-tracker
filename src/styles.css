@@ -3,8 +3,13 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import '../node_modules/font-awesome/css/font-awesome.css';
 
+html{
+  font-family: 'Montserrat', sans-serif;
 
+
+}
 body {
   font-family: 'Montserrat', sans-serif;
   /*background-color: #343a40 !important;*/
+
 }
