@@ -37,7 +37,7 @@ module.exports = app => {
 
   function getLoggedInUser(req, res){
     if(req.session['currentUser']){
-      res.send({email: req.session['currentUser'].email})
+      res.send(req.session['currentUser']);
     }else{
       res.send(null);
     }

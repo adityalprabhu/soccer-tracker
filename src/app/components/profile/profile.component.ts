@@ -58,8 +58,9 @@ export class ProfileComponent implements OnInit {
       lastName: this.lastName
     };
 
-    this.profileService.updateUser(this.id, user).subscribe(res =>
-      console.log(res));
+    this.profileService.updateUser(this.id, user).subscribe(res => {
+      console.log(res);
+    });
   }
 
   logout() {
@@ -72,6 +73,7 @@ export class ProfileComponent implements OnInit {
   getCurrentUser() {
     this.profileService.findCurrentUser()
       .subscribe(res => {
+        console.log(res);
         this.user = res;
 
         this.id = this.user._id;
