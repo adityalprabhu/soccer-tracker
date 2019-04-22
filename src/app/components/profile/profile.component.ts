@@ -13,6 +13,7 @@ import {TeamService} from "../../services/teamService/team.service";
 })
 export class ProfileComponent implements OnInit {
 
+  id: any;
   user: any;
   email: any;
   password: any;
@@ -49,11 +50,31 @@ export class ProfileComponent implements OnInit {
 
   }
 
+  update() {
+    const user = {
+      email: this.email,
+      password: this.password,
+      firstName: this.firstName,
+      lastName: this.lastName
+    };
+
+    this.profileService.updateUser(this.id, user).subscribe(res =>
+      console.log(res));
+  }
+
+  logout() {
+    this.profileService.logout().subscribe(res => {
+      console.log(res);
+      this.router.navigate(['/']);
+    });
+  }
+
   getCurrentUser() {
     this.profileService.findCurrentUser()
       .subscribe(res => {
         this.user = res;
 
+        this.id = this.user._id;
         this.email = this.user.email;
         this.password = this.user.password;
         this.firstName = this.user.firstName;
@@ -123,9 +144,7 @@ export class ProfileComponent implements OnInit {
 
     for (let i = 0; i < teamIds.length; i++) {
       this.teamService.findTeamDetails(teamIds[i]).subscribe(res => {
-        console.log(res['api']['teams'][teamIds[i].toString()]['name']);
         this.teamNames[teamIds[i]] = res['api']['teams'][teamIds[i].toString()]['name'];
-        console.log(this.teamNames);
       });
     }
   }

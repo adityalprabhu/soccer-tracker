@@ -32,16 +32,22 @@
                  [ngModelOptions]="{standalone: true}"/>
         </div>
 
-        <button type="submit" class="btn btn-outline-success form-control m-1">Update Profile
+        <button type="submit"
+                class="btn btn-outline-success form-control m-1"
+                (click)="update()">Updte Profile
         </button>
 
-        <button type="submit" class="btn btn-outline-info form-control m-1">Logout</button>
+        <button type="submit"
+                class="btn btn-outline-info form-control m-1"
+                (click)="logout()">Logout
+        </button>
 
       </form>
     </div>
 
     <div class="container-fluid col-sm-4 border border-dark rounded border-2">
-      <h3 class="d-flex justify-content-center row">Favorite Team: {{favTeamData['name']}}</h3>
+      <h3 class="d-flex justify-content-center row">Favorite Team</h3>
+      <h3 class="d-flex justify-content-center row">{{favTeamData['name']}}</h3>
 
       <div class="row">
         <div class="col-sm-6 d-flex justify-content-center">
@@ -137,7 +143,7 @@
           <th>
             <a routerLink="/team/{{row}}">
               <img src="{{teamLogos[row]}}" class="teamLogoImg">
-              <h4>{{teamNames[row]}}</h4>
+              <h6>{{teamNames[row]}}</h6>
             </a>
           </th>
         </tr>
@@ -151,5 +157,3 @@
     </div>
   </div>
 </div>
-
-

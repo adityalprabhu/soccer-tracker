@@ -11,7 +11,7 @@ module.exports = app => {
   function register(req, res) {
     var email = req.body.email;
     var password = req.body.password;
-    var id = req.body._id
+    var id = req.body._id;
     var fname = req.body.firstName;
     var lname = req.body.lastName;
 
@@ -40,7 +40,8 @@ module.exports = app => {
   }
 
   function logout(req, res) {
-    req.session.destroy();
+    req.session.cookie.expires = new Date().getTime();
+    //req.session.destroy();
     res.send(200);
   }
 
@@ -56,7 +57,12 @@ module.exports = app => {
           res.send(null);}});
   }
 
+  function updateUser(req, res) {
+    dao.updateUser(req.params['uid'], req.body)
+      .then(response => res.json(response));
+  }
 
+  app.put('/api/user/:uid', updateUser);
   app.post('/api/register', register);
   app.get('/api/currentUser', getLoggedInUser);
   app.post('/api/logout', logout);

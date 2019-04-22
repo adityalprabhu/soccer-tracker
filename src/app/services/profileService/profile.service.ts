@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 
@@ -16,13 +16,12 @@ const httpOptions = {
 export class ProfileService {
 
 
-
   constructor(private httpClient: HttpClient) {
 
   }
 
   public findCurrentUser() {
-     return this.httpClient.get(environment.local5000 + '/api/currentUser', httpOptions);
+    return this.httpClient.get(environment.local5000 + '/api/currentUser', httpOptions);
   }
 
   public login(user) {
@@ -31,6 +30,15 @@ export class ProfileService {
 
   public register(user) {
     return this.httpClient.post(environment.local5000 + '/api/register', user, httpOptions);
+  }
+
+  public updateUser(userId, user) {
+    return this.httpClient.put(environment.local5000 + '/api/user/' + userId, user, httpOptions);
+  }
+
+  public logout() {
+    return this.httpClient.post(environment.local5000 + '/api/logout', httpOptions, {responseType: 'text'});
+
   }
 
 
