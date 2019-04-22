@@ -1,8 +1,8 @@
 img.resize {
   height: auto;
   width: auto;
-  max-width: 160px;
-  max-height: 160px;
+  max-width: 150px;
+  max-height: 150px;
 }
 
 .border-2 {
@@ -16,14 +16,16 @@ img.resize {
   height: auto;
 }
 
-/*Center rows*/
-.table td {
-  text-align: center;
-  vertical-align: middle;
+.nav-link.active {
+  color: white !important;
+  background-color: #17a2b8 !important;
 }
 
-/*Center headers*/
-.table th {
-  text-align: center;
-  vertical-align: middle;
+.nav-link:hover {
+  color: #333333 !important;
+}
+
+.nav-link {
+  color: #17a2b8 !important;
+  border: 0.5px solid #d3d3d3;
 }

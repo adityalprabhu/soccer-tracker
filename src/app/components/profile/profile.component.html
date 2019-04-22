@@ -1,159 +1,134 @@
+<div class="container-fluid bg-secondary mt-1">
+  <h1 class="d-flex justify-content-center text-white">{{firstName}}'s Dashboard</h1>
+</div>
+
+<br/>
+
+<!--   PILLS   -->
 <div class="container-fluid">
 
-  <div class="container-fluid bg-secondary mt-1">
-    <h1 class="d-flex justify-content-center text-white">{{firstName}}'s Dashboard</h1>
-  </div>
+  <div class="center-container">
 
-  <div class="container-fluid row bg-light">
-    <div class="col-sm-3 border border-dark rounded border-2">
-      <h3 class="d-flex justify-content-center">Profile</h3>
-      <form class="border-dark">
-        <div class="form-group">
-          <label>First Name</label>
-          <input type="text" class="form-control" [(ngModel)]="firstName"
-                 [ngModelOptions]="{standalone: true}"/>
-        </div>
+    <ul class="center-container text-center nav nav-pills mb-2 row" id="pills-tab" role="tablist">
+      <li class="nav-item col-6">
+        <a class="nav-link active" id="pills-myTeams-tab" data-toggle="pill" href="#pills-myTeams"
+           role="tab" aria-controls="pills-myTeams" aria-selected="true">My Teams</a>
+      </li>
 
-        <div class="form-group">
-          <label>Last Name</label>
-          <input type="text" class="form-control" [(ngModel)]="lastName"
-                 [ngModelOptions]="{standalone: true}"/>
-        </div>
+      <li class="nav-item col-6">
+        <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile"
+           role="tab" aria-controls="pills-profile" aria-selected="false">Profile</a>
+      </li>
 
-        <div class="form-group">
-          <label>Email</label>
-          <input type="text" class="form-control" [(ngModel)]="email"
-                 [ngModelOptions]="{standalone: true}"/>
-        </div>
+    </ul>
 
-        <div class="form-group">
-          <label>Password</label>
-          <input type="text" class="form-control" [(ngModel)]="password"
-                 [ngModelOptions]="{standalone: true}"/>
-        </div>
+    <br/>
 
-        <button type="submit"
-                class="btn btn-outline-success form-control m-1"
-                (click)="update()">Update Profile
-        </button>
+    <div class="tab-content" id="pills-tabContent">
 
-        <button type="submit"
-                class="btn btn-outline-info form-control m-1"
-                (click)="logout()">Logout
-        </button>
+      <div class="tab-pane fade show active" id="pills-myTeams" role="tabpanel"
+           aria-labelledby="pills-myTeams-tab">
 
-      </form>
-    </div>
+        <!--   MY TEAMS   -->
 
-    <div class="container-fluid col-sm-4 border border-dark rounded border-2">
-      <h3 class="d-flex justify-content-center row">Favorite Team</h3>
-      <h3 class="d-flex justify-content-center row">{{favTeamData['name']}}</h3>
+        <div class="row">
 
-      <div class="row">
-        <div class="col-sm-6 d-flex justify-content-center">
-          <img src="{{teamLogos[favoriteTeam]}}" class="resize">
-        </div>
+          <div *ngFor="let team of teams" class="m-2">
 
-        <div class="col-sm-6">
-          <h5 class="d-flex justify-content-center row">Statistics</h5>
+            <div class="card text-center" style="width: 18rem;">
+              <img class="card-img-top resize img-fluid d-block mx-auto"
+                   src="{{teamLogos[team]}}"
+                   alt="Team Logo">
+              <div class="card-body">
+                <h5 class="card-title">{{teamNames[team]}}</h5>
+                <h6 class="card-title"></h6>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">League Standing: 0</li>
+                <li class="list-group-item">Matches Played: 0</li>
+                <li class="list-group-item">Wins: 0</li>
+                <li class="list-group-item">Draws: 0</li>
+                <li class="list-group-item">Losses: 0</li>
+              </ul>
+              <a href="#" class="btn d-block btn-danger">Remove</a>
+            </div>
 
-          <table class="table table-hover">
-
-            <tbody>
-
-            <tr>
-              <td>
-                League Standing:
-              </td>
-              <th>
-                {{favTeamData['leagueStanding']}}
-              </th>
-            </tr>
-
-            <tr>
-              <td>
-                Matches Played:
-              </td>
-              <th>
-                {{favTeamData['matchesPlayed']}}
-              </th>
-            </tr>
-
-            <tr>
-              <td>
-                Wins:
-              </td>
-              <th>
-                {{favTeamData['wins']}}
-              </th>
-            </tr>
-
-            <tr>
-              <td>
-                Draws:
-              </td>
-              <th>
-                {{favTeamData['draws']}}
-              </th>
-            </tr>
-
-            <tr>
-              <td>
-                Losses:
-              </td>
-              <th>
-                {{favTeamData['losses']}}
-              </th>
-            </tr>
-
-            <tr>
-              <td>
-                Goals For:
-              </td>
-              <th>
-                {{favTeamData['goalsFor']}}
-              </th>
-            </tr>
-
-            <tr>
-              <td>
-                Goals Against:
-              </td>
-              <th>
-                {{favTeamData['goalsAgainst']}}
-              </th>
-            </tr>
-
-            </tbody>
-
-          </table>
-
+          </div>
         </div>
       </div>
 
+      <div class="tab-pane fade" id="pills-profile" role="tabpanel"
+           aria-labelledby="pills-profile-tab">
+
+        <!--   PROFILE    -->
+
+        <div class="container">
+          <h3 class="d-flex justify-content-center">Profile</h3>
+          <form class="border-dark">
+            <div class="form-group">
+              <label>First Name</label>
+              <input type="text" class="form-control" [(ngModel)]="firstName"
+                     [ngModelOptions]="{standalone: true}"/>
+            </div>
+
+            <div class="form-group">
+              <label>Last Name</label>
+              <input type="text" class="form-control" [(ngModel)]="lastName"
+                     [ngModelOptions]="{standalone: true}"/>
+            </div>
+
+            <div class="form-group">
+              <label>Email</label>
+              <input type="text" class="form-control" [(ngModel)]="email"
+                     [ngModelOptions]="{standalone: true}"/>
+            </div>
+
+            <div class="form-group">
+              <label>Password</label>
+              <input type="text" class="form-control" [(ngModel)]="password"
+                     [ngModelOptions]="{standalone: true}"/>
+            </div>
+
+            <button type="submit"
+                    class="btn btn-outline-success form-control"
+                    (click)="update()">Update Profile
+            </button>
+
+            <button type="submit"
+                    class="btn btn-outline-info mt-2 form-control"
+                    (click)="logout()">Logout
+            </button>
+
+          </form>
+        </div>
+      </div>
+
+
+      <!--<h3 class="d-flex justify-content-center">My Teams</h3>-->
+      <!--<table class="table table-hover table-striped">-->
+
+      <!--<tbody>-->
+
+      <!--<tr *ngFor="let row of teams">-->
+      <!--<th>-->
+      <!--<a routerLink="/team/{{row}}">-->
+      <!--<img src="{{teamLogos[row]}}" class="teamLogoImg">-->
+      <!--<h6>{{teamNames[row]}}</h6>-->
+      <!--</a>-->
+      <!--</th>-->
+      <!--</tr>-->
+
+      <!--</tbody>-->
+
+      <!--</table>-->
+
+      <!--<button type="submit" class="btn btn-outline-success form-control m-1">-->
+      <!--Follow a Team-->
+      <!--</button>-->
+
+
     </div>
 
-    <div class="container-fluid col-sm-4 border border-dark rounded border-2">
-      <h3 class="d-flex justify-content-center">Followed Teams</h3>
-      <table class="table table-hover table-striped">
-
-        <tbody>
-
-        <tr *ngFor="let row of teams">
-          <th>
-            <a routerLink="/team/{{row}}">
-              <img src="{{teamLogos[row]}}" class="teamLogoImg">
-              <h6>{{teamNames[row]}}</h6>
-            </a>
-          </th>
-        </tr>
-
-        </tbody>
-
-      </table>
-
-      <button type="submit" class="btn btn-outline-success form-control m-1">Follow a Team</button>
-
-    </div>
   </div>
 </div>
+

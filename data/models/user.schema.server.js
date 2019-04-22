@@ -6,7 +6,6 @@ const userSchema = mongoose.Schema
    password: String,
    firstName: String,
    lastName: String,
-   favoriteTeam: String,
    teams: [{type: String}]
  }, {collection: 'user'});
 module.exports = userSchema;

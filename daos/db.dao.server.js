@@ -44,7 +44,6 @@ populateDatabase = () => {
       password: 'test',
       firstName: 'Hassan',
       lastName: 'K',
-      favoriteTeam: '40',
       teams: ['529', '42', '34', '40', '85']
     },
   ];
