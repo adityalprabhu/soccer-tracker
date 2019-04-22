@@ -1,8 +1,8 @@
 img.resize {
   height: auto;
   width: auto;
-  max-width: 300px;
-  max-height: 300px;
+  max-width: 220px;
+  max-height: 220px;
 }
 
 .border-2 {
@@ -10,8 +10,10 @@ img.resize {
 }
 
 .teamLogoImg {
-  height: 60px;
-  width: 60px;
+  max-width:60px;
+  max-height:60px;
+  width: auto;
+  height: auto;
 }
 
 /*Center rows*/
