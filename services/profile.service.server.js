@@ -30,7 +30,7 @@ module.exports = app => {
       })
       .then(function (user) {
         req.session['currentUser'] = user;
-        res.send({email: email});
+        res.send(user);
       });
   }
 
@@ -38,6 +38,7 @@ module.exports = app => {
   function getLoggedInUser(req, res){
     if(req.session['currentUser']){
       res.send(req.session['currentUser']);
+
     }else{
       res.send(null);
     }
@@ -57,7 +58,7 @@ module.exports = app => {
       .then(function (user) {
         if(user) {
           req.session['currentUser'] = user;
-          res.send({email: email});
+          res.send(user);
         } else {
           res.send(null);}});
   }

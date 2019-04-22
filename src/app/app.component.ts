@@ -26,7 +26,7 @@ export class AppComponent implements OnInit{
   }
 
   // noinspection JSAnnotator
-  public getCurrentUser(): AppComponent {
+  public getCurrentUser(): void {
     this.profileService.findCurrentUser().subscribe(res => {
       if(!isNullOrUndefined(res)){
         this.loggedIn = true;

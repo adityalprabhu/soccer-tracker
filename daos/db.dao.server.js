@@ -75,6 +75,9 @@ findUserById = userId =>
 findUserByCredentials = (email, password) =>
   userModel.findOne({email: email, password: password});
 
+findUserByTeam = (teamId) =>
+  userModel.find({ $or: [ {favoriteTeam: teamId}, { teams: teamId }]});
+
 createComment = comment =>
   commentsModel.create(comment);
 
@@ -98,6 +101,7 @@ module.exports = {
   findUserById,
   findUserByCredentials,
   findUserByEmail,
-  createComment
+  createComment,
+  findUserByTeam
 
 };

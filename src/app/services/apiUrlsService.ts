@@ -8,6 +8,7 @@ export class ApiUrlsService {
   public static findAllComments = environment.domain + '/api/comment';
   public static createComment = environment.domain + '/api/comment';
   public static deleteComment = environment.domain + '/api/comment/';
+  public static findUserByTeamIdApi = environment.domain + '/api/user/team/';
 
   public static findTeamDetails = environment.fdomain + '/teams/team/';
   public static findTeamFixtures = environment.fdomain + '/fixtures/team/';

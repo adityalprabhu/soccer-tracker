@@ -18,6 +18,11 @@ module.exports = app => {
       .then(response => res.json(response));
   };
 
+  let findUsersByTeam = (req, res) => {
+    dao.findUserByTeam(req.params['tid'])
+      .then(response => res.json(response));
+  };
+
   let populateLogos = (req, res) => {
     logoDao.populateLogos();
     res.send("Logos Populated!");
@@ -71,5 +76,6 @@ module.exports = app => {
 
   app.post('/api/populate', populateDatabase);
   app.get('/api/user', findAllUsers);
+  app.get('/api/user/team/:tid', findUsersByTeam);
   app.delete('/api/all', truncateDatabase);
 };

@@ -2,6 +2,7 @@
   <div class="form-container sign-up-container">
     <form action="#">
       <h1>Create Account</h1>
+      <p *ngIf="showSignUpError" class="text-danger">Try again with different credentials</p>
       <input type="text" [(ngModel)]="firstName" [ngModelOptions]="{standalone: true}"/>
       <input type="text" [(ngModel)]="lastName" [ngModelOptions]="{standalone: true}"/>
       <input type="email" [(ngModel)]="email" [ngModelOptions]="{standalone: true}"/>
@@ -12,6 +13,7 @@
   <div class="form-container sign-in-container">
     <form action="#">
       <h1>Sign in</h1>
+      <p *ngIf="showLoginError" class="text-danger">Try again with different credentials</p>
       <input type="email" [(ngModel)]="email" [ngModelOptions]="{standalone: true}"/>
       <input type="password" [(ngModel)]="password" [ngModelOptions]="{standalone: true}" />
       <!--<a href="#">Forgot your password?</a>-->
@@ -27,7 +29,7 @@
       </div>
       <div class="overlay-panel overlay-right">
         <h1>Hello!</h1>
-        <p>Enter your personal details and sign up with us</p>
+        <p>Enter your details and sign up with us</p>
         <button class="ghost" id="signUp" (click)="goToSignUp()">Sign Up</button>
       </div>
     </div>
