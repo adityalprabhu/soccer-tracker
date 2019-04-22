@@ -20,12 +20,12 @@
           <th scope="col"></th>
           <th scope="col"></th>
           <th scope="col"></th>
-          <th scope="col"></th>
           <th scope="col">Home Team</th>
-          <th scope="col">Score</th>
+          <th scope="col"></th>
+          <th class="score"  scope="col">Score</th>
           <th scope="col"></th>
           <th scope="col">Away Team</th>
-          <th scope="col"></th>
+
         </tr>
         </thead>
 
@@ -45,14 +45,17 @@
           </ng-template>
           <td><img class="countryFlag" src="{{countryFlags[fixture['league_id']]}}"
                    style="width:35px;height:35;">
-          </td>
+
+          <td><a routerLink="/team/{{fixture.homeTeam_id}}">{{fixture.homeTeam}}</a></td>
           <td><img class="logo" src="{{logos[fixture['homeTeam_id']]}}"
                    style="width:35px;height:35;"></td>
-          <td><a routerLink="/team/{{fixture.homeTeam_id}}">{{fixture.homeTeam}}</a></td>
-          <td><b>{{fixture.goalsHomeTeam}}  -  {{fixture.goalsAwayTeam}}</b></td>
-          <td>{{getTime(fixture)}}</td>
+          <td>
+            <div class="score" style="align-content: center"><b>{{fixture.goalsHomeTeam}}  -  {{fixture.goalsAwayTeam}}</b></div>
+            <div class="score" style="align-content: center">{{getTime(fixture)}}</div>
+          </td>
+          <td><img class="logo" src="{{logos[fixture['awayTeam_id']]}}"
+                   style="width:35px;height:35;"></td>
           <td><a routerLink="/team/{{fixture.awayTeam_id}}">{{fixture.awayTeam}}</a></td>
-          <td>logo</td>
         </tr>
         </tbody>
       </table>
