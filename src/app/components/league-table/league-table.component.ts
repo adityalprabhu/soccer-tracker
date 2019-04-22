@@ -30,6 +30,7 @@ export class LeagueTableComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.leagueId = params.leagueId;
+      this.findLeagueStandings(this.leagueId);
     });
 
     this.teamLogos = Utils.TEAMLOGOS;
