@@ -5,10 +5,10 @@ import { environment } from '../../environments/environment';
 export class ApiUrlsService {
 
   // comments apis
-  public static findAllComments = environment.domain + '/api/comment';
-  public static createComment = environment.domain + '/api/comment';
-  public static deleteComment = environment.domain + '/api/comment/';
-  public static findUserByTeamIdApi = environment.domain + '/api/user/team/';
+  public static findAllComments = environment.local5000 + '/api/comment';
+  public static createComment = environment.local5000 + '/api/comment';
+  public static deleteComment = environment.local5000 + '/api/comment/';
+  public static findUserByTeamIdApi = environment.local5000 + '/api/user/team/';
 
   public static findTeamDetails = environment.fdomain + '/teams/team/';
   public static findTeamFixtures = environment.fdomain + '/fixtures/team/';

@@ -97,6 +97,8 @@ findUserByCredentials = (email, password) =>
 findUserByTeam = (teamId) =>
   userModel.find({$or: [{favoriteTeam: teamId}, {teams: teamId}]});
 
+
+
 createComment = comment =>
   commentsModel.create(comment);
 

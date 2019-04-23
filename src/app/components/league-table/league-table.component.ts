@@ -3,6 +3,9 @@ import {TeamService} from '../../services/teamService/team.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {Utils} from '../../../assets/utils';
+import {CommentServiceService} from '../../services/commentService/comment-service.service';
+import {ProfileService} from '../../services/profileService/profile.service';
+import {isNullOrUndefined} from "util";
 
 
 @Component({
@@ -20,11 +23,19 @@ export class LeagueTableComponent implements OnInit {
   leagueStandings;
   leagueLogos;
   teamLogos;
+  comments: any;
+  newComment: string;
+  user: any;
+  userId: Number;
+  userName: String;
+  loggedIn: boolean;
 
   constructor(private route: ActivatedRoute,
               private location: Location,
               private router: Router,
-              private teamService: TeamService) {
+              private teamService: TeamService,
+              private commentsService: CommentServiceService,
+              private profileService: ProfileService) {
   }
 
   ngOnInit() {
@@ -32,6 +43,8 @@ export class LeagueTableComponent implements OnInit {
       this.leagueId = params.leagueId;
       this.findLeagueStandings(this.leagueId);
       this.findLeagueDetails(this.leagueId);
+      this.getCurrentUser();
+      this.findAllComments();
     });
 
     this.teamLogos = Utils.TEAMLOGOS;
@@ -51,5 +64,46 @@ export class LeagueTableComponent implements OnInit {
       this.leagueSeasonNext = parseInt(this.leagueDetails.season, 10) + 1;
     });
   }
+
+  findAllComments() {
+    this.commentsService.findAllComments().subscribe(res => {
+      var filteredComments = Object.values(res)
+      filteredComments = filteredComments.filter(comment => comment.leagueId == this.leagueId);
+      this.comments = filteredComments;
+      console.log("COMMENTS = " + this.comments)
+    });
+  }
+
+  postComment() {
+    const comment = {
+      userId: this.user._id,
+      leagueId: this.leagueId,
+      comment: this.newComment
+    };
+
+    this.commentsService.createComment(comment).subscribe(res => {
+      this.findAllComments();
+      this.newComment = '';
+    });
+  }
+
+  getCurrentUser() {
+    this.profileService.findCurrentUser().subscribe(res => {
+      this.user = res;
+      if(!isNullOrUndefined(this.user)){
+        this.userId = this.user._id;
+        this.userName = this.user.firstName + " " + this.user.lastName
+        this.loggedIn = true;
+        console.log(this.user);
+      }
+    });
+  }
+
+  deleteComment(commentId) {
+    this.commentsService.deleteComment(commentId).subscribe(res => {
+      this.findAllComments();
+    });
+  }
+
 
 }

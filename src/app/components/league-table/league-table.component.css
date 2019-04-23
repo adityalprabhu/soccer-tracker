@@ -6,6 +6,12 @@ img.resize {
   max-height: 120px;
 }
 
+/*div {*/
+/*  border: solid;*/
+/*  border-width: 1px;*/
+/*  border-color: red;*/
+/*}*/
+
 /*Center rows*/
 .table td {
   text-align: center;
@@ -25,4 +31,9 @@ img.resize {
   height: auto;
 }
 
+
+/*#noUser{*/
+/*  float:right;*/
+/*  align-content: flex-end;*/
+/*}*/
 
