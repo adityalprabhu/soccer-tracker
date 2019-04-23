@@ -1,5 +1,8 @@
-<div class="container-fluid bg-secondary mt-1">
-  <h1 class="d-flex justify-content-center text-white">{{firstName}}'s Dashboard</h1>
+<div class="jumbotron jumbotron-fluid">
+  <div class="container align-middle">
+    <h1 class="display-10">{{firstName}}'s Dashboard</h1>
+    <p class="lead">Customize Your Teams and Profile!</p>
+  </div>
 </div>
 
 <br/>
@@ -35,12 +38,18 @@
 
           <div *ngFor="let team of teams" class="m-2">
 
-            <div class="card text-center" style="width: 18rem;">
-              <img class="card-img-top resize img-fluid d-block mx-auto"
-                   src="{{teamLogos[team]}}"
-                   alt="Team Logo">
+            <div class="card text-center">
+              <a routerLink="/team/{{team}}">
+                <img class="card-img-top resize img-fluid d-block mx-auto"
+                     src="{{teamLogos[team]}}"
+                     alt="Team Logo">
+              </a>
               <div class="card-body">
-                <h5 class="card-title">{{teamNames[team]}}</h5>
+                <h5 class="card-title">
+                  <a routerLink="/team/{{team}}">
+                    {{teamNames[team]}}
+                  </a>
+                </h5>
                 <h6 class="card-title"></h6>
               </div>
               <ul class="list-group list-group-flush">
@@ -50,21 +59,52 @@
                 <li class="list-group-item">Draws: 0</li>
                 <li class="list-group-item">Losses: 0</li>
               </ul>
-              <a href="#" class="btn d-block btn-danger">Remove</a>
+              <button (click)="removeTeam(team)" class="btn d-block btn-danger">Remove</button>
             </div>
 
           </div>
 
-          <div class="card text-center" style="width: 18rem;">
-            <img class="card-img-top resize img-fluid d-block mx-auto"
+          <div class="card text-center m-2">
+            <img class="card-img-top resizeFixed img-fluid d-block mx-auto"
                  src="https://daily.jstor.org/wp-content/uploads/2018/06/soccer_europe_1050x700.jpg"
                  alt="Team Logo">
             <div class="card-body">
               <h5 class="card-title">Add a New Team!</h5>
-              <h6 class="card-title"></h6>
             </div>
 
-            <a href="#" class="btn d-block btn-success">Add Team</a>
+            <h6>Select a league first, though :)</h6>
+
+            <div class="dropdown">
+              <button class="btn btn-outline-info dropdown-toggle m-4" type="button"
+                      id="selectLeague"
+                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{addLeague}}
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" (click)="setAddLeague('English')">English</a>
+                <a class="dropdown-item" (click)="setAddLeague('French')">French</a>
+                <a class="dropdown-item" (click)="setAddLeague('German')">German</a>
+                <a class="dropdown-item" (click)="setAddLeague('Spanish')">Spanish</a>
+                <a class="dropdown-item" (click)="setAddLeague('Italian')">Italian</a>
+              </div>
+            </div>
+
+            <div class="dropdown">
+              <button class="btn btn-outline-secondary dropdown-toggle m-4" type="button"
+                      id="selectTeam"
+                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{addTeamName}}
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a *ngFor="let team of teamsMapByLeague[addLeague]"
+                   class="dropdown-item"
+                   (click)="setAddTeam(team.team_id, team.name)">
+                  {{team.name}}
+                </a>
+              </div>
+            </div>
+
+            <a class="btn d-block btn-success" (click)="addTeam()">Add Team</a>
           </div>
 
 

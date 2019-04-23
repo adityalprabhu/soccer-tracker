@@ -5,6 +5,13 @@ img.resize {
   max-height: 150px;
 }
 
+img.resizeFixed {
+  height: auto;
+  width: auto;
+  max-width: 300px;
+  max-height: 190px;
+}
+
 .border-2 {
   border-width:2px !important;
 }
@@ -29,3 +36,16 @@ img.resize {
   color: #17a2b8 !important;
   border: 0.5px solid #d3d3d3;
 }
+
+.jumbotron {
+  background: linear-gradient(to right, rgb(159, 160, 197), #cf6356);
+  padding-top: 0px;
+  padding-bottom:0px;
+  height:100px;
+  color: white;
+}
+
+.card {
+  width: 18rem;
+}
+

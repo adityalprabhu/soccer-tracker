@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {TeamService} from '../../services/teamService/team.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
-import {Utils} from "../../../assets/utils";
+import {Utils} from '../../../assets/utils';
 
 
 @Component({
@@ -15,7 +15,7 @@ export class LeagueTableComponent implements OnInit {
 
   leagueDetails;
   leagueId;
-  leagueName;
+  leagueNames;
   leagueSeasonNext;
   leagueStandings;
   leagueLogos;
@@ -31,44 +31,18 @@ export class LeagueTableComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.leagueId = params.leagueId;
       this.findLeagueStandings(this.leagueId);
+      this.findLeagueDetails(this.leagueId);
     });
 
     this.teamLogos = Utils.TEAMLOGOS;
     this.leagueLogos = Utils.LEAGUELOGOS;
-
-    this.findLeagueStandings(this.leagueId);
-    this.findLeagueDetails(this.leagueId);
-    this.findLeagueName(this.leagueId);
-  }
-
-  findLeagueName(leagueId) {
-    if (leagueId === '2') {
-      this.leagueName = 'English';
-    } else if (leagueId === '4') {
-      this.leagueName = 'French';
-    } else if (leagueId === '87') {
-      this.leagueName = 'Spanish';
-    } else if (leagueId === '8') {
-      this.leagueName = 'German';
-    } else if (leagueId === '94') {
-      this.leagueName = 'Italian';
-    } else {
-      this.leagueName = '';
-    }
+    this.leagueNames = Utils.LEAGUENAMES;
   }
 
   findLeagueStandings(leagueId) {
     this.teamService.findLeagueStandings(leagueId).subscribe(res => {
       this.leagueStandings = res['api'].standings[0];
     });
-  }
-
-  findTeamLogo(teamId) {
-    return this.teamLogos[parseInt(teamId, 10)];
-  }
-
-  findLeagueLogo(leagueId) {
-    return this.leagueLogos[parseInt(leagueId, 10)];
   }
 
   findLeagueDetails(leagueId) {

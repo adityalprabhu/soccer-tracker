@@ -7,6 +7,7 @@ export class Utils {
   public static RAPIDKEY = '2c4a4fc99amshe50fdd337dd7144p16d624jsn64cd58af65a9';
 
   public static LEAGUEIDS = {'english': 2, 'spanish': 87, 'french': 4, 'german': 8, 'italy': 94};
+  public static LEAGUENAMES = {2: 'English', 87: 'Spanish', 4: 'French', 8: 'German', 94: 'Italian'};
   public static SUPPORTEDLEAGUES = [Utils.LEAGUEIDS.english, Utils.LEAGUEIDS.spanish, Utils.LEAGUEIDS.french,
     Utils.LEAGUEIDS.german, Utils.LEAGUEIDS.italy];
   public static COUNTRYFLAGS = {

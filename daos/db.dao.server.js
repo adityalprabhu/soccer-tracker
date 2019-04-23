@@ -46,6 +46,22 @@ populateDatabase = () => {
       lastName: 'K',
       teams: ['529', '42', '34', '40', '85']
     },
+    {
+      _id: 2,
+      email: 't',
+      password: 't',
+      firstName: 'Gabe',
+      lastName: 'B',
+      teams: ['170', '42', '80', '40', '50', '537']
+    },
+    {
+      _id: 3,
+      email: '',
+      password: '',
+      firstName: 'Aditya',
+      lastName: 'P',
+      teams: ['42', '80', '40', '50', '728']
+    }
   ];
 
   return userModel.insertMany(users);
@@ -76,7 +92,7 @@ findUserByCredentials = (email, password) =>
   userModel.findOne({email: email, password: password});
 
 findUserByTeam = (teamId) =>
-  userModel.find({ $or: [ {favoriteTeam: teamId}, { teams: teamId }]});
+  userModel.find({$or: [{favoriteTeam: teamId}, {teams: teamId}]});
 
 createComment = comment =>
   commentsModel.create(comment);

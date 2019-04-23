@@ -65,7 +65,12 @@ module.exports = app => {
 
   function updateUser(req, res) {
     dao.updateUser(req.params['uid'], req.body)
-      .then(response => res.json(response));
+      .then(response => {
+        res.json(response);
+      });
+
+    // must update session aswell
+    req.session['currentUser'] = req.body;
   }
 
   app.put('/api/user/:uid', updateUser);
