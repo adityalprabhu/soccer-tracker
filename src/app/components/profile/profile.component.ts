@@ -20,6 +20,7 @@ export class ProfileComponent implements OnInit {
   password: any;
   firstName: any;
   lastName: any;
+  manager: any;
   teams: any;
   teamLogos: any;
   leagueLogos: any;
@@ -87,7 +88,8 @@ export class ProfileComponent implements OnInit {
       password: this.password,
       firstName: this.firstName,
       lastName: this.lastName,
-      teams: this.teams
+      teams: this.teams,
+      manager: this.manager
     };
 
     this.profileService.updateUser(this.userId, user).subscribe(res => {
@@ -132,6 +134,9 @@ export class ProfileComponent implements OnInit {
         this.firstName = this.user.firstName;
         this.lastName = this.user.lastName;
         this.teams = this.user.teams;
+        this.manager = this.user.manager;
+
+        console.log(this.manager);
 
         this.findTeamNames(this.teams);
         // this.findTeamsDetails(this.favoriteTeam);

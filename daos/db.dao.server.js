@@ -39,7 +39,6 @@ populateDatabase = () => {
 
   const users = [
     {
-      _id: 1,
       email: 'test',
       password: 'test',
       firstName: 'Hassan',
@@ -48,7 +47,6 @@ populateDatabase = () => {
       teams: ['529', '42', '34', '40', '85']
     },
     {
-      _id: 2,
       email: 't',
       password: 't',
       firstName: 'Gabe',
@@ -57,7 +55,6 @@ populateDatabase = () => {
       teams: ['170', '42', '80', '40', '50', '537']
     },
     {
-      _id: 3,
       email: 'adi',
       password: 'adi',
       firstName: 'Aditya',

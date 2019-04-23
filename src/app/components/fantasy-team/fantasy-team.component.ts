@@ -37,7 +37,6 @@ export class FantasyTeamComponent implements OnInit {
     this.selectedPosition = 'goalkeepers';
     this.selectedLeague = 0;
     this.fantasyTeam = {
-      _id: (new Date().getTime() / 1000),
       name: "",
       goalkeepers: [],
       strikers: [],
@@ -135,12 +134,13 @@ export class FantasyTeamComponent implements OnInit {
 
   findFantasyTeamByManager(){
     this.profileService.findCurrentUser().subscribe(res => {
+      console.log("RES IS" + res)
+      console.log("RED ID IS" + res['_id']);
       if(!isNullOrUndefined(res)){
         this.profileService.findFantasyTeamByUser(res['_id']).subscribe(team => {
           if(team['length'] == 0){
             this.newTeam = true;
             this.fantasyTeam = {
-              _id: (new Date().getTime() / 1000),
               name: "",
               goalkeepers: [],
               strikers: [],
@@ -162,6 +162,7 @@ export class FantasyTeamComponent implements OnInit {
   saveFantasyTeam(){
     if(this.newTeam){
       this.profileService.createFantasyTeam(this.fantasyTeam);
+      console.log(this.fantasyTeam)
     }else{
       this.profileService.updateFantasyTeamByUser(this.fantasyTeam.manager, this.fantasyTeam).subscribe(res => {
         console.log(res);

@@ -53,5 +53,4 @@ export class ProfileService {
     return this.httpClient.put(environment.local5000 + '/api/team/'+ mid, team,  httpOptions);
   }
 
-
 }

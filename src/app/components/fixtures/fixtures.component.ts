@@ -16,7 +16,6 @@ export class FixturesComponent implements OnInit {
 
 
   fixtures: any;
-  leagueIDs: any;
   today: Date;
   englishLeague: boolean;
   spanishLeague: true;
@@ -244,10 +243,8 @@ export class FixturesComponent implements OnInit {
 
   isHypeFixture(fixture) {
 
-    // var bool = this.topTeams.includes(fixture['homeTeam']) && this.topTeams.includes(fixture['awayTeam']);
-
     return this.topTeams.includes(fixture['homeTeam']) && this.topTeams.includes(fixture['awayTeam']);
-    ;
+
 
   }
 
@@ -311,12 +308,6 @@ export class FixturesComponent implements OnInit {
       this.englishLeague = true;
 
     }
-  }
-
-  getLogo(teamID) {
-    this.teamService.findLeagueStandings(Utils.LEAGUEIDS.german).subscribe(res => {
-      return res;
-    });
   }
 
   findLogo(teamID) {

@@ -9,7 +9,7 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link" routerLink="">Home</a>
       </li>
       <li class="nav-item dropdown">
@@ -22,14 +22,17 @@
         </div>
       </li>
       <li *ngIf="loggedIn" class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Profile
-        </a>
+<!--        <a class="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--          Profile-->
+<!--        </a>-->
+        <a class="nav-link" routerLink="/profile">Profile</a>
 
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" routerLink="#">Favorites</a>
-          <a class="dropdown-item" routerLink="/profile">Edit Profile</a>
-        </div>
+
+<!--        <div class="dropdown-menu" aria-labelledby="navbarDropdown">-->
+<!--          -->
+<!--          <a class="dropdown-item" routerLink="#">Favorites</a>-->
+<!--          <a class="dropdown-item" routerLink="/profile">Edit Profile</a>-->
+<!--        </div>-->
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="/fixtures">Fixtures</a>

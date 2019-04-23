@@ -11,16 +11,16 @@ module.exports = app => {
   function register(req, res) {
     var email = req.body.email;
     var password = req.body.password;
-    var id = req.body._id;
     var fname = req.body.firstName;
     var lname = req.body.lastName;
+    var manager = req.body.manager;
 
     var newUser = {
-      _id: id,
       email: email,
       password: password,
       firstName: fname,
       lastName: lname,
+      manager: manager
     };
     dao.findUserByEmail(newUser.email)
       .then(function (user) {

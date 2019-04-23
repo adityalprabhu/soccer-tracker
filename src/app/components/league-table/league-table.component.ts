@@ -26,7 +26,7 @@ export class LeagueTableComponent implements OnInit {
   comments: any;
   newComment: string;
   user: any;
-  userId: Number;
+  userId: string;
   userName: String;
   loggedIn: boolean;
 
@@ -76,10 +76,12 @@ export class LeagueTableComponent implements OnInit {
 
   postComment() {
     const comment = {
-      userId: this.user._id,
+      userId: this.userId,
       leagueId: this.leagueId,
       comment: this.newComment
     };
+
+    console.log(comment);
 
     this.commentsService.createComment(comment).subscribe(res => {
       this.findAllComments();
@@ -94,7 +96,7 @@ export class LeagueTableComponent implements OnInit {
         this.userId = this.user._id;
         this.userName = this.user.firstName + " " + this.user.lastName
         this.loggedIn = true;
-        console.log(this.user);
+        console.log(this.userId);
       }
     });
   }

@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
   password: string;
   firstName: string;
   lastName: string;
+  manager: boolean;
   showLoginError: boolean;
   showSignUpError: boolean;
 
@@ -35,6 +36,7 @@ export class LoginComponent implements OnInit {
     this.firstName ="John";
     this.lastName = "Doe";
     this.password = "password";
+    this.manager = false;
     this.showLoginError = false;
     this.showSignUpError = false;
 
@@ -54,7 +56,9 @@ export class LoginComponent implements OnInit {
   }
 
   signUp() {
-    let user = {_id: (new Date().getTime() / 1000), email: this.email, password: this.password, firstName: this.firstName, lastName: this.lastName}
+
+
+    let user = {_id: (new Date().getTime() / 1000), email: this.email, password: this.password, firstName: this.firstName, lastName: this.lastName, manager: this.manager}
     this.profileService.register(user).subscribe(res => {
       console.log(res);
       if(!isNullOrUndefined(res)){
