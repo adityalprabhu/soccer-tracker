@@ -137,7 +137,7 @@ export class FantasyTeamComponent implements OnInit {
     this.profileService.findCurrentUser().subscribe(res => {
       if(!isNullOrUndefined(res)){
         this.profileService.findFantasyTeamByUser(res['_id']).subscribe(team => {
-          if(team.length == 0){
+          if(team['length'] == 0){
             this.newTeam = true;
             this.fantasyTeam = {
               _id: (new Date().getTime() / 1000),
