@@ -146,7 +146,7 @@ export class ProfileComponent implements OnInit {
 
     for (let i = 0; i < teamIds.length; i++) {
       this.teamService.findTeamDetails(teamIds[i]).subscribe(res => {
-        this.teamNames[teamIds[i]] = res.api.teams[teamIds[i].toString()].name;
+        this.teamNames[teamIds[i]] = res['api'].teams[teamIds[i].toString()].name;
       });
     }
   }

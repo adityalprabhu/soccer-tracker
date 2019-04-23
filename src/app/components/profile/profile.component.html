@@ -36,7 +36,7 @@
 
         <div class="row">
 
-          <div *ngFor="let team of teams" class="m-2">
+          <div *ngFor="let team of teams" class="m-2 shadow rounded">
 
             <div class="card text-center">
               <a routerLink="/team/{{team}}">
@@ -64,6 +64,7 @@
 
           </div>
 
+          <!--   Add New Team Card   -->
           <div class="card text-center m-2">
             <img class="card-img-top resizeFixed img-fluid d-block mx-auto"
                  src="https://daily.jstor.org/wp-content/uploads/2018/06/soccer_europe_1050x700.jpg"
@@ -104,7 +105,7 @@
               </div>
             </div>
 
-            <a class="btn d-block btn-success" (click)="addTeam()">Add Team</a>
+            <a class="btn d-block btn-success text-white" (click)="addTeam()">Add Team</a>
           </div>
 
 
