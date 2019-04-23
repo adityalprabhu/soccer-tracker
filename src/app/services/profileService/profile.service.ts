@@ -38,7 +38,19 @@ export class ProfileService {
 
   public logout() {
     return this.httpClient.post(environment.local5000 + '/api/logout', {responseType: 'text'}, httpOptions);
+  }
 
+  public findFantasyTeamByUser(mid){
+    return this.httpClient.get(environment.local5000 + '/api/team/manager/'+ mid, httpOptions);
+  }
+
+
+  public createFantasyTeam(team){
+    return this.httpClient.post(environment.local5000 + '/api/team/', team,  httpOptions);
+  }
+
+  public updateFantasyTeamByUser(mid, team){
+    return this.httpClient.put(environment.local5000 + '/api/team/'+ mid, team,  httpOptions);
   }
 
 

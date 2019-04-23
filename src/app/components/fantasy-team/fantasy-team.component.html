@@ -3,14 +3,14 @@
     <div class="row">
       <div class="col-9">
         <div class="form-group row mt-3">
-          <label for="squadName" class=" col-form-label">Squad Name: </label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control" id="squadName" placeholder="Enter Squad Name">
+          <label for="squadName" class=" col-form-label">Fantasy Team Name: </label>
+          <div class="col-sm-7">
+            <input type="text" class="form-control" id="squadName" placeholder="Enter Squad Name" [(ngModel)]="fantasyTeam.name">
           </div>
         </div>
       </div>
       <div class="col-3">
-        <button class="btn btn-success float-right mt-3">Save Squad</button>
+        <button class="btn btn-success float-right mt-3" (click)="saveFantasyTeam()">Save Team</button>
       </div>
     </div>
   </div>
@@ -22,13 +22,15 @@
           <div>Goalkeepers</div>
         </div>
         <ul class="list-group list-group-flush text-justify">
-          <li class="list-group-item" *ngFor="let result of sample">
+          <li class="list-group-item" *ngFor="let goalkeeper of fantasyTeam.goalkeepers">
             <div class="row">
               <div class="col-9">
-                {{result}}
+                {{goalkeeper}}
               </div>
               <div class="col-3">
-                <button class="btn btn-danger btn-block"><a class="fa fa-times"></a></button>
+                <button class="btn btn-danger float-right"
+                        (click)="deletePlayer({'position':'goalkeepers', 'player':goalkeeper})">
+                  <a class="fa fa-times"></a></button>
               </div>
             </div>
           </li>
@@ -40,13 +42,15 @@
           <div>Defenders</div>
         </div>
         <ul class="list-group list-group-flush text-justify">
-          <li class="list-group-item" *ngFor="let result of sample">
+          <li class="list-group-item" *ngFor="let defender of fantasyTeam.defenders">
             <div class="row">
               <div class="col-9">
-                {{result}}
+                {{defender}}
               </div>
               <div class="col-3">
-                <button class="btn btn-danger btn-block"><a class="fa fa-times"></a></button>
+                <button class="btn btn-danger float-right"
+                        (click)="deletePlayer({'position':'defenders', 'player':defender})">
+                  <a class="fa fa-times"></a></button>
               </div>
             </div>
           </li>
@@ -58,13 +62,15 @@
           <div>Midfielders</div>
         </div>
         <ul class="list-group list-group-flush text-justify">
-          <li class="list-group-item" *ngFor="let result of sample">
+          <li class="list-group-item" *ngFor="let midfielder of fantasyTeam.midfielders">
             <div class="row">
               <div class="col-9">
-                {{result}}
+                {{midfielder}}
               </div>
               <div class="col-3">
-                <button class="btn btn-danger btn-block"><a class="fa fa-times"></a></button>
+                <button class="btn btn-danger float-right"
+                        (click)="deletePlayer({'position':'midfielders', 'player':midfielder})">
+                  <a class="fa fa-times"></a></button>
               </div>
             </div>
           </li>
@@ -76,13 +82,14 @@
           <div>Strikers</div>
         </div>
         <ul class="list-group list-group-flush text-justify">
-          <li class="list-group-item" *ngFor="let result of sample">
+          <li class="list-group-item" *ngFor="let striker of fantasyTeam.strikers">
             <div class="row">
               <div class="col-9">
-                {{result}}
+                {{striker}}
               </div>
               <div class="col-3">
-                <button class="btn btn-danger btn-block"><a class="fa fa-times"></a></button>
+                <button class="btn btn-danger float-right" (click)="deletePlayer({'position':'strikers', 'player':striker})">
+                  <a class="fa fa-times"></a></button>
               </div>
             </div>
           </li>
@@ -100,36 +107,36 @@
         <div id="dropdowns" class="p-3">
           <div class="form-group">
             <label for="league">Select League:</label>
-            <select class="form-control" id="league">
-              <option *ngFor="let item of leagues | keyvalue" value="{{item.value}}">{{item.key}}</option>
+            <select class="form-control" id="league" [(ngModel)]="selectedLeague" (change)="onSelectLeague($event.target.value)">
+              <option *ngFor="let league of leagues | keyvalue" [value]="league.value">{{league.key}}</option>
             </select>
           </div>
           <div class="form-group">
             <label for="team">Select Team:</label>
-            <select class="form-control" id="team">
-              <option *ngFor="let result of sample" value="{{result}}">{{result}}</option>
+            <select class="form-control" id="team" [disabled]="disableTeams" (change)="onSelectTeam($event.target.value)">
+              <option *ngFor="let team of teams" value="{{team.team_id}}">{{team.name}}</option>
             </select>
           </div>
           <div class="form-group">
             <label for="player">Select Player:</label>
-            <select class="form-control" id="player">
-              <option *ngFor="let result of sample" value="{{result}}">{{result}}</option>
+            <select class="form-control" id="player" [disabled]="disablePlayer" (change)="onSelectPlayer($event.target.value)">
+              <option *ngFor="let player of players" value="{{player.player}}">{{player.player}}</option>
             </select>
           </div>
 
           <div class="form-group">
             <label for="position">Select Position:</label>
-            <select class="form-control" id="position">
-              <option *ngFor="let result of sample" value="{{result}}">{{result}}</option>
+            <select class="form-control" id="position" [(ngModel)]="selectedPosition" [disabled]="disablePosition">
+              <option *ngFor="let position of positions | keyvalue" value="{{position.value}}">{{position.key}}</option>
             </select>
           </div>
 
           <div class="row">
             <div class="col-6">
-              <button class="btn btn-warning btn-block">Cancel</button>
+              <button class="btn btn-warning btn-block" (click)="cancel()">Cancel</button>
             </div>
             <div class="col-6">
-              <button class="btn btn-success btn-block">Add Player</button>
+              <button class="btn btn-success btn-block" (click)="addPlayer()">Add Player</button>
             </div>
           </div>
         </div>
