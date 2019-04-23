@@ -13,6 +13,7 @@ import { FixturesComponent } from './components/fixtures/fixtures.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { SearchComponent } from './components/search/search.component';
+import { FantasyTeamComponent } from './components/fantasy-team/fantasy-team.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { SearchComponent } from './components/search/search.component';
     FixturesComponent,
     HomeComponent,
     ProfileComponent,
-    SearchComponent
+    SearchComponent,
+    FantasyTeamComponent
   ],
   imports: [
     BrowserModule,

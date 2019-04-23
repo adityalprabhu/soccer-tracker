@@ -1,0 +1,25 @@
+.team-container {
+  border: solid 0.5px #d3d3d3;
+  border-radius: 10px;
+  min-height: 450px;
+  padding: 0 !important;
+  padding-bottom: 2px !important;
+  padding-right: 1px !important;
+}
+
+.row{
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.team-container .col-6 {
+  margin: 0 !important;
+}
+
+.list-group-item{
+  padding: .4rem;
+}
+
+.card-header{
+  line-height: 0.75rem !important;
+}
