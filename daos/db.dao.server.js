@@ -44,6 +44,7 @@ populateDatabase = () => {
       password: 'test',
       firstName: 'Hassan',
       lastName: 'K',
+      manager: true,
       teams: ['529', '42', '34', '40', '85']
     },
     {
@@ -52,14 +53,16 @@ populateDatabase = () => {
       password: 't',
       firstName: 'Gabe',
       lastName: 'B',
+      manager: true,
       teams: ['170', '42', '80', '40', '50', '537']
     },
     {
       _id: 3,
-      email: '',
-      password: '',
+      email: 'adi',
+      password: 'adi',
       firstName: 'Aditya',
       lastName: 'P',
+      manager: false,
       teams: ['42', '80', '40', '50', '728']
     }
   ];

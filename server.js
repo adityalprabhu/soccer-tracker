@@ -29,12 +29,13 @@ app.use(function (req, res, next) {
 const commentsService = require('./services/comments.service.server');
 const dbService = require('./services/db.service.server');
 const profileService = require('./services/profile.service.server');
-const searchService = require('./services/search.service.server');
+const teamService = require('./services/team.service.server');
 
 
 commentsService(app);
 dbService(app);
 profileService(app);
+teamService(app);
 
 // app.get('/api/session/set/:name/:value',
 //   setSession);
