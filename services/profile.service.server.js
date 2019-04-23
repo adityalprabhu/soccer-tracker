@@ -14,8 +14,11 @@ module.exports = app => {
     var fname = req.body.firstName;
     var lname = req.body.lastName;
     var manager = req.body.manager;
+    var id = req.body._id;
+
 
     var newUser = {
+      _id: id,
       email: email,
       password: password,
       firstName: fname,

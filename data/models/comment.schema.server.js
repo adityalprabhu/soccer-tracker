@@ -3,7 +3,7 @@ const user = require('./user.schema.server');
 
 const commentsSchema = mongoose.Schema
 ({
-  user: {type: mongoose.Schema.Types.ObjectId, ref: 'UserModel'},
+  userId: {type: mongoose.Schema.Types.Number, ref: 'UserModel'},
   leagueId: Number,
   comment: String
 }, {collection: 'comment'});

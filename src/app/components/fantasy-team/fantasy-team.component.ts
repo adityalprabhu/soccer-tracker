@@ -141,6 +141,7 @@ export class FantasyTeamComponent implements OnInit {
           if(team['length'] == 0){
             this.newTeam = true;
             this.fantasyTeam = {
+              _id: (new Date().getTime() / 1000),
               name: "",
               goalkeepers: [],
               strikers: [],
@@ -161,8 +162,7 @@ export class FantasyTeamComponent implements OnInit {
 
   saveFantasyTeam(){
     if(this.newTeam){
-      this.profileService.createFantasyTeam(this.fantasyTeam);
-      console.log(this.fantasyTeam)
+      this.profileService.createFantasyTeam(this.fantasyTeam).subscribe(res => console.log(res));
     }else{
       this.profileService.updateFantasyTeamByUser(this.fantasyTeam.manager, this.fantasyTeam).subscribe(res => {
         console.log(res);

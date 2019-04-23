@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
   signUp() {
 
 
-    let user = {_id: (new Date().getTime() / 1000), email: this.email, password: this.password, firstName: this.firstName, lastName: this.lastName, manager: this.manager}
+    let user = {_id: (new Date().getTime() / 10000), email: this.email, password: this.password, firstName: this.firstName, lastName: this.lastName, manager: this.manager}
     this.profileService.register(user).subscribe(res => {
       console.log(res);
       if(!isNullOrUndefined(res)){
