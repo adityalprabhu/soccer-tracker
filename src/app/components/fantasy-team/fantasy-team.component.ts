@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {isNullOrUndefined} from "util";
 import {TeamService} from "../../services/teamService/team.service";
 import {ProfileService} from "../../services/profileService/profile.service";
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-fantasy-team',
@@ -25,8 +26,10 @@ export class FantasyTeamComponent implements OnInit {
   newTeam: boolean;
 
 
-  constructor(private teamService: TeamService,
-              private profileService: ProfileService) {
+  constructor(private route: ActivatedRoute,
+              private teamService: TeamService,
+              private profileService: ProfileService,
+              private router: Router) {
     this.sample = ["1","2","3"]
   }
 
@@ -134,9 +137,14 @@ export class FantasyTeamComponent implements OnInit {
 
   findFantasyTeamByManager(){
     this.profileService.findCurrentUser().subscribe(res => {
-      console.log("RES IS" + res)
-      console.log("RED ID IS" + res['_id']);
+
       if(!isNullOrUndefined(res)){
+        // JANKY fix this up....navs away if not a manager
+        let user = Object.values(res);
+        if(!user[6]){
+          this.router.navigate(['/login']);
+
+        }
         this.profileService.findFantasyTeamByUser(res['_id']).subscribe(team => {
           if(team['length'] == 0){
             this.newTeam = true;
@@ -156,6 +164,8 @@ export class FantasyTeamComponent implements OnInit {
             this.fantasyTeam = team[0]
           }
         });
+      } else {
+        this.router.navigate(['/login']);
       }
     })
   }

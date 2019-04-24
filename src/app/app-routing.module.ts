@@ -1,14 +1,14 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
 import {LoginComponent} from './components/login/login.component';
 import {CommentsComponent} from './components/comments/comments.component';
 import {LeagueTableComponent} from './components/league-table/league-table.component';
 import {FixturesComponent} from './components/fixtures/fixtures.component';
 import {TeamComponent} from './components/team/team.component';
-import {HomeComponent} from "./components/home/home.component";
+import {HomeComponent} from './components/home/home.component';
 import {ProfileComponent} from './components/profile/profile.component';
-import {SearchComponent} from "./components/search/search.component";
-import {FantasyTeamComponent} from "./components/fantasy-team/fantasy-team.component";
+import {SearchComponent} from './components/search/search.component';
+import {FantasyTeamComponent} from './components/fantasy-team/fantasy-team.component';
 
 const routes: Routes = [
 
@@ -21,7 +21,10 @@ const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'profile', component: ProfileComponent},
   {path: 'search/:searchCriteria', component: SearchComponent},
-  {path: 'fantasyTeam', component: FantasyTeamComponent}
+  {path: 'search', component: SearchComponent},
+  {
+    path: 'fantasy-team', component: FantasyTeamComponent
+  }
 
 
 ];
@@ -30,4 +33,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}
