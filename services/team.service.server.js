@@ -30,7 +30,7 @@ module.exports = app => {
   app.post('/api/team', createTeam);
   app.get('/api/team', findAllTeams);
   app.get('/api/team/:id', findTeamById);
-  app.get('/api/team/manager/:id', findTeamByManager);
+  app.post('/api/team/manager/:id', findTeamByManager);
   app.put('/api/team/:id', updateTeam);
   app.delete('/api/team/:id', deleteTeam);
 };
