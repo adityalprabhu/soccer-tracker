@@ -90,7 +90,7 @@
 
             <div class="card text-center">
               <a routerLink="/team/{{team}}">
-                <img class="card-img-top resize img-fluid d-block mx-auto"
+                <img class="card-img-top resize img-fluid d-block mx-auto mt-2"
                      src="{{teamLogos[team]}}"
                      alt="Team Logo">
               </a>
@@ -111,7 +111,7 @@
                 <li class="list-group-item">Matches Played: {{teamsMatchesPlayed[team]}}</li>
                 <li class="list-group-item">Wins: {{teamsWins[team]}}</li>
                 <li class="list-group-item">Draws: {{teamsDraws[team]}}</li>
-                <li class="list-group-item">Losses: {{teamsLeagueIds[team]}}</li>
+                <li class="list-group-item">Losses: {{teamsLosses[team]}}</li>
               </ul>
               <button (click)="removeTeam(team)" class="btn d-block btn-danger">Remove</button>
             </div>
@@ -130,7 +130,7 @@
             <h6>Select a league first, though :)</h6>
 
             <div class="dropdown">
-              <button class="btn btn-outline-info dropdown-toggle m-4" type="button"
+              <button class="btn btn-outline-info dropdown-toggle m-3" type="button"
                       id="selectLeague"
                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 {{addLeague}}
@@ -145,7 +145,7 @@
             </div>
 
             <div class="dropdown">
-              <button class="btn btn-outline-secondary dropdown-toggle m-4" type="button"
+              <button class="btn btn-outline-secondary dropdown-toggle m-3" type="button"
                       id="selectTeam"
                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 {{addTeamName}}
@@ -216,30 +216,6 @@
           </form>
         </div>
       </div>
-
-
-      <!--<h3 class="d-flex justify-content-center">My Teams</h3>-->
-      <!--<table class="table table-hover table-striped">-->
-
-      <!--<tbody>-->
-
-      <!--<tr *ngFor="let row of teams">-->
-      <!--<th>-->
-      <!--<a routerLink="/team/{{row}}">-->
-      <!--<img src="{{teamLogos[row]}}" class="teamLogoImg">-->
-      <!--<h6>{{teamNames[row]}}</h6>-->
-      <!--</a>-->
-      <!--</th>-->
-      <!--</tr>-->
-
-      <!--</tbody>-->
-
-      <!--</table>-->
-
-      <!--<button type="submit" class="btn btn-outline-success form-control m-1">-->
-      <!--Follow a Team-->
-      <!--</button>-->
-
 
     </div>
 

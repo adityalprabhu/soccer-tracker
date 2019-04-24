@@ -43,7 +43,6 @@ export class ProfileComponent implements OnInit {
 
   teamsLeagueStandings = {};
   teamsLeagueIds = {};
-  teamsLeagueNames = {};
   teamsMatchesPlayed = {};
   teamsWins = {};
   teamsDraws = {};
@@ -192,7 +191,8 @@ export class ProfileComponent implements OnInit {
 
   findTeamsByLeague(leagueId, leagueName) {
     this.teamService.findTeamsByLeagueId(leagueId).subscribe(res => {
-      this.teamsMapByLeague[leagueName] = Object.values(res['api'].teams);
+      // sort teams
+      this.teamsMapByLeague[leagueName] = Object.values(res['api'].teams).sort((a, b) => a['name'].localeCompare(b['name']));
     });
   }
 
@@ -222,8 +222,8 @@ export class ProfileComponent implements OnInit {
     this.profileService.updateUser(this.userId, user).subscribe(res => {
       console.log(res);
       this.getCurrentUser();
+      alert("Successfully updated your profile!");
     });
-    alert("Successfully updated your profile!");
 
   }
 
@@ -262,49 +262,5 @@ export class ProfileComponent implements OnInit {
       });
     }
   }
-
-  // findLeagueStanding(leagueId, teamId) {
-  //
-  //   let rank = '2';
-  //
-  //   this.teamService.findLeagueStandings(leagueId).subscribe(res => {
-  //     let leagueStandings = res['api'].standings[0];
-  //
-  //     for (let team of leagueStandings) {
-  //       if (team.team_id === teamId) {
-  //         let rank = team.rank;
-  //         return rank;
-  //       }
-  //     }
-  //   });
-  // }
-
-  //
-  // findTeamsByLeagues(leagueId) {
-  //   this.findTeamsByLeague()
-  // }
-
-  // findLeagueId(teamId) {
-  //   this.teamService.findTeamFixtures(teamId).subscribe(res => {
-  //
-  //     if (res['api'].fixtures != {}) {
-  //       this.leagueId = res['api'].fixtures[Object.keys(res['api'].fixtures)[0]].league_id;
-  //       //
-  //       // this.findLeagueStandings(this.leagueId);
-  //       // this.findTeamStats(this.leagueId, teamId);
-  //       console.log(this.leagueId);
-  //
-  //     }
-  //   });
-  //
-  //   return this.leagueId;
-  //
-  // }
-  //
-
-  //
-  //
-  //
-
 
 }
