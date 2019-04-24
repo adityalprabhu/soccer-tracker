@@ -17,8 +17,8 @@ module.exports = app => {
   commentsDao.deleteComment(req.params.id)
     .then(data => res.json(data));
 
-  app.get('/api/comment', findAllComments);
+  app.post('/api/comment', findAllComments);
   app.post('/api/comment', createComment);
-  app.get('/api/comment/:id', findCommentsById);
+  app.post('/api/comment/:id', findCommentsById);
   app.delete('/api/comment/:id', deleteComment);
 };
