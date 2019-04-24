@@ -52,12 +52,14 @@ export class AppComponent implements OnInit{
     }
   }
 
-  logout(){
+  logout() {
     this.isManager = false;
     this.loggedIn = false;
     this.profileService.logout().subscribe(res => {
       this.getCurrentUser();
     })
+    this.router.navigateByUrl('/login', {skipLocationChange: true}).then(()=>
+      this.router.navigate(["/"]));
   }
 
   onActivate(componentReference) {
