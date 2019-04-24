@@ -134,9 +134,9 @@ export class ProfileComponent implements OnInit {
   findLeagueId(teamId) {
     for (const [key, value] of Object.entries(this.teamsByLeagueId)) {
 
-      if (value.includes(teamId.toString())) {
-        return key;
-      }
+      // if (value.includes(teamId.toString())) {
+      //   return key;
+      // }
 
     }
   }
