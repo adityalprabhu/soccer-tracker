@@ -53,12 +53,15 @@
                 <h6 class="card-title"></h6>
               </div>
               <ul class="list-group list-group-flush">
-                <li class="list-group-item">{{teamNames[team]}}</li>
-                <li class="list-group-item">League Standing: 0</li>
-                <li class="list-group-item">Matches Played: 0</li>
-                <li class="list-group-item">Wins: 0</li>
-                <li class="list-group-item">Draws: 0</li>
-                <li class="list-group-item">Losses: 0</li>
+                <li class="list-group-item">
+                  <a routerLink="/league/{{teamsLeagueIds[team]}}">
+                 {{leagueNames[teamsLeagueIds[team]]}} League Standing: {{teamsLeagueStandings[team]}}
+                  </a>
+                </li>
+                <li class="list-group-item">Matches Played: {{teamsMatchesPlayed[team]}}</li>
+                <li class="list-group-item">Wins: {{teamsWins[team]}}</li>
+                <li class="list-group-item">Draws: {{teamsDraws[team]}}</li>
+                <li class="list-group-item">Losses: {{teamsLeagueIds[team]}}</li>
               </ul>
               <button (click)="removeTeam(team)" class="btn d-block btn-danger">Remove</button>
             </div>
@@ -145,8 +148,9 @@
                      [ngModelOptions]="{standalone: true}"/>
             </div>
             <div class="form-group">
-              <label>Manager</label>
-              <input type="checkbox" [(ngModel)]="manager" [ngModelOptions]="{standalone: true}"/>
+              <label>Manager:</label>
+              <input class="m-3"
+                     type="checkbox" [(ngModel)]="manager" [ngModelOptions]="{standalone: true}"/>
             </div>
 
             <button type="submit"

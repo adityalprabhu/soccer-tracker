@@ -5,7 +5,6 @@ import {Location} from '@angular/common';
 import {ProfileService} from '../../services/profileService/profile.service';
 import {Utils} from '../../../assets/utils';
 import {TeamService} from '../../services/teamService/team.service';
-import {isNullOrUndefined} from 'util';
 
 @Component({
   selector: 'app-profile',
@@ -26,14 +25,25 @@ export class ProfileComponent implements OnInit {
   leagueLogos: any;
   team: any;
   teamNames: any;
+  teamsByLeagueId: any;
 
   teamsMapByLeague = {'English': {}, 'Spanish': {}, 'French': {}, 'German': {}, 'Italian': {}};
 
   leagueIds = {'English': 2, 'Spanish': 87, 'French': 4, 'German': 8, 'Italian': 94};
+  leagueNames = {2: 'English', 87: 'Spanish', 4: 'French', 8: 'German', 94: 'Italian'};
+
 
   addLeague: any;
   addTeamId: any;
   addTeamName: any;
+
+  teamsLeagueStandings = {};
+  teamsLeagueIds = {};
+  teamsLeagueNames = {};
+  teamsMatchesPlayed = {};
+  teamsWins = {};
+  teamsDraws = {};
+  teamsLosses = {};
 
   leagueId;
 
@@ -53,6 +63,7 @@ export class ProfileComponent implements OnInit {
 
     this.teamLogos = Utils.TEAMLOGOS;
     this.leagueLogos = Utils.LEAGUELOGOS;
+    this.teamsByLeagueId = Utils.TEAMSBYLEAGUEID;
 
     this.findTeamsByLeague(this.leagueIds['English'], 'English');
     this.findTeamsByLeague(this.leagueIds['French'], 'French');
@@ -63,26 +74,71 @@ export class ProfileComponent implements OnInit {
     this.addLeague = 'Select League';
     this.addTeamName = 'Select Team';
     this.addTeamId = null;
-
-    this.findTeams(94);
-
   }
 
-  findTeams(leagueId) {
+  getCurrentUser() {
+    this.profileService.findCurrentUser()
+      .subscribe(res => {
+        console.log(res);
+        this.user = res;
 
-    let temp;
+        this.userId = this.user._id;
+        this.email = this.user.email;
+        this.password = this.user.password;
+        this.firstName = this.user.firstName;
+        this.lastName = this.user.lastName;
+        this.teams = this.user.teams;
+        this.manager = this.user.manager;
 
-    let list = [];
-
-    this.teamService.findTeamsByLeagueId(leagueId).subscribe(res => {
-        temp = res['api'].teams;
-
-        for (let item in temp) {
-          list.push(item);
-        }
-
-        console.log(list);
+        this.findTeamNames(this.teams);
+        this.findTeamsStandings(this.teams);
+        this.findTeamsStats(this.teams);
       });
+  }
+
+  findTeamsStats(teamIds) {
+
+    for (let i = 0; i < teamIds.length; i++) {
+
+      let leagueId = this.teamsLeagueIds[teamIds[i]];
+
+      this.teamService.findTeamStats(leagueId, teamIds[i]).subscribe(res => {
+
+        this.teamsMatchesPlayed[teamIds[i]] = res['api']['stats']['matchs']['matchsPlayed']['total'];
+        this.teamsWins[teamIds[i]] = res['api']['stats']['matchs']['wins']['total'];
+        this.teamsDraws[teamIds[i]] = res['api']['stats']['matchs']['draws']['total'];
+        this.teamsLosses[teamIds[i]] = res['api']['stats']['matchs']['loses']['total'];
+      });
+    }
+  }
+
+  findTeamsStandings(teamIds) {
+    for (let i = 0; i < teamIds.length; i++) {
+
+      let leagueId = this.findLeagueId(teamIds[i]);
+
+      this.teamsLeagueIds[teamIds[i]] = leagueId;
+
+      this.teamService.findLeagueStandings(leagueId).subscribe(res => {
+        let leagueStandings = res['api'].standings[0];
+
+        for (let team of leagueStandings) {
+          if (team.team_id === teamIds[i]) {
+            this.teamsLeagueStandings[teamIds[i]] = team.rank;
+          }
+        }
+      });
+    }
+  }
+
+  findLeagueId(teamId) {
+    for (const [key, value] of Object.entries(this.teamsByLeagueId)) {
+
+      if (value.includes(teamId.toString())) {
+        return key;
+      }
+
+    }
   }
 
   findTeamsByLeague(leagueId, leagueName) {
@@ -144,26 +200,6 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  getCurrentUser() {
-    this.profileService.findCurrentUser()
-      .subscribe(res => {
-        console.log(res);
-        this.user = res;
-
-        this.userId = this.user._id;
-        this.email = this.user.email;
-        this.password = this.user.password;
-        this.firstName = this.user.firstName;
-        this.lastName = this.user.lastName;
-        this.teams = this.user.teams;
-        this.manager = this.user.manager;
-
-        this.findTeamNames(this.teams);
-        // this.findTeamsDetails(this.favoriteTeam);
-        // this.findLeagueId(this.favoriteTeam);
-
-      });
-  }
 
   findTeamNames(teamIds) {
 
@@ -176,6 +212,21 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  // findLeagueStanding(leagueId, teamId) {
+  //
+  //   let rank = '2';
+  //
+  //   this.teamService.findLeagueStandings(leagueId).subscribe(res => {
+  //     let leagueStandings = res['api'].standings[0];
+  //
+  //     for (let team of leagueStandings) {
+  //       if (team.team_id === teamId) {
+  //         let rank = team.rank;
+  //         return rank;
+  //       }
+  //     }
+  //   });
+  // }
 
   //
   // findTeamsByLeagues(leagueId) {
@@ -199,28 +250,10 @@ export class ProfileComponent implements OnInit {
   //
   // }
   //
-  // findLeagueStandings(leagueId) {
-  //   this.teamService.findLeagueStandings(leagueId).subscribe(res => {
-  //     let leagueStandings = res['api'].standings[0];
-  //
-  //     for (let team of leagueStandings) {
-  //       if (team.team_id == this.favoriteTeam) {
-  //         this.favTeamData['leagueStanding'] = team.rank;
-  //       }
-  //     }
-  //   });
-  // }
+
   //
   //
   //
-  // findTeamStats(leagueId, teamId) {
-  //   this.teamService.findTeamStats(leagueId, teamId).subscribe(res => {
-  //
-  //     this.favTeamData['matchesPlayed'] = res['api']['stats']['matchs']['matchsPlayed']['total'];
-  //     this.favTeamData['wins'] = res['api']['stats']['matchs']['wins']['total'];
-  //     this.favTeamData['draws'] = res['api']['stats']['matchs']['draws']['total'];
-  //     this.favTeamData['losses'] = res['api']['stats']['matchs']['loses']['total'];
-  //   });
-  // }
+
 
 }
