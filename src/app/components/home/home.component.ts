@@ -18,10 +18,14 @@ export class HomeComponent implements OnInit {
   loggedIn: boolean;
   hasTeamFixtures: boolean;
   teamFixtures: any;
+  logos: any;
+
+
 
   constructor(private fixtureService: FixtureService,
               private profileService: ProfileService,
               private teamService: TeamService) {
+
   }
 
   user: any;
@@ -30,9 +34,10 @@ export class HomeComponent implements OnInit {
     this.loggedIn = false;
     this.hasTeamFixtures = false;
     this.today = new Date();
+    this.logos = Utils.TEAMLOGOS;
+
     this.findLiveFixtures();
     this.getCurrentUser();
-
   }
 
   getCurrentUser() {
@@ -85,7 +90,11 @@ export class HomeComponent implements OnInit {
           }
 
           for (let match of upcomingMatches) {
-            if (parseInt(match['event_timestamp'], 10) < parseInt(min['event_timestamp'], 10)) {
+            if(min['statusShort'] == "FT"){
+              min = match;
+            }
+            if (parseInt(match['event_timestamp'], 10) < parseInt(min['event_timestamp'], 10)
+            && match['statusShort'] != "FT") {
               min = match;
             }
           }
@@ -121,5 +130,22 @@ export class HomeComponent implements OnInit {
       this.liveFixtures = todaysFixtures;
 
     });
+  }
+
+  displayTime(date){
+    let newDate = new Date(date);
+    let mins = newDate.getMinutes();
+    let minsString;
+    if(mins == 0){
+      minsString = "00"
+    } else {
+      minsString = mins
+    }
+
+    return (newDate.getMonth() + 1) + "-" + newDate.getDate() + "  " + newDate.getHours()+ ":" + minsString
+  }
+
+  findLogo(teamID) {
+    return this.logos[parseInt(teamID, 10)];
   }
 }

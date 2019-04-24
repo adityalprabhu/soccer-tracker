@@ -49,34 +49,33 @@
   </div>
 
 <div *ngIf="hasTeamFixtures">
-  <div class="intro-container">
-    <p>Teams you follow:</p>
+  <div class="follow col-4">
+    <p>Upcoming matches for teams you follow:</p>
   </div>
   <div class="row scrolling-wrapper-flexbox">
     <div *ngFor="let liveFixture of teamFixtures" class="card">
       <div class="card-body">
         <div class="row">
-          <div class="col-6">
+          <div class="col-8">
             <em>{{liveFixture.round}}</em>
           </div>
-          <div class="col-6">
-            {{liveFixture.event_date}}'
+          <div class="col-4">
+            {{displayTime(liveFixture.event_date)}}
           </div>
         </div>
-        <div class="row">
+        <div class="row mt-2">
           <div class="col-2">
           </div>
-          <div class="col-8">
-            {{liveFixture.homeTeam}}
+          <div class="col-4">
+            <img class="logo" src="{{findLogo(liveFixture['homeTeam_id'])}}">
           </div>
 
-        </div>
-        <div class="row">
+          <div class="col-4">
+            <img class="logo" src="{{findLogo(liveFixture['awayTeam_id'])}}">
+          </div>
           <div class="col-2">
           </div>
-          <div class="col-8">
-            {{liveFixture.awayTeam}}
-          </div>
+
         </div>
       </div>
     </div>

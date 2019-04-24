@@ -110,6 +110,14 @@
   color: white;
 }
 
+.follow {
+  border: solid 1px #d3d3d3;
+  border-radius: 10px;
+  background-color: rgba(0,0,0,.8);
+  color: white;
+}
+
+
 .center-container{
   width: 60%;
   height: 40%;
@@ -125,4 +133,14 @@
   background-size:     cover;                      /* <------ */
   background-repeat:   no-repeat;
   background-position: center center;              /* optional, center the image */
+}
+
+.logo {
+  display: block;
+  max-width:50px;
+  max-height:50px;
+  width: auto;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
