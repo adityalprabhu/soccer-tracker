@@ -5,6 +5,9 @@ import {FixtureService} from '../../services/fixtureService/fixture.service';
 import {Utils} from '../../../assets/utils';
 import {element} from 'protractor';
 import {TeamService} from '../../services/teamService/team.service';
+import {Observable} from 'rxjs';
+import { timer } from 'rxjs';
+let timer$ = timer(60000);
 
 
 @Component({
@@ -31,6 +34,7 @@ export class FixturesComponent implements OnInit {
   allGames: any;
 
   todayGames: any;
+  timerSubscription: any;
 
 
   monthNames: any;
@@ -64,6 +68,8 @@ export class FixturesComponent implements OnInit {
 
 
   }
+
+
 
 
   fillMatchLists() {
@@ -182,7 +188,6 @@ export class FixturesComponent implements OnInit {
     this.fixtureService.findLiveFixtures().subscribe(res => {
       var todaysFixtures = [];
       var recentFixtures = Object.values(res['api'].fixtures);
-      console.log(recentFixtures);
 
       for (let fixture of recentFixtures) {
 
@@ -191,7 +196,6 @@ export class FixturesComponent implements OnInit {
         if (gameTime.getDate() === this.today.getDate()
           && Utils.SUPPORTEDLEAGUES.includes(parseInt(fixture['league_id'], 10))) {
           todaysFixtures.push(fixture);
-          console.log(todaysFixtures);
         }
       }
 
@@ -200,7 +204,9 @@ export class FixturesComponent implements OnInit {
       });
       this.fixtures = todaysFixtures;
 
-      console.log(this.fixtures);
+      console.log("Populated live fixtures");
+
+      this.subscribeToData();
 
       if (todaysFixtures.length !== 0) {
         let showLiveScores = document.getElementById('live-fixtures');
@@ -210,6 +216,10 @@ export class FixturesComponent implements OnInit {
         showNoLiveMatches.style.display = 'inline';
       }
     });
+  }
+
+  private subscribeToData(): void {
+    this.timerSubscription = timer$.subscribe(() => this.findLiveFixtures());
   }
 
   checkDate(date, daysFromToday) {
@@ -301,10 +311,8 @@ export class FixturesComponent implements OnInit {
   toggleEnglishLeague() {
 
     if (this.englishLeague) {
-      console.log('filtering english games');
       this.englishLeague = false;
     } else {
-      console.log('adding english games');
       this.englishLeague = true;
 
     }
