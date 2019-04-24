@@ -47,7 +47,7 @@ export class ProfileService {
   public findFantasyTeamByUser(mid){
     console.log(mid)
 
-    return this.httpClient.get(environment.local5000 + '/api/team/manager/'+ mid, httpOptions);
+    return this.httpClient.post(environment.local5000 + '/api/team/manager/'+ mid, httpOptions);
   }
 
 

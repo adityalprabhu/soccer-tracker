@@ -174,7 +174,9 @@ export class FantasyTeamComponent implements OnInit {
     if(this.newTeam){
       this.profileService.createFantasyTeam(this.fantasyTeam).subscribe(res => console.log(res));
     }else{
-      this.profileService.updateFantasyTeamByUser(this.fantasyTeam.manager, this.fantasyTeam).subscribe(res => {
+      console.log(this.fantasyTeam.manager)
+      console.log(this.fantasyTeam)
+      this.profileService.updateFantasyTeamByUser(this.fantasyTeam._id, this.fantasyTeam).subscribe(res => {
         console.log(res);
       })
     }

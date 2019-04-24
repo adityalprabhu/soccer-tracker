@@ -9,8 +9,12 @@ findTeamById = teamId => teamModel.findById(teamId);
 
 findTeamByManager = teamId => teamModel.find({manager: teamId});
 
-updateTeam = (teamId, team) =>
-  teamModel.update({_id: teamId}, {$set: team});
+updateTeam = (teamId, team) => {
+  console.log(teamId)
+  console.log(team)
+  return teamModel.update({_id: teamId}, {$set: team});
+}
+
 
 deleteTeam = teamId =>
   teamModel.remove({_id: teamId});

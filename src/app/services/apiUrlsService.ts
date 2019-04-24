@@ -5,7 +5,7 @@ import { environment } from '../../environments/environment';
 export class ApiUrlsService {
 
   // comments apis
-  public static findAllComments = environment.local5000 + '/api/comment';
+  public static findAllComments = environment.local5000 + '/api/comments';
   public static createComment = environment.local5000 + '/api/comment';
   public static deleteComment = environment.local5000 + '/api/comment/';
   public static findUserByTeamIdApi = environment.local5000 + '/api/user/team/';

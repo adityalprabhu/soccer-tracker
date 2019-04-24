@@ -19,7 +19,7 @@ export class CommentServiceService {
   }
 
   public findAllComments() {
-    return this.httpClient.get(this.findAllCommentsApiUrl);
+    return this.httpClient.post(this.findAllCommentsApiUrl,{});
   }
 
   public createComment(comment) {
