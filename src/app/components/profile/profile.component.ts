@@ -29,6 +29,7 @@ export class ProfileComponent implements OnInit {
   team: any;
   teamNames: any;
   teamsByLeagueId: any;
+  teamsEmpty: boolean;
 
   teamsMapByLeague = {'English': {}, 'Spanish': {}, 'French': {}, 'German': {}, 'Italian': {}};
 
@@ -62,11 +63,8 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.profileUserId = params['userId'];
-      console.log("HERE")
 
-      console.log(this.profileUserId)
-      console.log("HERE")
-
+      this.teamsEmpty = false;
       this.isLoggedInUser = true;
       if(this.profileUserId == null){
         this.getCurrentUser();
@@ -107,7 +105,9 @@ export class ProfileComponent implements OnInit {
           this.firstName = user['firstName'];
           this.lastName = user['lastName'];
           this.teams = user['teams'];
-          console.log(user['teams']);
+          if(this.teams.length == 0){
+            this.teamsEmpty = true;
+          }
           this.manager = user['manager'];
 
           this.findTeamNames(this.teams);
@@ -135,6 +135,9 @@ export class ProfileComponent implements OnInit {
         this.firstName = this.user.firstName;
         this.lastName = this.user.lastName;
         this.teams = this.user.teams;
+        if(this.teams.length == 0){
+          this.teamsEmpty = true;
+        }
         this.manager = this.user.manager;
 
 
@@ -234,7 +237,7 @@ export class ProfileComponent implements OnInit {
 
     if (this.addTeamId !== null) {
       this.teams.push(this.addTeamId);
-
+      this.teamsEmpty = false;
       this.update();
     }
   }
