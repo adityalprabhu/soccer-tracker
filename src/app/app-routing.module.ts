@@ -20,6 +20,7 @@ const routes: Routes = [
   {path: 'league/:leagueId', component: LeagueTableComponent},
   {path: '', component: HomeComponent},
   {path: 'profile', component: ProfileComponent},
+  {path: 'profile/:userId', component: ProfileComponent},
   {path: 'search/:searchCriteria', component: SearchComponent},
   {path: 'search', component: SearchComponent},
   {

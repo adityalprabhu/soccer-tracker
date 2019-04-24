@@ -1,7 +1,11 @@
 <div class="jumbotron jumbotron-fluid">
   <div class="container align-middle">
-    <h1 class="display-10">{{firstName}}'s Dashboard</h1>
-    <p class="lead">Customize Your Teams and Profile!</p>
+    <h1 *ngIf="isLoggedInUser" class="display-10">{{firstName}} {{lastName}}'s Dashboard</h1>
+    <h1 *ngIf="!isLoggedInUser" class="display-10">{{firstName}} {{lastName}}'s Profile Page</h1>
+
+    <p *ngIf="isLoggedInUser" class="lead">Customize Your Teams and Profile!</p>
+    <p *ngIf="!isLoggedInUser" class="lead">Check Out This Other User's Profile</p>
+
   </div>
 </div>
 
@@ -12,7 +16,7 @@
 
   <div class="center-container">
 
-    <ul class="center-container text-center nav nav-pills mb-2 row" id="pills-tab" role="tablist">
+    <ul *ngIf="isLoggedInUser" class="center-container text-center nav nav-pills mb-2 row" id="pills-tab" role="tablist">
       <li class="nav-item col-6">
         <a class="nav-link active" id="pills-myTeams-tab" data-toggle="pill" href="#pills-myTeams"
            role="tab" aria-controls="pills-myTeams" aria-selected="true">My Teams</a>
@@ -27,13 +31,57 @@
 
     <br/>
 
-    <div class="tab-content" id="pills-tabContent">
+    <!--WHEN VIEWING OTHER PROFILES-->
+    <div *ngIf="!isLoggedInUser" class="row ml-3">
+      <h2>Teams {{firstName}} follows:</h2>
+    </div>
+    <div class="row" *ngIf="!isLoggedInUser">
+
+      <div *ngFor="let team of teams" class="m-2 shadow rounded">
+
+        <div class="card text-center">
+          <a routerLink="/team/{{team}}">
+            <img class="card-img-top resize img-fluid d-block mx-auto"
+                 src="{{teamLogos[team]}}"
+                 alt="Team Logo">
+          </a>
+          <div class="card-body">
+            <h5 class="card-title">
+              <a routerLink="/team/{{team}}">
+                {{teamNames[team]}}
+              </a>
+            </h5>
+            <h6 class="card-title"></h6>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <a routerLink="/league/{{teamsLeagueIds[team]}}">
+                {{leagueNames[teamsLeagueIds[team]]}} League Standing: {{teamsLeagueStandings[team]}}
+              </a>
+            </li>
+            <li class="list-group-item">Matches Played: {{teamsMatchesPlayed[team]}}</li>
+            <li class="list-group-item">Wins: {{teamsWins[team]}}</li>
+            <li class="list-group-item">Draws: {{teamsDraws[team]}}</li>
+            <li class="list-group-item">Losses: {{teamsLeagueIds[team]}}</li>
+          </ul>
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+    <div class="tab-content" id="pills-tabContent" *ngIf="isLoggedInUser">
+
 
       <div class="tab-pane fade show active" id="pills-myTeams" role="tabpanel"
            aria-labelledby="pills-myTeams-tab">
 
         <!--   MY TEAMS   -->
-
+        <div *ngIf="isLoggedInUser" class="row ml-3">
+          <h2>Teams you follow:</h2>
+        </div>
         <div class="row">
 
           <div *ngFor="let team of teams" class="m-2 shadow rounded">
