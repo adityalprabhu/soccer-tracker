@@ -14,6 +14,8 @@ import {isNullOrUndefined} from "util";
 })
 export class ProfileComponent implements OnInit {
 
+  profileUserId: any;
+  isLoggedInUser: boolean;
   userId: any;
   user: any;
   email: any;
@@ -59,7 +61,19 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.getCurrentUser();
+      this.profileUserId = params['userId'];
+      console.log("HERE")
+
+      console.log(this.profileUserId)
+      console.log("HERE")
+
+      this.isLoggedInUser = true;
+      if(this.profileUserId == null){
+        this.getCurrentUser();
+      } else {
+        this.isLoggedInUser = false;
+        this.getOtherUser();
+      }
     });
 
     this.teamLogos = Utils.TEAMLOGOS;
@@ -77,12 +91,40 @@ export class ProfileComponent implements OnInit {
     this.addTeamId = null;
   }
 
+  getOtherUser(){
+    this.profileService.findUserById(this.profileUserId)
+      .subscribe(res => {
+          if (isNullOrUndefined(res)) {
+            this.router.navigate(['/profile']);
+          }
+
+          let user = res;
+          console.log(user)
+
+          this.userId = user['_id'];
+          this.firstName = user['firstName'];
+          this.lastName = user['lastName'];
+          this.teams = user['teams'];
+          console.log(user['teams']);
+          this.manager = user['manager'];
+
+          this.findTeamNames(this.teams);
+          this.findTeamsStandings(this.teams);
+          this.findTeamsStats(this.teams);
+        }
+
+
+        )
+  }
+
   getCurrentUser() {
     this.profileService.findCurrentUser()
       .subscribe(res => {
         if(isNullOrUndefined(res)) {
           this.router.navigate(['/login']);
         }
+
+
         this.user = res;
 
         this.userId = this.user._id;
@@ -92,6 +134,7 @@ export class ProfileComponent implements OnInit {
         this.lastName = this.user.lastName;
         this.teams = this.user.teams;
         this.manager = this.user.manager;
+
 
         this.findTeamNames(this.teams);
         this.findTeamsStandings(this.teams);
@@ -135,12 +178,10 @@ export class ProfileComponent implements OnInit {
   }
 
   findLeagueId(teamId) {
-    for (const [key, value] of Object.entries(this.teamsByLeagueId)) {
-
-      // if (value.includes(teamId.toString())) {
-      //   return key;
-      // }
-
+    for (const key in this.teamsByLeagueId) {
+      if (this.teamsByLeagueId[key].includes(teamId.toString())){
+        return key;
+      }
     }
   }
 
