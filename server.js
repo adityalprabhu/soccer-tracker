@@ -19,16 +19,16 @@ app.use(express.static('./dist/soccer-tracker'));
 app.disable('etag');
 
 app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin",
-    "http://localhost:4200");
+  // res.header("Access-Control-Allow-Origin",
+  //   "http://localhost:4200");
   // res.header("Access-Control-Allow-Origin",
   //   "https://soccer-tracker.herokuapp.com","");
 
-  // var allowedOrigins = ['https://soccer-tracker.herokuapp.com', 'http://soccer-tracker.herokuapp.com', 'soccer-tracker.herokuapp.com', 'http://localhost:4200'];
-  // var origin = req.headers.origin;
-  // if(allowedOrigins.indexOf(origin) > -1){
-  //   res.setHeader('Access-Control-Allow-Origin', origin);
-  // }
+  var allowedOrigins = ['https://soccer-tracker.herokuapp.com', 'http://soccer-tracker.herokuapp.com', 'soccer-tracker.herokuapp.com', 'http://localhost:4200'];
+  var origin = req.headers.origin;
+  if(allowedOrigins.indexOf(origin) > -1){
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
 
   res.header("Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept");
