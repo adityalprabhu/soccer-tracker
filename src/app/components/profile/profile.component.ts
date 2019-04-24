@@ -35,6 +35,8 @@ export class ProfileComponent implements OnInit {
   addTeamId: any;
   addTeamName: any;
 
+  leagueId;
+
   constructor(private route: ActivatedRoute,
               private location: Location,
               private router: Router,
@@ -61,11 +63,31 @@ export class ProfileComponent implements OnInit {
     this.addLeague = 'Select League';
     this.addTeamName = 'Select Team';
     this.addTeamId = null;
+
+    this.findTeams(94);
+
+  }
+
+  findTeams(leagueId) {
+
+    let temp;
+
+    let list = [];
+
+    this.teamService.findTeamsByLeagueId(leagueId).subscribe(res => {
+        temp = res['api'].teams;
+
+        for (let item in temp) {
+          list.push(item);
+        }
+
+        console.log(list);
+      });
   }
 
   findTeamsByLeague(leagueId, leagueName) {
     this.teamService.findTeamsByLeagueId(leagueId).subscribe(res => {
-      this.teamsMapByLeague[leagueName] = Object.values(res['api']['teams']);
+      this.teamsMapByLeague[leagueName] = Object.values(res['api'].teams);
     });
   }
 
@@ -136,8 +158,6 @@ export class ProfileComponent implements OnInit {
         this.teams = this.user.teams;
         this.manager = this.user.manager;
 
-        console.log(this.manager);
-
         this.findTeamNames(this.teams);
         // this.findTeamsDetails(this.favoriteTeam);
         // this.findLeagueId(this.favoriteTeam);
@@ -156,17 +176,10 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  // findTeamsDetails(tid) {
+
   //
-  //   this.favTeamData = {
-  //     name: '',
-  //
-  //   };
-  //
-  //   this.teamService.findTeamDetails(tid).subscribe(res => {
-  //     this.teamData = res;
-  //     this.favTeamData['name'] = this.teamData.api.teams[tid].name;
-  //   });
+  // findTeamsByLeagues(leagueId) {
+  //   this.findTeamsByLeague()
   // }
 
   // findLeagueId(teamId) {
@@ -174,13 +187,18 @@ export class ProfileComponent implements OnInit {
   //
   //     if (res['api'].fixtures != {}) {
   //       this.leagueId = res['api'].fixtures[Object.keys(res['api'].fixtures)[0]].league_id;
+  //       //
+  //       // this.findLeagueStandings(this.leagueId);
+  //       // this.findTeamStats(this.leagueId, teamId);
+  //       console.log(this.leagueId);
   //
-  //       this.findLeagueStandings(this.leagueId);
-  //       this.findTeamStats(this.leagueId, teamId);
   //     }
   //   });
+  //
+  //   return this.leagueId;
+  //
   // }
-
+  //
   // findLeagueStandings(leagueId) {
   //   this.teamService.findLeagueStandings(leagueId).subscribe(res => {
   //     let leagueStandings = res['api'].standings[0];
@@ -193,6 +211,8 @@ export class ProfileComponent implements OnInit {
   //   });
   // }
   //
+  //
+  //
   // findTeamStats(leagueId, teamId) {
   //   this.teamService.findTeamStats(leagueId, teamId).subscribe(res => {
   //
@@ -200,8 +220,6 @@ export class ProfileComponent implements OnInit {
   //     this.favTeamData['wins'] = res['api']['stats']['matchs']['wins']['total'];
   //     this.favTeamData['draws'] = res['api']['stats']['matchs']['draws']['total'];
   //     this.favTeamData['losses'] = res['api']['stats']['matchs']['loses']['total'];
-  //     this.favTeamData['goalsFor'] = res['api']['stats']['goals']['goalsFor']['total'];
-  //     this.favTeamData['goalsAgainst'] = res['api']['stats']['goals']['goalsAgainst']['total'];
   //   });
   // }
 
