@@ -40,10 +40,12 @@ module.exports = app => {
 
   function getLoggedInUser(req, res){
     if(req.session['currentUser']){
+      console.log("YELLLLOOOOOOO",req.session['currentUser'])
       res.send(req.session['currentUser']);
 
     }else{
       res.send(null);
+      console.log("YELLLLOOOOOOO1111111")
     }
 
   }
