@@ -92,11 +92,13 @@ export class ProfileComponent implements OnInit {
   }
 
   getOtherUser(){
+    this.profileService.findCurrentUser()
+      .subscribe(res => {
+        if(res['_id'] == this.profileUserId) {
+          this.router.navigate(['/profile']);
+        }});
     this.profileService.findUserById(this.profileUserId)
       .subscribe(res => {
-          if (isNullOrUndefined(res)) {
-            this.router.navigate(['/profile']);
-          }
 
           let user = res;
           console.log(user)

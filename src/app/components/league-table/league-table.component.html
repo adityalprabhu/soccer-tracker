@@ -51,8 +51,12 @@
   <div class="card mb-2 ml-3 mr-3">
     <div class="card-body">
       <div class="row">
-        <div class="col-9">
-          <h5 class="card-title">User: {{comment.userId}} says...</h5>
+        <div *ngIf="comment.userId !== userId" class="col-9">
+          <h5 class="card-title"><a routerLink="/profile/{{comment.userId}}">User {{comment.userId}}</a> says...</h5>
+          {{comment.comment}}
+        </div>
+        <div *ngIf="comment.userId === userId" class="col-9">
+          <h5 class="card-title"><a routerLink="/profile/{{comment.userId}}">You </a> said...</h5>
           {{comment.comment}}
         </div>
         <div class="col-3">
