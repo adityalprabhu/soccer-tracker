@@ -19,8 +19,10 @@ app.use(express.static('./dist/soccer-tracker'));
 app.disable('etag');
 
 app.use(function (req, res, next) {
+  // res.header("Access-Control-Allow-Origin",
+  //   "http://localhost:4200");
   res.header("Access-Control-Allow-Origin",
-    "http://localhost:4200");
+    "*");
   res.header("Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept");
   res.header("Access-Control-Allow-Methods",
@@ -53,9 +55,4 @@ profileService(app);
 teamService(app);
 
 app.listen(process.env.PORT || 5000);
-<<<<<<< HEAD
-=======
 
-
-
->>>>>>> ffbcca665a6281885005bee9b6bc896a1bb608c6
