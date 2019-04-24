@@ -18,12 +18,18 @@ export class FixtureService {
 
   findLiveFixturesApiUrl: string;
   findLeagueFixturesUrl: string;
+  findTeamFixturesUrl: string;
 
 
   constructor(private httpClient: HttpClient) {
     this.findLiveFixturesApiUrl = ApiUrlsService.findLiveFixtures;
     this.findLeagueFixturesUrl = ApiUrlsService.findLeagueFixtures;
+    this.findTeamFixturesUrl = ApiUrlsService.findTeamFixtures;
 
+  }
+
+  public findFixturesForTeam(teamId){
+    return this.httpClient.get(this.findTeamFixturesUrl + teamId, httpOptions);
   }
 
   public findLeagueFixtures(leagueID) {

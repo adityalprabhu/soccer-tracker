@@ -47,4 +47,40 @@
     <!--<img id="slide" class="float-right" src="https://www.api-football.com/public/img/home1/hero-banner1.png" style="width: 60%; height: 300px">-->
     <!--</div>-->
   </div>
+
+<div *ngIf="hasTeamFixtures">
+  <div class="intro-container">
+    <p>Teams you follow:</p>
+  </div>
+  <div class="row scrolling-wrapper-flexbox">
+    <div *ngFor="let liveFixture of teamFixtures" class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-6">
+            <em>{{liveFixture.round}}</em>
+          </div>
+          <div class="col-6">
+            {{liveFixture.event_date}}'
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-2">
+          </div>
+          <div class="col-8">
+            {{liveFixture.homeTeam}}
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col-2">
+          </div>
+          <div class="col-8">
+            {{liveFixture.awayTeam}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 </div>
