@@ -42,6 +42,8 @@ dbService(app);
 profileService(app);
 teamService(app);
 
+localStorage.setItem("port", process.env.PORT)
 app.listen(process.env.PORT || 8080);
+
 
 
