@@ -3,5 +3,5 @@ export const environment = {
   apiURL: '',
   domain: 'http://localhost:3000',
   fdomain: 'https://api-football-v1.p.rapidapi.com',
-  local5000: "https://arcane-chamber-25948.herokuapp.com"
+  local5000: "https://soccer-tracker.herokuapp.com/"
 };
