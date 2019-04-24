@@ -21,7 +21,7 @@ export class ProfileService {
   }
 
   public findUserById(uid){
-    return this.httpClient.get(environment.local5000 + '/api/user/' + uid, httpOptions);
+    return this.httpClient.post(environment.local5000 + '/api/user/' + uid, httpOptions);
   }
 
   public findCurrentUser() {

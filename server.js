@@ -53,9 +53,4 @@ profileService(app);
 teamService(app);
 
 app.listen(process.env.PORT || 5000);
-<<<<<<< HEAD
-=======
 
-
-
->>>>>>> ffbcca665a6281885005bee9b6bc896a1bb608c6

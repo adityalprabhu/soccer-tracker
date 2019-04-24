@@ -88,6 +88,6 @@ module.exports = app => {
   app.post('/api/currentUser', getLoggedInUser);
   app.post('/api/logout', logout);
   app.post('/api/login', login);
-  app.get('/api/user/:uid', findUserById);
+  app.post('/api/user/:uid', findUserById);
 };
 
