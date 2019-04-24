@@ -16,6 +16,9 @@ module.exports = app => {
     var manager = req.body.manager;
     var id = req.body._id;
 
+    if (email == null || password == null || fname == null || lname == null){
+      return null;
+    }
 
     var newUser = {
       _id: id,
@@ -46,6 +49,13 @@ module.exports = app => {
       res.send(null);
     }
 
+  }
+
+  function deleteUser(req, res){
+    dao.deleteUser(req.params['uid'])
+      .then(response =>
+        res.send(response)
+      )
   }
 
   function logout(req, res) {
@@ -89,5 +99,6 @@ module.exports = app => {
   app.post('/api/logout', logout);
   app.post('/api/login', login);
   app.post('/api/user/:uid', findUserById);
+  app.post('/api/user/:uid/delete', deleteUser);
 };
 

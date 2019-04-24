@@ -15,8 +15,8 @@
     <form action="#">
       <h1>Sign in</h1>
       <p *ngIf="showLoginError" class="text-danger">Try again with different credentials</p>
-      <input type="email" [(ngModel)]="email" [ngModelOptions]="{standalone: true}"/>
-      <input type="password" [(ngModel)]="password" [ngModelOptions]="{standalone: true}" />
+      <input type="email" placeholder="Email" [(ngModel)]="email" [ngModelOptions]="{standalone: true}"/>
+      <input type="password" placeholder="Password" [(ngModel)]="password" [ngModelOptions]="{standalone: true}" />
       <!--<a href="#">Forgot your password?</a>-->
       <button (click)="signIn()">Sign In</button>
     </form>

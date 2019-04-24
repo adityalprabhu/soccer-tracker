@@ -31,11 +31,11 @@ export class LoginComponent implements OnInit {
               private router: Router,
               private profileService: ProfileService) {
     this.rightPanelActive = false;
-    this.message = 'sddsds';
-    this.email = "example@example.com";
-    this.firstName ="John";
-    this.lastName = "Doe";
-    this.password = "password";
+    // this.message = 'sddsds';
+    // this.email = "example@example.com";
+    // this.firstName ="John";
+    // this.lastName = "Doe";
+    // this.password = "password";
     this.manager = false;
     this.showLoginError = false;
     this.showSignUpError = false;
@@ -57,6 +57,10 @@ export class LoginComponent implements OnInit {
 
   signUp() {
 
+    if(this.email == null || this.password == null || this.firstName == null || this.lastName == null){
+      this.showSignUpError = true;
+      return;
+    }
 
     let user = {_id: (new Date().getTime() / 10000), email: this.email, password: this.password, firstName: this.firstName, lastName: this.lastName, manager: this.manager}
     this.profileService.register(user).subscribe(res => {
