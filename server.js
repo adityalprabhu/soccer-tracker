@@ -29,7 +29,7 @@ app.use(function (req, res, next) {
 });
 
 app.get('/*', function (req, res) {
-  res.sendFile(path.join('./dist/ng-sp19-adityalprabhu/index.html'));
+  res.sendFile(path.join('./dist/soccer-tracker/index.html'));
 });
 
 const commentsService = require('./services/comments.service.server');
