@@ -223,6 +223,8 @@ export class ProfileComponent implements OnInit {
       console.log(res);
       this.getCurrentUser();
     });
+    alert("Successfully updated your profile!");
+
   }
 
   removeTeam(teamId) {

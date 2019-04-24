@@ -180,6 +180,8 @@ export class FantasyTeamComponent implements OnInit {
         console.log(res);
       })
     }
+    alert("Successfully saved your team!");
+
   }
 
 }

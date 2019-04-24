@@ -68,14 +68,14 @@ module.exports = app => {
   // app.get('/api/student/:studentId', findStudentById)
 
   // Logos
-  app.get('/api/logo/team/:tid', findLogoUrlByTeam);
-  app.get('/api/logo/league/:lid', findLogoUrlByLeague);
+  app.post('/api/logo/team/:tid', findLogoUrlByTeam);
+  app.post('/api/logo/league/:lid', findLogoUrlByLeague);
   app.post('/api/populate_logos', populateLogos);
   app.delete('/api/logo/delete', truncateLogos);
-  app.get('/api/logo', findAllLogos);
+  app.post('/api/logo', findAllLogos);
 
   app.post('/api/populate', populateDatabase);
-  app.get('/api/user', findAllUsers);
-  app.get('/api/user/team/:tid', findUsersByTeam);
+  app.post('/api/user', findAllUsers);
+  app.post('/api/user/team/:tid', findUsersByTeam);
   app.delete('/api/all', truncateDatabase);
 };

@@ -3,11 +3,11 @@
     <form action="#">
       <h1>Create Account</h1>
       <p *ngIf="showSignUpError" class="text-danger">Try again with different credentials</p>
-      <input type="text" [(ngModel)]="firstName" [ngModelOptions]="{standalone: true}"/>
-      <input type="text" [(ngModel)]="lastName" [ngModelOptions]="{standalone: true}"/>
-      <input type="email" [(ngModel)]="email" [ngModelOptions]="{standalone: true}"/>
-      <input type="password" [(ngModel)]="password" [ngModelOptions]="{standalone: true}"/>
-      <input type="checkbox" [(ngModel)]="manager" [ngModelOptions]="{standalone: true}"/>
+      <input type="text" placeholder="First name" [(ngModel)]="firstName" [ngModelOptions]="{standalone: true}"/>
+      <input type="text" placeholder="Last name" [(ngModel)]="lastName" [ngModelOptions]="{standalone: true}"/>
+      <input type="email" placeholder="Email" [(ngModel)]="email" [ngModelOptions]="{standalone: true}"/>
+      <input type="password" placeholder="Password" [(ngModel)]="password" [ngModelOptions]="{standalone: true}"/>
+      Be a Manager! Manage a Fantasy Team<input style="float: left" type="checkbox" [(ngModel)]="manager" [ngModelOptions]="{standalone: true}"/>
       <button (click)="signUp()">Sign Up</button>
     </form>
   </div>
