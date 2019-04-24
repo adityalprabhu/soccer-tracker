@@ -52,11 +52,11 @@
     <div class="card-body">
       <div class="row">
         <div class="col-9">
-          <h5 class="card-title">{{comment.userId}}</h5>
+          <h5 class="card-title">User: {{comment.userId}} says...</h5>
           {{comment.comment}}
         </div>
         <div class="col-3">
-          <button *ngIf="comment.userId===userId" class="btn btn-danger" (click)="deleteComment(comment._id)">
+          <button *ngIf="comment.userId===userId" class="btn btn-danger float-right" (click)="deleteComment(comment._id)">
             <i class="fa fa-times" aria-hidden="true"></i>
           </button>
         </div>

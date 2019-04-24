@@ -76,10 +76,18 @@ module.exports = app => {
     req.session['currentUser'] = req.body;
   }
 
+  function findUserById(req, res) {
+    dao.findUserById(req.params['uid'])
+      .then(response => {
+        res.json(response)
+      });
+  }
+
   app.put('/api/user/:uid', updateUser);
   app.post('/api/register', register);
   app.get('/api/currentUser', getLoggedInUser);
   app.post('/api/logout', logout);
-  app.post('/api/login', login)
+  app.post('/api/login', login);
+  app.get('/api/user/:uid', findUserById);
 };
 

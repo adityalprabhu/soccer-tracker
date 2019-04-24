@@ -20,6 +20,10 @@ export class ProfileService {
 
   }
 
+  public findUserById(uid){
+    return this.httpClient.get(environment.local5000 + '/api/user/' + uid, httpOptions);
+  }
+
   public findCurrentUser() {
     return this.httpClient.get(environment.local5000 + '/api/currentUser', httpOptions);
   }

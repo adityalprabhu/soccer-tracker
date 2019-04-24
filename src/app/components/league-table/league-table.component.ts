@@ -5,7 +5,7 @@ import {Location} from '@angular/common';
 import {Utils} from '../../../assets/utils';
 import {CommentServiceService} from '../../services/commentService/comment-service.service';
 import {ProfileService} from '../../services/profileService/profile.service';
-import {isNullOrUndefined} from "util";
+import {isNullOrUndefined} from 'util';
 
 
 @Component({
@@ -67,10 +67,10 @@ export class LeagueTableComponent implements OnInit {
 
   findAllComments() {
     this.commentsService.findAllComments().subscribe(res => {
-      var filteredComments = Object.values(res)
+      var filteredComments = Object.values(res);
       filteredComments = filteredComments.filter(comment => comment.leagueId == this.leagueId);
       this.comments = filteredComments;
-      console.log("COMMENTS = " + this.comments)
+      console.log('COMMENTS = ' + this.comments);
     });
   }
 
@@ -92,9 +92,9 @@ export class LeagueTableComponent implements OnInit {
   getCurrentUser() {
     this.profileService.findCurrentUser().subscribe(res => {
       this.user = res;
-      if(!isNullOrUndefined(this.user)){
+      if (!isNullOrUndefined(this.user)) {
         this.userId = this.user._id;
-        this.userName = this.user.firstName + " " + this.user.lastName
+        this.userName = this.user.firstName + ' ' + this.user.lastName;
         this.loggedIn = true;
         console.log(this.userId);
       }
@@ -106,6 +106,14 @@ export class LeagueTableComponent implements OnInit {
       this.findAllComments();
     });
   }
+
+
+  findUsersName(userId) {
+    // this.profileService.findUserById(userId).subscribe(res => {
+    console.log(userId);
+    // return res.firstName + " " + res.lastName
+  }
+    // })}
 
 
 }
