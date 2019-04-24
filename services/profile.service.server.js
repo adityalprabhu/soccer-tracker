@@ -87,7 +87,7 @@ module.exports = app => {
 
   app.put('/api/user/:uid', updateUser);
   app.post('/api/register', register);
-  app.get('/api/currentUser', getLoggedInUser);
+  app.post('/api/currentUser', getLoggedInUser);
   app.post('/api/logout', logout);
   app.post('/api/login', login);
   app.get('/api/user/:uid', findUserById);

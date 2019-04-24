@@ -25,7 +25,7 @@ export class ProfileService {
   }
 
   public findCurrentUser() {
-    return this.httpClient.get(environment.local5000 + '/api/currentUser', httpOptions);
+    return this.httpClient.post(environment.local5000 + '/api/currentUser', httpOptions,httpOptions);
   }
 
   public login(user) {
