@@ -15,7 +15,7 @@ app.use(session({
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-// app.use(express.static('./dist/soccer-tracker'));
+app.use(express.static('./dist/soccer-tracker'));
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin",
@@ -28,15 +28,15 @@ app.use(function (req, res, next) {
   next();
 });
 
-// app.get('/*', function (req, res) {
-//   res.sendFile(path.join('./dist/soccer-tracker/index.html'));
-// });
-
-app.use(express.static(path.join(__dirname, 'dist')));
-
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname + '/dist/index.html'));
+app.get('/*', function (req, res) {
+  res.sendFile(path.join(__dirname,'./dist/soccer-tracker/index.html'));
 });
+
+// app.use(express.static(path.join(__dirname, 'dist')));
+//
+// app.get('/*', (req, res) => {
+//   res.sendFile(path.join(__dirname + '/dist/index.html'));
+// });
 
 const commentsService = require('./services/comments.service.server');
 const dbService = require('./services/db.service.server');
