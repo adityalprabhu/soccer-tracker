@@ -33,7 +33,8 @@
 
     <!--WHEN VIEWING OTHER PROFILES-->
     <div *ngIf="!isLoggedInUser" class="row ml-3">
-      <h2>Teams {{firstName}} follows:</h2>
+      <h2 *ngIf="!teamsEmpty">Teams {{firstName}} follows:</h2>
+      <h2 *ngIf="teamsEmpty">{{firstName}} doesn't follow any teams yet.... :(</h2>
     </div>
     <div class="row" *ngIf="!isLoggedInUser">
 
@@ -80,7 +81,8 @@
 
         <!--   MY TEAMS   -->
         <div *ngIf="isLoggedInUser" class="row ml-3">
-          <h2>Teams you follow:</h2>
+          <h2 *ngIf="!teamsEmpty">Teams you follow:</h2>
+          <h2 *ngIf="teamsEmpty">You don't follow any teams yet.... :(</h2>
         </div>
         <div class="row">
 
