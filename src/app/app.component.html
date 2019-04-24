@@ -21,6 +21,12 @@
           <a class="dropdown-item" *ngFor="let league of leagues | keyvalue" routerLink="/league/{{league.key}}">{{league.value}}</a>
         </div>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/fixtures">Fixtures</a>
+      </li>
+      <li class="nav-item" *ngIf="isManager">
+        <a class="nav-link" routerLink="/fantasy-team">Fantasy Team</a>
+      </li>
       <li *ngIf="loggedIn" class="nav-item dropdown">
 <!--        <a class="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
 <!--          Profile-->
@@ -34,9 +40,8 @@
 <!--          <a class="dropdown-item" routerLink="/profile">Edit Profile</a>-->
 <!--        </div>-->
       </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/fixtures">Fixtures</a>
-      </li>
+
+
       <li class="nav-item" *ngIf="!loggedIn">
         <a class="nav-link" routerLink="/login">Login</a>
       </li>

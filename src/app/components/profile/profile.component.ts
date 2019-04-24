@@ -5,6 +5,7 @@ import {Location} from '@angular/common';
 import {ProfileService} from '../../services/profileService/profile.service';
 import {Utils} from '../../../assets/utils';
 import {TeamService} from '../../services/teamService/team.service';
+import {isNullOrUndefined} from "util";
 
 @Component({
   selector: 'app-profile',
@@ -79,7 +80,9 @@ export class ProfileComponent implements OnInit {
   getCurrentUser() {
     this.profileService.findCurrentUser()
       .subscribe(res => {
-        console.log(res);
+        if(isNullOrUndefined(res)) {
+          this.router.navigate(['/login']);
+        }
         this.user = res;
 
         this.userId = this.user._id;
@@ -134,7 +137,7 @@ export class ProfileComponent implements OnInit {
   findLeagueId(teamId) {
     for (const [key, value] of Object.entries(this.teamsByLeagueId)) {
 
-      if (value.includes(teamId.toString())) {
+      if (value === teamId.toString()) {
         return key;
       }
 
