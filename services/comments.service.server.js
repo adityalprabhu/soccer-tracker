@@ -19,6 +19,6 @@ module.exports = app => {
 
   app.post('/api/comments', findAllComments);
   app.post('/api/comment', createComment);
-  app.get('/api/comment/:id', findCommentsById);
+  app.post('/api/comment/:id', findCommentsById);
   app.delete('/api/comment/:id', deleteComment);
 };

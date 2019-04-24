@@ -16,6 +16,7 @@ app.use(session({
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('./dist/soccer-tracker'));
+app.disable('etag');
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin",
@@ -25,6 +26,9 @@ app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Methods",
     "GET, POST, PUT, DELETE, OPTIONS");
   res.header("Access-Control-Allow-Credentials", "true");
+  res.header("Cache-Control", "no-cache, no-store, must-revalidate");
+  res.header("Pragma", "no-cache");
+  res.header("Expires", 0);
   next();
 });
 
@@ -49,3 +53,9 @@ profileService(app);
 teamService(app);
 
 app.listen(process.env.PORT || 5000);
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> ffbcca665a6281885005bee9b6bc896a1bb608c6
