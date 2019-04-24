@@ -1,6 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var session = require('express-session');
+const path = require('path');
 
 require('./data/db')();
 
@@ -14,6 +15,7 @@ app.use(session({
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.static('./dist/soccer-tracker'));
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin",
@@ -26,15 +28,20 @@ app.use(function (req, res, next) {
   next();
 });
 
+app.get('/*', function (req, res) {
+  res.sendFile(path.join('./dist/ng-sp19-adityalprabhu/index.html'));
+});
+
 const commentsService = require('./services/comments.service.server');
 const dbService = require('./services/db.service.server');
 const profileService = require('./services/profile.service.server');
 const teamService = require('./services/team.service.server');
-
 
 commentsService(app);
 dbService(app);
 profileService(app);
 teamService(app);
 
-app.listen(process.env.PORT || 5000);
+app.listen(process.env.PORT || 8080);
+
+
