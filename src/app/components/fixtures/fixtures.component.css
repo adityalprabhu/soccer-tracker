@@ -60,6 +60,7 @@
 /*Center rows*/
 .table td {
   text-align: center;
+  vertical-align: middle;
   align-content: center;
   max-width: 150px;
 }
