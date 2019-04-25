@@ -41,11 +41,11 @@
       <!--Follow Unfollow Buttons-->
       <div class="row m-2 d-flex justify-content-center">
 
-        <button *ngIf="!isOtherUserFollowed"
+        <button *ngIf="!isOtherUserFollowed && loggedIn"
                 class="btn btn-success m-1" (click)="followUser()">Follow {{firstName}}
         </button>
 
-        <button *ngIf="isOtherUserFollowed"
+        <button *ngIf="isOtherUserFollowed && loggedIn"
                 class="btn btn-danger m-1" (click)="unfollowUser()">Unfollow {{firstName}}
         </button>
 
@@ -53,7 +53,7 @@
 
       <div class="row ml-1">
         <h2 *ngIf="!teamsEmpty">Teams {{firstName}} follows:</h2>
-        <h2 *ngIf="teamsE mpty">{{firstName}} doesn't follow any teams yet.... :(</h2>
+        <h2 *ngIf="teamsEmpty">{{firstName}} doesn't follow any teams yet.... :(</h2>
       </div>
     </div>
     <div class="row" *ngIf="!isLoggedInUser">

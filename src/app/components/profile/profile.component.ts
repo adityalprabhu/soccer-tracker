@@ -14,6 +14,7 @@ import {isNullOrUndefined} from "util";
 })
 export class ProfileComponent implements OnInit {
 
+  loggedIn: boolean;
   profileUserId: any;
   isLoggedInUser: boolean;
   userId: any;
@@ -68,7 +69,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.profileUserId = params['userId'];
-
+      this.loggedIn = false;
       this.teamsEmpty = false;
       this.isLoggedInUser = true;
       if (this.profileUserId == null) {
@@ -97,7 +98,16 @@ export class ProfileComponent implements OnInit {
   getOtherUser() {
     this.profileService.findCurrentUser()
       .subscribe(res => {
+        if (isNullOrUndefined(res)) {
+          this.loggedIn = false;
+        } else {
+          this.loggedIn = true;
+        }});
+
+    this.profileService.findCurrentUser()
+      .subscribe(res => {
         if (res['_id'] == this.profileUserId) {
+          this.loggedIn = true;
           this.router.navigate(['/profile']);
         }
       });
@@ -137,8 +147,9 @@ export class ProfileComponent implements OnInit {
           following: this.otherUserId
         })
           .subscribe(res => {
+            let els = Object.values(res);
 
-            for (let i = 0; i < res.length; i++) {
+            for (let i = 0; i < els.length; i++) {
               if (this.otherUserId === res[i].following._id) {
                 this.isOtherUserFollowed = true;
               }
@@ -211,6 +222,8 @@ export class ProfileComponent implements OnInit {
         if (isNullOrUndefined(res)) {
           this.router.navigate(['/login']);
         }
+
+        this.loggedIn = true;
 
         this.user = res;
 
