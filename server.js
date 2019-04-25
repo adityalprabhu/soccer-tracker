@@ -55,11 +55,14 @@ const commentsService = require('./services/comments.service.server');
 const dbService = require('./services/db.service.server');
 const profileService = require('./services/profile.service.server');
 const teamService = require('./services/team.service.server');
+const followingService = require('./services/following.service.server');
+
 
 commentsService(app);
 dbService(app);
 profileService(app);
 teamService(app);
+followingService(app);
 
 app.listen(process.env.PORT || 5000);
 
