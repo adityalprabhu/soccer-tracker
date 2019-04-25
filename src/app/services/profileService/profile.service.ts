@@ -59,4 +59,19 @@ export class ProfileService {
     return this.httpClient.put(environment.local5000 + '/api/team/'+ mid, team,  httpOptions);
   }
 
+  public followUser(followFollowingPair) {
+    return this.httpClient.post(environment.local5000 + '/api/followUser', followFollowingPair, httpOptions);
+  }
+
+  public unfollowUser(followFollowingPair) {
+    return this.httpClient.post(environment.local5000 + '/api/unfollowUser', followFollowingPair, httpOptions);
+  }
+
+  public findFollowingsOfUser(follower) {
+    return this.httpClient.post(environment.local5000 + '/api/findFollowingsOfUser', follower, httpOptions);
+  }
+
+  public findFollowersOfUser(following) {
+    return this.httpClient.post(environment.local5000 + '/api/findFollowersOfUser', following, httpOptions);
+  }
 }

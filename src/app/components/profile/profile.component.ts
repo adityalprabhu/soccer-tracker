@@ -17,6 +17,7 @@ export class ProfileComponent implements OnInit {
   profileUserId: any;
   isLoggedInUser: boolean;
   userId: any;
+  otherUserId: any;
   user: any;
   email: any;
   password: any;
@@ -50,6 +51,11 @@ export class ProfileComponent implements OnInit {
 
   leagueId;
 
+  followers: any;
+  followings: any;
+
+  isOtherUserFollowed: any;
+
   constructor(private route: ActivatedRoute,
               private location: Location,
               private router: Router,
@@ -65,7 +71,7 @@ export class ProfileComponent implements OnInit {
 
       this.teamsEmpty = false;
       this.isLoggedInUser = true;
-      if(this.profileUserId == null){
+      if (this.profileUserId == null) {
         this.getCurrentUser();
       } else {
         this.isLoggedInUser = false;
@@ -88,43 +94,123 @@ export class ProfileComponent implements OnInit {
     this.addTeamId = null;
   }
 
-  getOtherUser(){
+  getOtherUser() {
     this.profileService.findCurrentUser()
       .subscribe(res => {
-        if(res['_id'] == this.profileUserId) {
+        if (res['_id'] == this.profileUserId) {
           this.router.navigate(['/profile']);
-        }});
+        }
+      });
     this.profileService.findUserById(this.profileUserId)
       .subscribe(res => {
 
-          let user = res;
-          console.log(user)
+        let user = res;
+        console.log(user)
 
-          this.userId = user['_id'];
-          this.firstName = user['firstName'];
-          this.lastName = user['lastName'];
-          this.teams = user['teams'];
-          if(this.teams.length == 0){
-            this.teamsEmpty = true;
-          }
-          this.manager = user['manager'];
-
-          this.findTeamNames(this.teams);
-          this.findTeamsStandings(this.teams);
-          this.findTeamsStats(this.teams);
+        this.otherUserId = user['_id'];
+        this.firstName = user['firstName'];
+        this.lastName = user['lastName'];
+        this.teams = user['teams'];
+        if (this.teams.length == 0) {
+          this.teamsEmpty = true;
         }
+        this.manager = user['manager'];
+
+        this.findTeamNames(this.teams);
+        this.findTeamsStandings(this.teams);
+        this.findTeamsStats(this.teams);
+
+        this.otherUserFollowed();
+      });
+  }
+
+  otherUserFollowed() {
+
+    let loggedInUserId;
+
+    this.profileService.findCurrentUser().subscribe(res => {
+      loggedInUserId = res['_id'];
+
+      if (loggedInUserId !== this.otherUserId) {
+        this.profileService.findFollowingsOfUser({
+          follower: loggedInUserId,
+          following: this.otherUserId
+        })
+          .subscribe(res => {
+
+            for (let i = 0; i < res.length; i++) {
+              if (this.otherUserId === res[i].following._id) {
+                this.isOtherUserFollowed = true;
+              }
+            }
+          });
+      }
+    });
+  }
 
 
-        )
+  followUser() {
+
+    if (this.isOtherUserFollowed !== true) {
+
+      let loggedInUserId;
+
+      this.profileService.findCurrentUser().subscribe(res => {
+        loggedInUserId = res['_id'];
+
+        if (loggedInUserId !== this.otherUserId) {
+          this.profileService.followUser({follower: loggedInUserId, following: this.otherUserId})
+            .subscribe(res => {
+              console.log(res);
+              this.isOtherUserFollowed = true;
+              alert('User followed!');
+            });
+        }
+      });
+    }
+  }
+
+  unfollowUser() {
+
+    if (this.isOtherUserFollowed === true) {
+      let loggedInUserId;
+
+      this.profileService.findCurrentUser().subscribe(res => {
+        loggedInUserId = res['_id'];
+
+        if (loggedInUserId !== this.otherUserId) {
+          this.profileService.unfollowUser({
+            follower: loggedInUserId,
+            following: this.otherUserId
+          })
+            .subscribe(res => {
+              console.log(res);
+              this.isOtherUserFollowed = false;
+              alert('User un followed!');
+            });
+        }
+      });
+    }
+  }
+
+  getFollowings(userId) {
+    this.profileService.findFollowingsOfUser({follower: userId}).subscribe(res => {
+      this.followings = res;
+    });
+  }
+
+  getFollowers(userId) {
+    this.profileService.findFollowersOfUser({following: userId}).subscribe(res => {
+      this.followers = res;
+    });
   }
 
   getCurrentUser() {
     this.profileService.findCurrentUser()
       .subscribe(res => {
-        if(isNullOrUndefined(res)) {
+        if (isNullOrUndefined(res)) {
           this.router.navigate(['/login']);
         }
-
 
         this.user = res;
 
@@ -134,15 +220,17 @@ export class ProfileComponent implements OnInit {
         this.firstName = this.user.firstName;
         this.lastName = this.user.lastName;
         this.teams = this.user.teams;
-        if(this.teams.length == 0){
+        if (this.teams.length == 0) {
           this.teamsEmpty = true;
         }
         this.manager = this.user.manager;
 
-
         this.findTeamNames(this.teams);
         this.findTeamsStandings(this.teams);
         this.findTeamsStats(this.teams);
+
+        this.getFollowings(this.userId);
+        this.getFollowers(this.userId);
       });
   }
 
@@ -183,7 +271,7 @@ export class ProfileComponent implements OnInit {
 
   findLeagueId(teamId) {
     for (const key in this.teamsByLeagueId) {
-      if (this.teamsByLeagueId[key].includes(teamId.toString())){
+      if (this.teamsByLeagueId[key].includes(teamId.toString())) {
         return key;
       }
     }

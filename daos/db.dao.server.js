@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const commentsModel = require('../data/models/comment.model.server');
 const userModel = require('../data/models/user.model.server');
+const followingModel = require('../data/models/following.model.server');
 
 truncateDatabase = () =>
   // commentsModel.remove();
@@ -94,7 +95,38 @@ findUserByCredentials = (email, password) =>
 findUserByTeam = (teamId) =>
   userModel.find({$or: [{favoriteTeam: teamId}, {teams: teamId}]});
 
+///////////// Following ///////////////
 
+followUser = (followerId, followingId) =>
+  followingModel.create({
+                          follower: followerId,
+                          following: followingId
+                        });
+
+unfollowUser = (followerId, followingId) =>
+  followingModel.remove({
+                          follower: followerId,
+                          following: followingId
+                        });
+
+findAllFollowings = () =>
+  followingModel.find();
+
+// get users that the user follows. Use populate
+findFollowingsOfUser = (followerId) =>
+  followingModel
+    .find({follower: followerId})
+    .populate('following')
+    .exec();
+
+// get followers who follow user.
+findFollowersOfUser = (followingId) =>
+  followingModel
+    .find({following: followingId})
+    .populate('follower')
+    .exec();
+
+///////////// Comments //////////////
 
 createComment = comment =>
   commentsModel.create(comment);
@@ -120,6 +152,10 @@ module.exports = {
   findUserByCredentials,
   findUserByEmail,
   createComment,
-  findUserByTeam
-
+  findUserByTeam,
+  followUser,
+  findAllFollowings,
+  findFollowingsOfUser,
+  findFollowersOfUser,
+  unfollowUser
 };
