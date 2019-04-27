@@ -321,9 +321,25 @@ export class ProfileComponent implements OnInit {
     };
 
     this.profileService.updateUser(this.userId, user).subscribe(res => {
-      console.log(res);
       this.getCurrentUser();
       alert("Successfully updated your profile!");
+    });
+
+  }
+
+  updateTeam() {
+    const user = {
+      _id: this.userId,
+      email: this.email,
+      password: this.password,
+      firstName: this.firstName,
+      lastName: this.lastName,
+      teams: this.teams,
+      manager: this.manager
+    };
+
+    this.profileService.updateUser(this.userId, user).subscribe(res => {
+      this.getCurrentUser();
     });
 
   }
@@ -333,7 +349,7 @@ export class ProfileComponent implements OnInit {
     this.teams = this.teams.filter(team => team !== teamId);
 
     // update db
-    this.update();
+    this.updateTeam();
   }
 
   addTeam() {
@@ -341,7 +357,7 @@ export class ProfileComponent implements OnInit {
     if (this.addTeamId !== null) {
       this.teams.push(this.addTeamId);
       this.teamsEmpty = false;
-      this.update();
+      this.updateTeam();
     }
   }
 

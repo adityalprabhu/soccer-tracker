@@ -70,7 +70,6 @@ export class LeagueTableComponent implements OnInit {
       var filteredComments = Object.values(res);
       filteredComments = filteredComments.filter(comment => comment.leagueId == this.leagueId);
       this.comments = filteredComments;
-      console.log('COMMENTS = ' + this.comments);
     });
   }
 
@@ -81,7 +80,6 @@ export class LeagueTableComponent implements OnInit {
       comment: this.newComment
     };
 
-    console.log(comment);
 
     this.commentsService.createComment(comment).subscribe(res => {
       this.findAllComments();
@@ -96,7 +94,6 @@ export class LeagueTableComponent implements OnInit {
         this.userId = this.user._id;
         this.userName = this.user.firstName + ' ' + this.user.lastName;
         this.loggedIn = true;
-        console.log(this.userId);
       }
     });
   }
@@ -106,14 +103,4 @@ export class LeagueTableComponent implements OnInit {
       this.findAllComments();
     });
   }
-
-
-  findUsersName(userId) {
-    // this.profileService.findUserById(userId).subscribe(res => {
-    console.log(userId);
-    // return res.firstName + " " + res.lastName
-  }
-    // })}
-
-
 }

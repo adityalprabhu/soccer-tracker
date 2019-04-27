@@ -204,7 +204,6 @@ export class FixturesComponent implements OnInit {
       });
       this.fixtures = todaysFixtures;
 
-      console.log("Populated live fixtures");
 
       this.subscribeToData();
 
@@ -219,6 +218,7 @@ export class FixturesComponent implements OnInit {
   }
 
   private subscribeToData(): void {
+    console.log("Refreshing live fixtures!")
     this.timerSubscription = timer$.subscribe(() => this.findLiveFixtures());
   }
 

@@ -131,7 +131,8 @@ findFollowersOfUser = (followingId) =>
 createComment = comment =>
   commentsModel.create(comment);
 
-findAllComments = () => commentsModel.find();
+findAllComments = () =>
+  commentsModel.find().populate('userId').exec();
 
 findCommentsById = commentId => commentsModel.findById(commentId);
 

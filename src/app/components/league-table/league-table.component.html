@@ -52,15 +52,16 @@
     <div class="card-body">
       <div class="row">
         <div *ngIf="comment.userId !== userId" class="col-9">
-          <h5 class="card-title"><a routerLink="/profile/{{comment.userId}}">User {{comment.userId}}</a> says...</h5>
+          <h5 class="card-title"><a routerLink="/profile/{{comment.userId._id}}">{{comment.userId.firstName}}
+            {{comment.userId.lastName}}</a> says...</h5>
           {{comment.comment}}
         </div>
         <div *ngIf="comment.userId === userId" class="col-9">
-          <h5 class="card-title"><a routerLink="/profile/{{comment.userId}}">You </a> said...</h5>
+          <h5 class="card-title"><a routerLink="/profile/{{comment.userId._id}}">You </a> said...</h5>
           {{comment.comment}}
         </div>
         <div class="col-3">
-          <button *ngIf="comment.userId===userId" class="btn btn-danger float-right" (click)="deleteComment(comment._id)">
+          <button *ngIf="comment.userId._id===userId" class="btn btn-danger float-right" (click)="deleteComment(comment._id)">
             <i class="fa fa-times" aria-hidden="true"></i>
           </button>
         </div>
