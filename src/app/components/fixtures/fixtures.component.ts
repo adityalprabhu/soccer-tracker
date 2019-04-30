@@ -44,6 +44,7 @@ export class FixturesComponent implements OnInit {
   topTeams: any[];
   countryFlags: any;
   logos: any;
+  loadCount: number;
 
   futureGames = [];
 
@@ -55,6 +56,7 @@ export class FixturesComponent implements OnInit {
 
     this.matches = {};
     this.futureGames = [1,2,3,4]
+    this.loadCount = 0;
     this.setUpMap();
 
   }
@@ -108,6 +110,7 @@ export class FixturesComponent implements OnInit {
           }
 
         }
+        this.loadCount += 1;
 
       });
     }

@@ -173,6 +173,7 @@
 
             <!-- Today +1 fixtures -->
             <ng-container *ngFor="let day of futureGames">
+              <div *ngIf="matches[day].length > 0">
               <h3>{{adjustMonth(day)}} {{adjustDate(day)}}, {{adjustYear(day)}}</h3>
               <table class="table table-striped">
                 <thead class="thead-dark">
@@ -209,11 +210,18 @@
                 </ng-container>
                 </tbody>
               </table>
+                </div>
+              <div *ngIf="!matches[day].length > 0 && loadCount == 5" class="mt-5 mb-3">
+                <h3>{{adjustMonth(day)}} {{adjustDate(day)}}, {{adjustYear(day)}}</h3>
+                <div class="mt-4">
+                  <p>No matches on this day.</p>
+
+                </div>
+                <br>
+              </div>
             </ng-container>
           </div>
         </div>
-
-        WOA
 
         <div class="tab-pane fade" id="pills-pastMatches" role="tabpanel" aria-labelledby="pills-pastMatches-tab">
           <!--Past fixtures-->
