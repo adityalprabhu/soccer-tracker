@@ -16,6 +16,7 @@ export class Utils {
   };
   public static SUPPORTEDLEAGUES = [Utils.LEAGUEIDS.english, Utils.LEAGUEIDS.spanish, Utils.LEAGUEIDS.french,
     Utils.LEAGUEIDS.german, Utils.LEAGUEIDS.italy];
+
   public static COUNTRYFLAGS = {
     2: 'https://www.api-football.com/public/teams/10.png',
     87: 'https://www.api-football.com/public/teams/9.jpg',
@@ -140,5 +141,11 @@ export class Utils {
     8: "https://www.api-football.com/public/leagues/8.png",
     94: "https://www.api-football.com/public/leagues/94.png"
   };
+
+  public static FIVEDAYSMS = 1000 * 60 * 60 * 24 * 5;
+
+  // 86400000
+  public static ONEDAYMS = 1000 * 60 * 60 * 24;
+
 
 }

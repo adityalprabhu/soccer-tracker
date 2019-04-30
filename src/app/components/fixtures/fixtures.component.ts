@@ -6,7 +6,8 @@ import {Utils} from '../../../assets/utils';
 import {element} from 'protractor';
 import {TeamService} from '../../services/teamService/team.service';
 import {Observable} from 'rxjs';
-import { timer } from 'rxjs';
+import {timer} from 'rxjs';
+
 let timer$ = timer(60000);
 
 
@@ -36,6 +37,8 @@ export class FixturesComponent implements OnInit {
   todayGames: any;
   timerSubscription: any;
 
+  matches: any;
+
 
   monthNames: any;
   topTeams: any[];
@@ -48,6 +51,9 @@ export class FixturesComponent implements OnInit {
               private fixtureService: FixtureService,
               private teamService: TeamService) {
 
+    this.matches = {};
+    this.setUpMap();
+
   }
 
   ngOnInit() {
@@ -55,9 +61,12 @@ export class FixturesComponent implements OnInit {
       this.today = new Date();
       this.countryFlags = Utils.COUNTRYFLAGS;
 
+
       this.allGames = [];
       this.logos = Utils.TEAMLOGOS;
       this.findLiveFixtures();
+      this.populateMatches();
+
       this.fillMatchLists();
       this.todayGames = [];
       this.topTeams = [];
@@ -69,8 +78,37 @@ export class FixturesComponent implements OnInit {
 
   }
 
+  setUpMap() {
+    for (let i = -5; i < 6; i++) {
+      this.matches[i] = [];
+    }
+
+  }
 
 
+  populateMatches() {
+    for (let league of Utils.SUPPORTEDLEAGUES) {
+
+      this.fixtureService.findLeagueFixtures(league).subscribe(res => {
+
+        let allFixtures = Object.values(res['api'].fixtures);
+        for (let fixture of allFixtures) {
+
+          const gameTime = new Date(fixture['event_date']);
+          let differenceInTime = gameTime.getTime() - this.today.getTime();
+
+          if (differenceInTime < Utils.FIVEDAYSMS &&
+            differenceInTime > (-1 * Utils.FIVEDAYSMS)) {
+
+            this.matches[Math.floor(differenceInTime / Utils.ONEDAYMS)].push(fixture);
+
+          }
+
+        }
+
+      });
+    }
+  }
 
   fillMatchLists() {
     this.fixtureService.findLeagueFixtures(Utils.LEAGUEIDS.english).subscribe(res => {
@@ -79,13 +117,11 @@ export class FixturesComponent implements OnInit {
 
       for (let fixture of allFixtures) {
 
-        const numberOfDays = 5;
-        const fiveDaysMS = 1000 * 60 * 60 * 24 * numberOfDays;
-
         const gameTime = new Date(fixture['event_date']);
 
-        if (this.today.getTime() - gameTime.getTime() < fiveDaysMS &&
-          this.today.getTime() - gameTime.getTime() > (-1 * fiveDaysMS)) {
+        if (this.today.getTime() - gameTime.getTime() < Utils.FIVEDAYSMS &&
+          this.today.getTime() - gameTime.getTime() > (-1 * Utils.FIVEDAYSMS)) {
+
           closeFixtures.push(fixture);
           this.allGames.push(fixture);
         }
@@ -218,7 +254,7 @@ export class FixturesComponent implements OnInit {
   }
 
   private subscribeToData(): void {
-    console.log("Refreshing live fixtures!")
+    console.log('Refreshing live fixtures!');
     this.timerSubscription = timer$.subscribe(() => this.findLiveFixtures());
   }
 
