@@ -360,4 +360,8 @@ export class FixturesComponent implements OnInit {
   findLogo(teamID) {
     return this.logos[parseInt(teamID, 10)];
   }
+
+  filterBy(prop: string, num: number) {
+    return this.matches[num].sort((a, b) => a[prop] > b[prop] ? 1 : a[prop] === b[prop] ? 0 : -1);
+  }
 }

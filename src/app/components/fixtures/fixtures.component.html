@@ -187,7 +187,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <ng-container *ngFor="let fixture of matches[day]">
+                <ng-container *ngFor="let fixture of filterBy('event_date', day)">
                   <tr *ngIf="checkDate(fixture.event_date, day)">
                     <td *ngIf="isHypeFixture(fixture);else other_content" width="40">
                       <img src="https://ui-ex.com/images/fire-svg-6.png"
