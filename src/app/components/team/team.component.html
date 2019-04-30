@@ -14,10 +14,9 @@
     </div>
     <div class="card-body">
       <div>{{liveFixture.round}}</div>
-      <h5 class="row"><img class="logo" src="{{logos[liveFixture['homeTeam_id']]}}"
-                            style="width:35px;height:35;"><b>{{liveFixture['homeTeam']}}</b> - <b>{{liveFixture['awayTeam']}}</b>
-        <img class="logo" src="{{logos[liveFixture['awayTeam_id']]}}"
-             style="width:35px;height:35;"></h5>
+      <h5 class="row"><img class="logo" src="{{logos[liveFixture['homeTeam_id']]}}">
+        <b>{{liveFixture['homeTeam']}}</b> - <b>{{liveFixture['awayTeam']}}</b>
+        <img class="logo" src="{{logos[liveFixture['awayTeam_id']]}}"></h5>
       <div class="card-text mt-1">
         <h5 class="mb-0"><b>{{liveFixture.goalsHomeTeam}}</b> - <b>{{liveFixture.goalsAwayTeam}}</b></h5>
         <div>{{liveFixture.elapsed}}'</div>
@@ -52,13 +51,13 @@
               <div>{{match['event_date'] | date: 'medium'}}</div>
               <div class="row">
                 <div class="col-3">
-                  <img class="logo" src="{{logos[match['homeTeam_id']]}}" style="width:35px;height:35;">
+                  <img class="logo" src="{{logos[match['homeTeam_id']]}}">
                 </div>
                 <div class="col-6">
                   <b>{{match['homeTeam']}} {{match['goalsHomeTeam']}}</b> - <b>{{match['goalsAwayTeam']}} {{match['awayTeam']}}</b>
                 </div>
                 <div class="col-3">
-                  <img class="logo" src="{{logos[match['awayTeam_id']]}}" style="width:35px;height:35;">
+                  <img class="logo" src="{{logos[match['awayTeam_id']]}}">
                 </div>
               </div>
             </li>
@@ -78,13 +77,13 @@
               <div>{{match['event_date'] | date}}</div>
               <div class="row">
                 <div class="col-3">
-                  <img class="logo" src="{{logos[match['homeTeam_id']]}}" style="width:35px;height:35;">
+                  <img class="logo" src="{{logos[match['homeTeam_id']]}}" >
                 </div>
                 <div class="col-6">
                   <b>{{match['homeTeam']}} {{match['goalsHomeTeam']}}</b> - <b>{{match['goalsAwayTeam']}} {{match['awayTeam']}}</b>
                 </div>
                 <div class="col-3">
-                  <img class="logo" src="{{logos[match['awayTeam_id']]}}" style="width:35px;height:35;">
+                  <img class="logo" src="{{logos[match['awayTeam_id']]}}" >
                 </div>
               </div>
             </li>

@@ -71,10 +71,15 @@ ul {
 
 }
 
-/*.logo {*/
-/*  width:35px;*/
-/*  height:35px;*/
-/*}*/
+.logo {
+  display: block;
+  max-width:35px;
+  max-height:35px;
+  width: auto;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 .center-container .row {
    margin-right: 0 !important;
