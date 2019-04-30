@@ -45,6 +45,8 @@ export class FixturesComponent implements OnInit {
   countryFlags: any;
   logos: any;
 
+  futureGames = [];
+
   constructor(private route: ActivatedRoute,
               private location: Location,
               private router: Router,
@@ -52,6 +54,7 @@ export class FixturesComponent implements OnInit {
               private teamService: TeamService) {
 
     this.matches = {};
+    this.futureGames = [1,2,3,4]
     this.setUpMap();
 
   }
