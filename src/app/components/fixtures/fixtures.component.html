@@ -125,11 +125,13 @@
       </ul>
 
       <div class="tab-content" id="pills-tabContent">
+
+        <!--FUTURE FIXTURES-->
+
         <div class="tab-pane fade show active" id="pills-upcomingMatches" role="tabpanel"
              aria-labelledby="pills-upcomingMatches-tab">
-          <!--Future fixtures-->
-          <div>
 
+          <div>
             <!-- Later Today's fixtures -->
             <div>
 
@@ -171,7 +173,7 @@
               </table>
             </div>
 
-            <!-- Today +1 fixtures -->
+            <!-- Today + 1 - 5 FIXTURES -->
             <ng-container *ngFor="let day of futureGames">
               <div *ngIf="matches[day].length > 0">
               <h3>{{adjustMonth(day)}} {{adjustDate(day)}}, {{adjustYear(day)}}</h3>
@@ -223,8 +225,13 @@
           </div>
         </div>
 
-        <div class="tab-pane fade" id="pills-pastMatches" role="tabpanel" aria-labelledby="pills-pastMatches-tab">
-          <!--Past fixtures-->
+
+        <!-- PAST fixtures-->
+        
+        <div class="tab-pane fade"
+             id="pills-pastMatches"
+             role="tabpanel"
+             aria-labelledby="pills-pastMatches-tab">
           <div>
             <!-- Today -1 fixtures -->
             <div>
