@@ -47,6 +47,7 @@ export class FixturesComponent implements OnInit {
   loadCount: number;
 
   futureGames = [];
+  pastGames = [];
 
   constructor(private route: ActivatedRoute,
               private location: Location,
@@ -55,7 +56,9 @@ export class FixturesComponent implements OnInit {
               private teamService: TeamService) {
 
     this.matches = {};
-    this.futureGames = [1,2,3,4]
+    this.futureGames = [1,2,3,4];
+    this.pastGames = [-1,-2,-3,-4];
+
     this.loadCount = 0;
     this.setUpMap();
 
@@ -111,7 +114,7 @@ export class FixturesComponent implements OnInit {
 
         }
         this.loadCount += 1;
-
+        console.log(this.matches)
       });
     }
   }
