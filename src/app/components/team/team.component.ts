@@ -82,6 +82,14 @@ export class TeamComponent implements OnInit {
         }
       }
 
+
+      this.upcomingMatches.sort((a, b) => {
+        return parseInt(a['event_timestamp'], 10) - parseInt(b['event_timestamp'], 10);
+      });
+
+      this.pastMatches.sort((a, b) => {
+        return parseInt(b['event_timestamp'], 10) - parseInt(a['event_timestamp'], 10);
+      });
       this.findTeamLeagueStanding(this.leagueId);
     });
 
