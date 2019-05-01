@@ -21,12 +21,14 @@ export class FixturesComponent implements OnInit {
 
   fixtures: any;
   today: Date;
-  englishLeague: boolean;
-  spanishLeague: true;
-  germanLeague: true;
-  frenchLeague: true;
-  italianLeague: true;
+  showLeagues: any;
+  englishLeague = true;
+  frenchLeague = true;
+  spanishLeague = true;
+  italianLeague = true;
+  germanLeague = true;
 
+  leagueGames: any;
   englishGames: any;
   spanishGames: any;
   germanGames: any;
@@ -56,8 +58,8 @@ export class FixturesComponent implements OnInit {
               private teamService: TeamService) {
 
     this.matches = {};
-    this.futureGames = [1,2,3,4];
-    this.pastGames = [-1,-2,-3,-4];
+    this.futureGames = [1, 2, 3, 4];
+    this.pastGames = [-1, -2, -3, -4];
 
     this.loadCount = 0;
     this.setUpMap();
@@ -68,14 +70,27 @@ export class FixturesComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.today = new Date();
       this.countryFlags = Utils.COUNTRYFLAGS;
+      this.showLeagues = {
+        '2': this.englishLeague,
+        '87': this.spanishLeague,
+        '4': this.frenchLeague,
+        '8': this.germanLeague,
+        '94': this.italianLeague
+      };
 
+      this.leagueGames = {
+        2: [],
+        87: [],
+        4: [],
+        8: [],
+        94: []
+      };
 
       this.allGames = [];
       this.logos = Utils.TEAMLOGOS;
       this.findLiveFixtures();
       this.populateMatches();
 
-      this.fillMatchLists();
       this.todayGames = [];
       this.topTeams = [];
       this.monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
@@ -105,128 +120,18 @@ export class FixturesComponent implements OnInit {
           const gameTime = new Date(fixture['event_date']);
           let differenceInTime = gameTime.getTime() - this.today.getTime();
 
-          if (differenceInTime < Utils.FIVEDAYSMS &&
-            differenceInTime > (-1 * Utils.FIVEDAYSMS)) {
-
+          if (differenceInTime < Utils.FIVEDAYSMS && differenceInTime > (-1 * Utils.FIVEDAYSMS)) {
             this.matches[Math.floor(differenceInTime / Utils.ONEDAYMS)].push(fixture);
-
+            this.leagueGames[league].push(fixture);
           }
-
         }
         this.loadCount += 1;
-        console.log(this.matches)
       });
     }
   }
 
-  fillMatchLists() {
-    this.fixtureService.findLeagueFixtures(Utils.LEAGUEIDS.english).subscribe(res => {
-      let closeFixtures = [];
-      let allFixtures = Object.values(res['api'].fixtures);
 
-      for (let fixture of allFixtures) {
 
-        const gameTime = new Date(fixture['event_date']);
-
-        if (this.today.getTime() - gameTime.getTime() < Utils.FIVEDAYSMS &&
-          this.today.getTime() - gameTime.getTime() > (-1 * Utils.FIVEDAYSMS)) {
-
-          closeFixtures.push(fixture);
-          this.allGames.push(fixture);
-        }
-      }
-      this.englishGames = closeFixtures;
-      this.allGames.sort((a, b) => {
-        return parseInt(a['event_timestamp'], 10) - parseInt(b['event_timestamp'], 10);
-      });
-
-    });
-    this.fixtureService.findLeagueFixtures(Utils.LEAGUEIDS.spanish).subscribe(res => {
-      var closeFixtures = [];
-      var allFixtures = Object.values(res['api'].fixtures);
-
-      for (let fixture of allFixtures) {
-
-        const fiveDays = 1000 * 60 * 60 * 24 * 5;
-
-        const gameTime = new Date(fixture['event_date']);
-        if (this.today.getTime() - gameTime.getTime() < fiveDays &&
-          this.today.getTime() - gameTime.getTime() > (-1 * fiveDays)) {
-          closeFixtures.push(fixture);
-          this.allGames.push(fixture);
-
-        }
-      }
-      this.spanishGames = closeFixtures;
-      this.allGames.sort((a, b) => {
-        return parseInt(a['event_timestamp'], 10) - parseInt(b['event_timestamp'], 10);
-      });
-    });
-    this.fixtureService.findLeagueFixtures(Utils.LEAGUEIDS.german).subscribe(res => {
-      var closeFixtures = [];
-      var allFixtures = Object.values(res['api'].fixtures);
-
-      for (let fixture of allFixtures) {
-
-        const fiveDays = 1000 * 60 * 60 * 24 * 5;
-
-        const gameTime = new Date(fixture['event_date']);
-        if (this.today.getTime() - gameTime.getTime() < fiveDays &&
-          this.today.getTime() - gameTime.getTime() > (-1 * fiveDays)) {
-          closeFixtures.push(fixture);
-          this.allGames.push(fixture);
-
-        }
-      }
-      this.germanGames = closeFixtures;
-      this.allGames.sort((a, b) => {
-        return parseInt(a['event_timestamp'], 10) - parseInt(b['event_timestamp'], 10);
-      });
-    });
-    this.fixtureService.findLeagueFixtures(Utils.LEAGUEIDS.italy).subscribe(res => {
-      var closeFixtures = [];
-      var allFixtures = Object.values(res['api'].fixtures);
-
-      for (let fixture of allFixtures) {
-
-        const fiveDays = 1000 * 60 * 60 * 24 * 5;
-
-        const gameTime = new Date(fixture['event_date']);
-        if (this.today.getTime() - gameTime.getTime() < fiveDays &&
-          this.today.getTime() - gameTime.getTime() > (-1 * fiveDays)) {
-          closeFixtures.push(fixture);
-          this.allGames.push(fixture);
-
-        }
-      }
-      this.italianGames = closeFixtures;
-      this.allGames.sort((a, b) => {
-        return parseInt(a['event_timestamp'], 10) - parseInt(b['event_timestamp'], 10);
-      });
-    });
-    this.fixtureService.findLeagueFixtures(Utils.LEAGUEIDS.french).subscribe(res => {
-      var closeFixtures = [];
-      var allFixtures = Object.values(res['api'].fixtures);
-
-      for (let fixture of allFixtures) {
-
-        const fiveDays = 1000 * 60 * 60 * 24 * 5;
-
-        const gameTime = new Date(fixture['event_date']);
-        if (this.today.getTime() - gameTime.getTime() < fiveDays &&
-          this.today.getTime() - gameTime.getTime() > (-1 * fiveDays)) {
-          closeFixtures.push(fixture);
-          this.allGames.push(fixture);
-
-        }
-      }
-      this.frenchGames = closeFixtures;
-      this.allGames.sort((a, b) => {
-        return parseInt(a['event_timestamp'], 10) - parseInt(b['event_timestamp'], 10);
-      });
-    });
-
-  }
 
 
   findLiveFixtures() {
@@ -353,15 +258,6 @@ export class FixturesComponent implements OnInit {
     return fixture['statusShort'] === 'FT' && date.getDate() === this.today.getDate();
   }
 
-  toggleEnglishLeague() {
-
-    if (this.englishLeague) {
-      this.englishLeague = false;
-    } else {
-      this.englishLeague = true;
-
-    }
-  }
 
   findLogo(teamID) {
     return this.logos[parseInt(teamID, 10)];
@@ -369,5 +265,59 @@ export class FixturesComponent implements OnInit {
 
   filterBy(prop: string, num: number) {
     return this.matches[num].sort((a, b) => a[prop] > b[prop] ? 1 : a[prop] === b[prop] ? 0 : -1);
+  }
+
+  toggleEnglishLeague() {
+    if (this.englishLeague) {
+      this.englishLeague = false;
+      this.showLeagues[Utils.LEAGUEIDS.english.toString()] = false;
+    } else {
+      this.englishLeague = true;
+      this.showLeagues[Utils.LEAGUEIDS.english.toString()] = true;
+    }
+  }
+
+  toggleSpanishLeague() {
+    if (this.spanishLeague) {
+      this.spanishLeague = false;
+      this.showLeagues[Utils.LEAGUEIDS.spanish.toString()] = false;
+    } else {
+      this.spanishLeague = true;
+      this.showLeagues[Utils.LEAGUEIDS.spanish.toString()] = true;
+    }
+  }
+
+  toggleGermanLeague() {
+    if (this.germanLeague) {
+      this.germanLeague = false;
+      this.showLeagues[Utils.LEAGUEIDS.german.toString()] = false;
+    } else {
+      this.germanLeague = true;
+      this.showLeagues[Utils.LEAGUEIDS.german.toString()] = true;
+    }
+  }
+
+  toggleItalianLeague() {
+    if (this.italianLeague) {
+      this.italianLeague = false;
+      this.showLeagues[Utils.LEAGUEIDS.italy.toString()] = false;
+    } else {
+      this.italianLeague = true;
+      this.showLeagues[Utils.LEAGUEIDS.italy.toString()] = true;
+    }
+  }
+
+  toggleFrenchLeague() {
+    if (this.frenchLeague) {
+      this.frenchLeague = false;
+      this.showLeagues[Utils.LEAGUEIDS.french.toString()] = false;
+    } else {
+      this.frenchLeague = true;
+      this.showLeagues[Utils.LEAGUEIDS.french.toString()] = true;
+    }
+  }
+
+  leagueShowing(leagueid) {
+    return this.showLeagues[leagueid];
   }
 }

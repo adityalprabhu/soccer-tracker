@@ -5,10 +5,31 @@
     </div>
 
 
-    <!--    <input-->
-    <!--      type="checkbox"-->
-    <!--      [checked]="englishLeague"-->
-    <!--      (change)="toggleEnglishLeague()"/> Premier League-->
+    <input
+      type="checkbox"
+      [checked]="englishLeague"
+      (change)="toggleEnglishLeague()"/> Premier League
+
+
+    <input
+      type="checkbox"
+      [checked]="spanishLeague"
+      (change)="toggleSpanishLeague()"/> La Liga
+
+    <input
+      type="checkbox"
+      [checked]="italianLeague"
+      (change)="toggleItalianLeague()"/> Seria A
+
+    <input
+      type="checkbox"
+      [checked]="frenchLeague"
+      (change)="toggleFrenchLeague()"/> Ligue 1
+
+    <input
+      type="checkbox"
+      [checked]="germanLeague"
+      (change)="toggleGermanLeague()"/> Bundesliga
 
     <div id="live-fixtures" class="row" style="text-align: center">
       <h3>
@@ -191,7 +212,7 @@
                 </thead>
                 <tbody>
                 <ng-container *ngFor="let fixture of filterBy('event_timestamp', day)">
-                  <tr>
+                  <tr *ngIf="leagueShowing(fixture['league_id'])">
                     <td *ngIf="isHypeFixture(fixture);else other_content" width="40">
                       <img src="https://ui-ex.com/images/fire-svg-6.png"
                            style="width:35px;height:35;"
@@ -200,7 +221,8 @@
                     <ng-template #other_content>
                       <td></td>
                     </ng-template>
-                    <td class="d-none d-sm-table-cell"><img class="countryFlag" src="{{countryFlags[fixture['league_id']]}}">
+                    <td class="d-none d-sm-table-cell"><img class="countryFlag"
+                                                            src="{{countryFlags[fixture['league_id']]}}">
                     </td>
                     <td><a routerLink="/team/{{fixture.homeTeam_id}}">{{fixture.homeTeam}}</a></td>
                     <td class="logotd"><img class="logo" src="{{findLogo(fixture['homeTeam_id'])}}"></td>
