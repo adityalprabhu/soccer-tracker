@@ -4,32 +4,23 @@
       <h1>Fixtures</h1>
     </div>
 
-
-    <input
-      type="checkbox"
-      [checked]="englishLeague"
-      (change)="toggleEnglishLeague()"/> Premier League
+    <div class="d-flex justify-content-start">
 
 
-    <input
-      type="checkbox"
-      [checked]="spanishLeague"
-      (change)="toggleSpanishLeague()"/> La Liga
+    <button type="button" class="btn btn-outline-danger active mr-2" (click)="toggleEnglishLeague()"
+            data-toggle="button" aria-pressed="true" autocomplete="off">Premier League</button>
+    <button type="button" class="btn btn-outline-warning spanish active mr-2" (click)="toggleSpanishLeague()"
+            data-toggle="button" aria-pressed="true" autocomplete="off">La Liga</button>
+    <button type="button" class="btn btn-outline-warning german active mr-2" (click)="toggleGermanLeague()"
+            data-toggle="button" aria-pressed="true" autocomplete="off">Bundesliga</button>
+    <button type="button" class="btn btn-outline-success active mr-2" (click)="toggleItalianLeague()"
+            data-toggle="button" aria-pressed="true" autocomplete="off">Serie A</button>
+    <button type="button" class="btn btn-outline-primary active mr-2" (click)="toggleFrenchLeague()"
+            data-toggle="button" aria-pressed="true" autocomplete="off">Ligue 1</button>
 
-    <input
-      type="checkbox"
-      [checked]="italianLeague"
-      (change)="toggleItalianLeague()"/> Seria A
+    </div>
 
-    <input
-      type="checkbox"
-      [checked]="frenchLeague"
-      (change)="toggleFrenchLeague()"/> Ligue 1
 
-    <input
-      type="checkbox"
-      [checked]="germanLeague"
-      (change)="toggleGermanLeague()"/> Bundesliga
 
     <div id="live-fixtures" class="row" style="text-align: center">
       <h3>
@@ -106,7 +97,7 @@
         </thead>
 
         <tbody>
-        <ng-container *ngFor="let fixture of allGames">
+        <ng-container *ngFor="let fixture of filterBy('event_timestamp', 0)">
           <tr *ngIf="checkIfDone(fixture)">
             <td *ngIf="isHypeFixture(fixture);else other_content" width="40">
               <img src="https://ui-ex.com/images/fire-svg-6.png"
@@ -155,7 +146,7 @@
              aria-labelledby="pills-upcomingMatches-tab">
 
           <!-- Later Today's fixtures -->
-          <div>
+          <div *ngIf="matches[0].length > 0">
             <h3>Later Today - {{monthNames[today.getMonth()]}} {{today.getDate()}}, {{today.getFullYear()}}</h3>
             <table class="table table-striped">
               <thead class="thead-dark">
@@ -170,8 +161,8 @@
               </tr>
               </thead>
               <tbody>
-              <ng-container *ngFor="let fixture of allGames">
-                <tr *ngIf="checkTodayDate(fixture)">
+              <ng-container *ngFor="let fixture of filterBy('event_timestamp', 0)">
+                <tr *ngIf="checkTodayDate(fixture) && leagueShowing(fixture['league_id'])">
                   <td *ngIf="isHypeFixture(fixture);else other_content" width="40">
                     <img src="https://ui-ex.com/images/fire-svg-6.png"
                          style="width:35px;height:35;"
@@ -193,11 +184,18 @@
               </tbody>
             </table>
           </div>
+          <div *ngIf="!matches[0].length > 0 && loadCount == 5" class="mt-5 mb-3">
+            <h3>Later Today - {{monthNames[today.getMonth()]}} {{today.getDate()}}, {{today.getFullYear()}}</h3>
+            <div class="mt-4">
+              <p>No matches on this day.</p>
+            </div>
+            <br>
+          </div>
 
           <!-- Today + 1 - 5 FIXTURES -->
           <ng-container *ngFor="let day of futureGames">
             <div *ngIf="matches[day].length > 0">
-              <h3>{{adjustMonth(day)}} {{adjustDate(day)}}, {{adjustYear(day)}}</h3>
+              <h3>{{adjustDayOfWeek(day)}}, {{adjustMonth(day)}} {{adjustDate(day)}}, {{adjustYear(day)}}</h3>
               <table class="table table-striped">
                 <thead class="thead-dark">
                 <tr>
@@ -235,10 +233,9 @@
               </table>
             </div>
             <div *ngIf="!matches[day].length > 0 && loadCount == 5" class="mt-5 mb-3">
-              <h3>{{adjustMonth(day)}} {{adjustDate(day)}}, {{adjustYear(day)}}</h3>
+              <h3>{{adjustDayOfWeek(day)}}, {{adjustMonth(day)}} {{adjustDate(day)}}, {{adjustYear(day)}}</h3>
               <div class="mt-4">
                 <p>No matches on this day.</p>
-
               </div>
               <br>
             </div>

@@ -38,6 +38,7 @@ export class FixturesComponent implements OnInit {
 
   todayGames: any;
   timerSubscription: any;
+  daysOfWeek: any;
 
   matches: any;
 
@@ -60,6 +61,8 @@ export class FixturesComponent implements OnInit {
     this.matches = {};
     this.futureGames = [1, 2, 3, 4];
     this.pastGames = [-1, -2, -3, -4];
+    this.daysOfWeek = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+
 
     this.loadCount = 0;
     this.setUpMap();
@@ -69,6 +72,7 @@ export class FixturesComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.today = new Date();
+      this.today.setHours(0,0,0,0);
       this.countryFlags = Utils.COUNTRYFLAGS;
       this.showLeagues = {
         '2': this.englishLeague,
@@ -123,6 +127,7 @@ export class FixturesComponent implements OnInit {
           if (differenceInTime < Utils.FIVEDAYSMS && differenceInTime > (-1 * Utils.FIVEDAYSMS)) {
             this.matches[Math.floor(differenceInTime / Utils.ONEDAYMS)].push(fixture);
             this.leagueGames[league].push(fixture);
+            this.allGames.push(fixture)
           }
         }
         this.loadCount += 1;
@@ -181,6 +186,17 @@ export class FixturesComponent implements OnInit {
   checkTodayDate(fixture) {
     var gameTime = new Date(fixture['event_date']);
     return (this.today.getDate() === gameTime.getDate() && fixture['statusShort'] === 'NS');
+  }
+
+  earlierToday(fixture) {
+    var gameTime = new Date(fixture['event_date']);
+    return (this.today.getDate() === gameTime.getDate() && fixture['statusShort'] === 'FT');
+  }
+
+  adjustDayOfWeek(amount){
+    var newDate = new Date(this.today.getTime());
+    newDate.setDate(newDate.getDate() + amount );
+    return this.daysOfWeek[newDate.getDay()];
   }
 
   adjustDate(amount) {
