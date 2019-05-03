@@ -184,7 +184,7 @@
               </tbody>
             </table>
           </div>
-          <div *ngIf="!matches[0].length > 0 && loadCount == 5" class="mt-5 mb-3">
+          <div *ngIf="!(matches[0].length > 0)&& loadCount == 5" class="mt-5 mb-3">
             <h3>Later Today - {{monthNames[today.getMonth()]}} {{today.getDate()}}, {{today.getFullYear()}}</h3>
             <div class="mt-4">
               <p>No matches on this day.</p>
