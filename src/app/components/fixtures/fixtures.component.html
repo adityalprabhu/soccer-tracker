@@ -43,7 +43,9 @@
 
 
         <tbody>
-        <tr *ngFor="let fixture of fixtures">
+        <ng-container *ngFor="let fixture of fixtures">
+        <tr *ngIf="leagueShowing(fixture['league_id'])">
+
           <td id="led-box">
             <div class="led-green"></div>
           </td>
@@ -70,6 +72,7 @@
                    style="width:35px;height:35;"></td>
           <td><a routerLink="/team/{{fixture.awayTeam_id}}">{{fixture.awayTeam}}</a></td>
         </tr>
+        </ng-container>
         </tbody>
       </table>
     </div>
@@ -79,7 +82,7 @@
     </div>
 
     <!-- Earlier Today's fixtures -->
-    <div>
+    <div style="text-align: center">
 
       <h3>Earlier Today - {{monthNames[today.getMonth()]}} {{today.getDate()}}, {{today.getFullYear()}}</h3>
       <table class="table table-striped">
@@ -98,7 +101,7 @@
 
         <tbody>
         <ng-container *ngFor="let fixture of filterBy('event_timestamp', 0)">
-          <tr *ngIf="checkIfDone(fixture)">
+          <tr *ngIf="checkIfDone(fixture) && leagueShowing(fixture['league_id'])">
             <td *ngIf="isHypeFixture(fixture);else other_content" width="40">
               <img src="https://ui-ex.com/images/fire-svg-6.png"
                    style="width:35px;height:35;"

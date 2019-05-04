@@ -32,7 +32,7 @@
 }
 
 .countryFlag {
-  border: .5px solid lightgrey;
+  border: 1px solid lightgrey;
   display: block;
   max-width:30px;
   max-height:30px;

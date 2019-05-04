@@ -125,6 +125,11 @@ export class FixturesComponent implements OnInit {
           let differenceInTime = gameTime.getTime() - this.today.getTime();
 
           if (differenceInTime < Utils.FIVEDAYSMS && differenceInTime > (-1 * Utils.FIVEDAYSMS)) {
+
+            if (Math.floor(differenceInTime / Utils.ONEDAYMS) == 0) {
+
+            }
+
             this.matches[Math.floor(differenceInTime / Utils.ONEDAYMS)].push(fixture);
             this.leagueGames[league].push(fixture);
             this.allGames.push(fixture)
@@ -264,6 +269,10 @@ export class FixturesComponent implements OnInit {
       var dateString = date.toTimeString().substr(0, 5);
 
       return dateString;
+    }
+
+    if (fixture['statusShort'] === 'HT'){
+      return "HT"
     }
 
     return fixture['elapsed'] + '\'';
