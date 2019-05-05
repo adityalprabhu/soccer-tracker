@@ -143,9 +143,9 @@ export class FixturesComponent implements OnInit {
 
 
   findTodaysFixtures() {
-    this.earlierGames = [];
-    this.laterGames = [];
-    this.liveGames = [];
+    let updatedEarlierGames = [];
+    let updatedLaterGames = [];
+    let updatedLiveGames = [];
 
     let dateString = this.today.getFullYear() + '-' + (this.today.getMonth() + 1) + '-' + this.today.getDate();
     this.fixtureService.findTodaysFixtures(dateString).subscribe(res => {
@@ -160,27 +160,38 @@ export class FixturesComponent implements OnInit {
           && Utils.SUPPORTEDLEAGUES.includes(parseInt(game['league_id'], 10))) {
 
           if (game['statusShort'] === 'NS') {
-            this.laterGames.push(game);
+            updatedLaterGames.push(game);
           } else if (game['statusShort'] === 'FT') {
-            this.earlierGames.push(game);
+            updatedEarlierGames.push(game);
           } else {
-            this.liveGames.push(game);
+            updatedLiveGames.push(game);
           }
         }
       }
 
-      this.liveGames.sort((a, b) => {
-        return parseInt(b['elapsed'], 10) - parseInt(a['elapsed'], 10);
+      updatedLiveGames.sort((a, b) => {
+        let aTime = parseInt(a['elapsed'], 10);
+        let bTime = parseInt(b['elapsed'], 10);
+        if (a['statusShort'] == 'HT'){
+          aTime = 45;
+        }
+        if (b['statusShort'] == 'HT'){
+          bTime = 45;
+        }
+
+        return bTime - aTime;
       });
 
-      this.laterGames.sort((a, b) => {
+      updatedLaterGames.sort((a, b) => {
         return parseInt(b['event_timestamp'], 10) - parseInt(a['event_timestamp'], 10);
       });
-      this.earlierGames.sort((a, b) => {
+      updatedEarlierGames.sort((a, b) => {
         return parseInt(b['event_timestamp'], 10) - parseInt(a['event_timestamp'], 10);
       });
 
-      console.log(this.liveGames)
+      this.liveGames = updatedLiveGames;
+      this.earlierGames = updatedEarlierGames;
+      this.laterGames = updatedLaterGames;
 
       // refreshes today's scores every minute
       this.subscribeToData();
