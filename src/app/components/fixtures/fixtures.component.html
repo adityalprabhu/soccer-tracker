@@ -105,7 +105,7 @@
         </tbody>
       </table>
       </div>
-      <div *ngIf="!(earlierGames.length) > 0 && loadCount == 5">
+      <div *ngIf="!(earlierGames.length > 0) && loadCount == 5">
         No Matches Earlier Today!
       </div>
 
@@ -205,7 +205,7 @@
                 </tbody>
               </table>
             </div>
-            <div *ngIf="!matches[day].length > 0 && loadCount == 5" class="mt-5 mb-3">
+            <div *ngIf="!(matches[day].length > 0) && loadCount == 5" class="mt-5 mb-3">
               <h3>{{adjustDayOfWeek(day)}}, {{adjustMonth(day)}} {{adjustDate(day)}}, {{adjustYear(day)}}</h3>
               <div class="mt-4">
                 <p>No matches.</p>
@@ -218,67 +218,67 @@
 
         <!-- PAST fixtures-->
 
-        <div class="tab-pane fade"
-             id="pills-pastMatches"
-             role="tabpanel"
-             aria-labelledby="pills-pastMatches-tab">
-          <div>
-            <!-- Today -1 fixtures -->
+<!--        <div class="tab-pane fade"-->
+<!--             id="pills-pastMatches"-->
+<!--             role="tabpanel"-->
+<!--             aria-labelledby="pills-pastMatches-tab">-->
+<!--          <div>-->
+<!--            &lt;!&ndash; Today -1 fixtures &ndash;&gt;-->
 
-            <div *ngFor="let day of pastGames">
-              <div *ngIf="matches[day].length > 0">
-                <h3>{{adjustMonth(day)}} {{adjustDate(day)}}, {{adjustYear(day)}}</h3>
-                <table class="table table-striped">
-                  <thead class="thead-dark">
-                  <tr>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col">Home Team</th>
-                    <th scope="col"></th>
-                    <th class="score" scope="col">Score</th>
-                    <th scope="col"></th>
-                    <th scope="col">Away Team</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <ng-container *ngFor="let fixture of filterBy('event_date', day)">
-                    <tr>
-                      <td *ngIf="isHypeFixture(fixture);else other_content" width="40">
-                        <img src="https://ui-ex.com/images/fire-svg-6.png"
-                             style="width:35px;height:35;"
-                             title="Top Teams Playing">
-                      </td>
-                      <ng-template #other_content>
-                        <td></td>
-                      </ng-template>
-                      <td><img class="countryFlag" src="{{countryFlags[fixture['league_id']]}}"></td>
-                      <td><a routerLink="/team/{{fixture.homeTeam_id}}">{{fixture.homeTeam}}</a></td>
-                      <td class="logotd"><img class="logo" src="{{findLogo(fixture['homeTeam_id'])}}"></td>
-                      <td>
-                        <div class="score" style="align-content: center"><b>{{fixture.goalsHomeTeam}}
-                          -  {{fixture.goalsAwayTeam}}</b></div>
-                        <div class="score" style="align-content: center">{{fixture['statusShort']}}</div>
-                      </td>
-                      <td class="logotd"><img class="logo" src="{{findLogo(fixture['awayTeam_id'])}}"></td>
-                      <td><a routerLink="/team/{{fixture.awayTeam_id}}">{{fixture.awayTeam}}</a></td>
-                    </tr>
-                  </ng-container>
-                  </tbody>
-                </table>
-              </div>
-              <div *ngIf="!matches[day].length > 0 && loadCount == 5" class="mt-5 mb-3">
-                <h3>{{adjustMonth(day)}} {{adjustDate(day)}}, {{adjustYear(day)}}</h3>
-                <div class="mt-4">
-                  <p>No matches on this day.</p>
+<!--            <div *ngFor="let day of pastGames">-->
+<!--              <div *ngIf="matches[day].length > 0">-->
+<!--                <h3>{{adjustMonth(day)}} {{adjustDate(day)}}, {{adjustYear(day)}}</h3>-->
+<!--                <table class="table table-striped">-->
+<!--                  <thead class="thead-dark">-->
+<!--                  <tr>-->
+<!--                    <th scope="col"></th>-->
+<!--                    <th scope="col"></th>-->
+<!--                    <th scope="col">Home Team</th>-->
+<!--                    <th scope="col"></th>-->
+<!--                    <th class="score" scope="col">Score</th>-->
+<!--                    <th scope="col"></th>-->
+<!--                    <th scope="col">Away Team</th>-->
+<!--                  </tr>-->
+<!--                  </thead>-->
+<!--                  <tbody>-->
+<!--                  <ng-container *ngFor="let fixture of filterBy('event_date', day)">-->
+<!--                    <tr>-->
+<!--                      <td *ngIf="isHypeFixture(fixture);else other_content" width="40">-->
+<!--                        <img src="https://ui-ex.com/images/fire-svg-6.png"-->
+<!--                             style="width:35px;height:35;"-->
+<!--                             title="Top Teams Playing">-->
+<!--                      </td>-->
+<!--                      <ng-template #other_content>-->
+<!--                        <td></td>-->
+<!--                      </ng-template>-->
+<!--                      <td><img class="countryFlag" src="{{countryFlags[fixture['league_id']]}}"></td>-->
+<!--                      <td><a routerLink="/team/{{fixture.homeTeam_id}}">{{fixture.homeTeam}}</a></td>-->
+<!--                      <td class="logotd"><img class="logo" src="{{findLogo(fixture['homeTeam_id'])}}"></td>-->
+<!--                      <td>-->
+<!--                        <div class="score" style="align-content: center"><b>{{fixture.goalsHomeTeam}}-->
+<!--                          -  {{fixture.goalsAwayTeam}}</b></div>-->
+<!--                        <div class="score" style="align-content: center">{{fixture['statusShort']}}</div>-->
+<!--                      </td>-->
+<!--                      <td class="logotd"><img class="logo" src="{{findLogo(fixture['awayTeam_id'])}}"></td>-->
+<!--                      <td><a routerLink="/team/{{fixture.awayTeam_id}}">{{fixture.awayTeam}}</a></td>-->
+<!--                    </tr>-->
+<!--                  </ng-container>-->
+<!--                  </tbody>-->
+<!--                </table>-->
+<!--              </div>-->
+<!--              <div *ngIf="!matches[day].length > 0 && loadCount == 5" class="mt-5 mb-3">-->
+<!--                <h3>{{adjustMonth(day)}} {{adjustDate(day)}}, {{adjustYear(day)}}</h3>-->
+<!--                <div class="mt-4">-->
+<!--                  <p>No matches on this day.</p>-->
 
-                </div>
-                <br>
-              </div>
-            </div>
+<!--                </div>-->
+<!--                <br>-->
+<!--              </div>-->
+<!--            </div>-->
 
 
-          </div>
-        </div>
+<!--          </div>-->
+<!--        </div>-->
 
       </div>
     </div>
