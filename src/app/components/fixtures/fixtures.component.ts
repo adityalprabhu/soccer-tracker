@@ -143,6 +143,10 @@ export class FixturesComponent implements OnInit {
 
 
   findTodaysFixtures() {
+    this.earlierGames = [];
+    this.laterGames = [];
+    this.liveGames = [];
+
     let dateString = this.today.getFullYear() + '-' + (this.today.getMonth() + 1) + '-' + this.today.getDate();
     this.fixtureService.findTodaysFixtures(dateString).subscribe(res => {
 
