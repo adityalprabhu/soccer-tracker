@@ -56,7 +56,7 @@ export class Utils {
     52: "https://www.api-football.com/public/teams/52.png",
     77: "https://www.api-football.com/public/teams/77.png",
     78: "https://www.api-football.com/public/teams/78.svg",
-    79: "https://www.api-football.com/public/teams/79.svg",
+    79: "https://www.api-football.com/public/teams/79.png",
     80: "https://www.api-football.com/public/teams/80.png",
     81: "https://www.api-football.com/public/teams/81.svg",
     82: "https://www.api-football.com/public/teams/82.png",
