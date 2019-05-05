@@ -19,12 +19,14 @@ export class FixtureService {
   findLiveFixturesApiUrl: string;
   findLeagueFixturesUrl: string;
   findTeamFixturesUrl: string;
+  findTodaysFixturesUrl: string;
 
 
   constructor(private httpClient: HttpClient) {
     this.findLiveFixturesApiUrl = ApiUrlsService.findLiveFixtures;
     this.findLeagueFixturesUrl = ApiUrlsService.findLeagueFixtures;
     this.findTeamFixturesUrl = ApiUrlsService.findTeamFixtures;
+    this.findTodaysFixturesUrl = ApiUrlsService.findTodaysFixtures;
 
   }
 
@@ -38,5 +40,9 @@ export class FixtureService {
 
   public findLiveFixtures() {
     return this.httpClient.get(this.findLiveFixturesApiUrl, httpOptions);
+  }
+
+  public findTodaysFixtures(yyyymmdd) {
+    return this.httpClient.get(this.findTodaysFixturesUrl + yyyymmdd, httpOptions);
   }
 }

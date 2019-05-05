@@ -25,5 +25,6 @@ export class ApiUrlsService {
 
   public static findTeamStats = environment.fdomain + '/statistics/';
   public static findTeamByLeagueId = environment.fdomain + '/teams/league/';
+  public static findTodaysFixtures = environment.fdomain + '/fixtures/date/';
 
 }

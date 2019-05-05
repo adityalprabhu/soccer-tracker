@@ -21,8 +21,7 @@
     </div>
 
 
-
-    <div id="live-fixtures" class="row" style="text-align: center">
+    <div *ngIf="liveGames.length > 0" id="live-fixtures" class="row" style="text-align: center">
       <h3>
         Live Scores
       </h3>
@@ -37,13 +36,11 @@
           <th class="score" scope="col">Score</th>
           <th scope="col"></th>
           <th scope="col">Away Team</th>
-
         </tr>
         </thead>
 
-
         <tbody>
-        <ng-container *ngFor="let fixture of fixtures">
+        <ng-container *ngFor="let fixture of liveGames">
         <tr *ngIf="leagueShowing(fixture['league_id'])">
 
           <td id="led-box">
@@ -76,14 +73,14 @@
         </tbody>
       </table>
     </div>
-
-    <div id="no-live-fixtures" class="row" style="text-align: center">
+    <div *ngIf="!liveGames.length > 0 && loadCount == 5" class="mt-4 mb-3" style="text-align: center">
       <h3>No Live Matches!</h3>
     </div>
 
     <!-- Earlier Today's fixtures -->
     <div style="text-align: center">
 
+      <div *ngIf="earlierGames.length > 0 && loadCount == 5">
       <h3>Earlier Today - {{monthNames[today.getMonth()]}} {{today.getDate()}}, {{today.getFullYear()}}</h3>
       <table class="table table-striped">
         <thead class="thead-dark">
@@ -124,7 +121,12 @@
         </ng-container>
         </tbody>
       </table>
-    </div>
+      </div>
+      <div *ngIf="!earlierGames.length > 0 && loadCount == 5">
+        No Matches Earlier Today!
+      </div>
+
+      </div>
 
 
     <div class="center-container text-center">
@@ -149,7 +151,7 @@
              aria-labelledby="pills-upcomingMatches-tab">
 
           <!-- Later Today's fixtures -->
-          <div *ngIf="matches[0].length > 0">
+          <div *ngIf="laterGames.length > 0">
             <h3>Later Today - {{monthNames[today.getMonth()]}} {{today.getDate()}}, {{today.getFullYear()}}</h3>
             <table class="table table-striped">
               <thead class="thead-dark">
@@ -238,7 +240,7 @@
             <div *ngIf="!matches[day].length > 0 && loadCount == 5" class="mt-5 mb-3">
               <h3>{{adjustDayOfWeek(day)}}, {{adjustMonth(day)}} {{adjustDate(day)}}, {{adjustYear(day)}}</h3>
               <div class="mt-4">
-                <p>No matches on this day.</p>
+                <p>No matches.</p>
               </div>
               <br>
             </div>

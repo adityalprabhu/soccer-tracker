@@ -36,7 +36,10 @@ export class FixturesComponent implements OnInit {
   italianGames: any;
   allGames: any;
 
-  todayGames: any;
+  earlierGames: any;
+  laterGames: any;
+  liveGames: any;
+
   timerSubscription: any;
   daysOfWeek: any;
 
@@ -61,7 +64,7 @@ export class FixturesComponent implements OnInit {
     this.matches = {};
     this.futureGames = [1, 2, 3, 4];
     this.pastGames = [-1, -2, -3, -4];
-    this.daysOfWeek = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    this.daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 
     this.loadCount = 0;
@@ -72,7 +75,7 @@ export class FixturesComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.today = new Date();
-      this.today.setHours(0,0,0,0);
+      this.today.setHours(0, 0, 0, 0);
       this.countryFlags = Utils.COUNTRYFLAGS;
       this.showLeagues = {
         '2': this.englishLeague,
@@ -90,12 +93,15 @@ export class FixturesComponent implements OnInit {
         94: []
       };
 
+      this.earlierGames = [];
+      this.laterGames = [];
+      this.liveGames = [];
+
       this.allGames = [];
       this.logos = Utils.TEAMLOGOS;
-      this.findLiveFixtures();
+      this.findTodaysFixtures();
       this.populateMatches();
 
-      this.todayGames = [];
       this.topTeams = [];
       this.monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
         'July', 'August', 'September', 'October', 'November', 'December'];
@@ -125,14 +131,9 @@ export class FixturesComponent implements OnInit {
           let differenceInTime = gameTime.getTime() - this.today.getTime();
 
           if (differenceInTime < Utils.FIVEDAYSMS && differenceInTime > (-1 * Utils.FIVEDAYSMS)) {
-
-            if (Math.floor(differenceInTime / Utils.ONEDAYMS) == 0) {
-
-            }
-
             this.matches[Math.floor(differenceInTime / Utils.ONEDAYMS)].push(fixture);
             this.leagueGames[league].push(fixture);
-            this.allGames.push(fixture)
+            this.allGames.push(fixture);
           }
         }
         this.loadCount += 1;
@@ -141,45 +142,48 @@ export class FixturesComponent implements OnInit {
   }
 
 
+  findTodaysFixtures() {
+    let dateString = this.today.getFullYear() + '-' + (this.today.getMonth() + 1) + '-' + this.today.getDate();
+    this.fixtureService.findTodaysFixtures(dateString).subscribe(res => {
 
+      let games = Object.values(res['api'].fixtures);
 
+      for (let game of games) {
 
-  findLiveFixtures() {
-    this.fixtureService.findLiveFixtures().subscribe(res => {
-      var todaysFixtures = [];
-      var recentFixtures = Object.values(res['api'].fixtures);
-
-      for (let fixture of recentFixtures) {
-
-        let gameTime = new Date(fixture['event_date']);
+        let gameTime = new Date(game['event_date']);
 
         if (gameTime.getDate() === this.today.getDate()
-          && Utils.SUPPORTEDLEAGUES.includes(parseInt(fixture['league_id'], 10))) {
-          todaysFixtures.push(fixture);
+          && Utils.SUPPORTEDLEAGUES.includes(parseInt(game['league_id'], 10))) {
+
+          if(game['statusShort'] === 'NS'){
+            this.laterGames.push(game)
+          } else if (game['statusShort'] === 'FT') {
+            this.earlierGames.push(game)
+          } else {
+            this.liveGames.push(game)
+          }
         }
       }
 
-      todaysFixtures.sort((a, b) => {
+      this.liveGames.sort((a, b) => {
         return parseInt(b['elapsed'], 10) - parseInt(a['elapsed'], 10);
       });
-      this.fixtures = todaysFixtures;
 
+      this.laterGames.sort((a, b) => {
+        return parseInt(b['event_timestamp'], 10) - parseInt(a['event_timestamp'], 10);
+      });
+      this.earlierGames.sort((a, b) => {
+        return parseInt(b['event_timestamp'], 10) - parseInt(a['event_timestamp'], 10);
+      });
 
+      // refreshes today's scores every minute
       this.subscribeToData();
-
-      if (todaysFixtures.length !== 0) {
-        let showLiveScores = document.getElementById('live-fixtures');
-        showLiveScores.style.display = 'inline';
-      } else {
-        let showNoLiveMatches = document.getElementById('no-live-fixtures');
-        showNoLiveMatches.style.display = 'inline';
-      }
     });
   }
 
   private subscribeToData(): void {
     console.log('Refreshing live fixtures!');
-    this.timerSubscription = timer$.subscribe(() => this.findLiveFixtures());
+    this.timerSubscription = timer$.subscribe(() => this.findTodaysFixtures());
   }
 
   checkDate(date, daysFromToday) {
@@ -198,9 +202,9 @@ export class FixturesComponent implements OnInit {
     return (this.today.getDate() === gameTime.getDate() && fixture['statusShort'] === 'FT');
   }
 
-  adjustDayOfWeek(amount){
+  adjustDayOfWeek(amount) {
     var newDate = new Date(this.today.getTime());
-    newDate.setDate(newDate.getDate() + amount );
+    newDate.setDate(newDate.getDate() + amount);
     return this.daysOfWeek[newDate.getDay()];
   }
 
@@ -271,8 +275,8 @@ export class FixturesComponent implements OnInit {
       return dateString;
     }
 
-    if (fixture['statusShort'] === 'HT'){
-      return "HT"
+    if (fixture['statusShort'] === 'HT') {
+      return 'HT';
     }
 
     return fixture['elapsed'] + '\'';
