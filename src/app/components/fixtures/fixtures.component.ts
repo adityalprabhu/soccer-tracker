@@ -155,12 +155,12 @@ export class FixturesComponent implements OnInit {
         if (gameTime.getDate() === this.today.getDate()
           && Utils.SUPPORTEDLEAGUES.includes(parseInt(game['league_id'], 10))) {
 
-          if(game['statusShort'] === 'NS'){
-            this.laterGames.push(game)
+          if (game['statusShort'] === 'NS') {
+            this.laterGames.push(game);
           } else if (game['statusShort'] === 'FT') {
-            this.earlierGames.push(game)
+            this.earlierGames.push(game);
           } else {
-            this.liveGames.push(game)
+            this.liveGames.push(game);
           }
         }
       }
@@ -228,9 +228,10 @@ export class FixturesComponent implements OnInit {
 
   isHypeFixture(fixture) {
 
-    return this.topTeams.includes(fixture['homeTeam']) && this.topTeams.includes(fixture['awayTeam']);
-
-
+    if (this.topTeams.includes(fixture['homeTeam']) && this.topTeams.includes(fixture['awayTeam'])) {
+      return 'hype-fixture';
+    }
+    return '';
   }
 
   findTopTeams() {

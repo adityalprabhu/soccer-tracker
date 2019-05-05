@@ -30,7 +30,6 @@
         <tr>
           <th scope="col"></th>
           <th scope="col"></th>
-          <th scope="col"></th>
           <th scope="col">Home Team</th>
           <th scope="col"></th>
           <th class="score" scope="col">Score</th>
@@ -46,14 +45,6 @@
           <td id="led-box">
             <div class="led-green"></div>
           </td>
-          <td *ngIf="isHypeFixture(fixture);else other_content" width="40">
-            <img src="https://ui-ex.com/images/fire-svg-6.png"
-                 style="width:35px;height:35;"
-                 title="Top Teams Playing">
-          </td>
-          <ng-template #other_content>
-            <td></td>
-          </ng-template>
           <td><img class="countryFlag" src="{{countryFlags[fixture['league_id']]}}"
                    style="width:35px;height:35;">
 
@@ -73,7 +64,7 @@
         </tbody>
       </table>
     </div>
-    <div *ngIf="!liveGames.length > 0 && loadCount == 5" class="mt-4 mb-3" style="text-align: center">
+    <div *ngIf="!(liveGames.length > 0) && loadCount == 5" class="mt-4 mb-3" style="text-align: center">
       <h3>No Live Matches!</h3>
     </div>
 
@@ -86,7 +77,6 @@
         <thead class="thead-dark">
         <tr>
           <th scope="col"></th>
-          <th scope="col"></th>
           <th scope="col">Home Team</th>
           <th scope="col"></th>
 
@@ -98,15 +88,8 @@
 
         <tbody>
         <ng-container *ngFor="let fixture of filterBy('event_timestamp', 0)">
-          <tr *ngIf="checkIfDone(fixture) && leagueShowing(fixture['league_id'])">
-            <td *ngIf="isHypeFixture(fixture);else other_content" width="40">
-              <img src="https://ui-ex.com/images/fire-svg-6.png"
-                   style="width:35px;height:35;"
-                   title="Top Teams Playing">
-            </td>
-            <ng-template #other_content>
-              <td></td>
-            </ng-template>
+          <tr *ngIf="checkIfDone(fixture) && leagueShowing(fixture['league_id'])"
+              class="{{isHypeFixture(fixture)}}">
             <td><img class="countryFlag" src="{{countryFlags[fixture['league_id']]}}"></td>
             <td><a routerLink="/team/{{fixture.homeTeam_id}}">{{fixture.homeTeam}}</a></td>
             <td class="logotd"><img class="logo" src="{{findLogo(fixture['homeTeam_id'])}}"></td>
@@ -122,7 +105,7 @@
         </tbody>
       </table>
       </div>
-      <div *ngIf="!earlierGames.length > 0 && loadCount == 5">
+      <div *ngIf="!(earlierGames.length) > 0 && loadCount == 5">
         No Matches Earlier Today!
       </div>
 
@@ -157,7 +140,6 @@
               <thead class="thead-dark">
               <tr>
                 <th scope="col"></th>
-                <th scope="col"></th>
                 <th scope="col">Home Team</th>
                 <th scope="col"></th>
                 <th scope="col">Time</th>
@@ -167,15 +149,8 @@
               </thead>
               <tbody>
               <ng-container *ngFor="let fixture of filterBy('event_timestamp', 0)">
-                <tr *ngIf="checkTodayDate(fixture) && leagueShowing(fixture['league_id'])">
-                  <td *ngIf="isHypeFixture(fixture);else other_content" width="40">
-                    <img src="https://ui-ex.com/images/fire-svg-6.png"
-                         style="width:35px;height:35;"
-                         title="Top Teams Playing">
-                  </td>
-                  <ng-template #other_content>
-                    <td></td>
-                  </ng-template>
+                <tr *ngIf="checkTodayDate(fixture) && leagueShowing(fixture['league_id'])"
+                    class="{{isHypeFixture(fixture)}}">
                   <td><img class="countryFlag" src="{{countryFlags[fixture['league_id']]}}"
                            style="width:35px;height:35;">
                   </td>
@@ -204,7 +179,6 @@
               <table class="table table-striped">
                 <thead class="thead-dark">
                 <tr>
-                  <th scope="col"></th>
                   <th scope="col" class="d-none d-sm-table-cell"></th>
                   <th scope="col">Home Team</th>
                   <th scope="col"></th>
@@ -215,17 +189,11 @@
                 </thead>
                 <tbody>
                 <ng-container *ngFor="let fixture of filterBy('event_timestamp', day)">
-                  <tr *ngIf="leagueShowing(fixture['league_id'])">
-                    <td *ngIf="isHypeFixture(fixture);else other_content" width="40">
-                      <img src="https://ui-ex.com/images/fire-svg-6.png"
-                           style="width:35px;height:35;"
-                           title="Top Teams Playing">
-                    </td>
-                    <ng-template #other_content>
-                      <td></td>
-                    </ng-template>
-                    <td class="d-none d-sm-table-cell"><img class="countryFlag"
-                                                            src="{{countryFlags[fixture['league_id']]}}">
+                  <tr *ngIf="leagueShowing(fixture['league_id'])" class="{{isHypeFixture(fixture)}}" >
+
+                    <td class="d-none d-sm-table-cell">
+                      <img class="countryFlag"
+                           src="{{countryFlags[fixture['league_id']]}}">
                     </td>
                     <td><a routerLink="/team/{{fixture.homeTeam_id}}">{{fixture.homeTeam}}</a></td>
                     <td class="logotd"><img class="logo" src="{{findLogo(fixture['homeTeam_id'])}}"></td>
