@@ -91,13 +91,6 @@
   border-radius: 10px;
 }
 
-#live-fixtures {
-  display: none;
-}
-
-#no-live-fixtures {
-  display: none;
-}
 
 @-webkit-keyframes blinkGreen {
   from { background-color: #ABFF00; }

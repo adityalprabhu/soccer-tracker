@@ -38,7 +38,7 @@ export class FixturesComponent implements OnInit {
 
   earlierGames: any;
   laterGames: any;
-  liveGames: any;
+  liveGames: any[];
 
   timerSubscription: any;
   daysOfWeek: any;
@@ -175,6 +175,8 @@ export class FixturesComponent implements OnInit {
       this.earlierGames.sort((a, b) => {
         return parseInt(b['event_timestamp'], 10) - parseInt(a['event_timestamp'], 10);
       });
+
+      console.log(this.liveGames)
 
       // refreshes today's scores every minute
       this.subscribeToData();
