@@ -123,7 +123,7 @@ export class Utils {
     540: "https://www.api-football.com/public/teams/540.png",
     541: "https://www.api-football.com/public/teams/541.png",
     542: "https://www.api-football.com/public/teams/542.png",
-    543: "https://www.api-football.com/public/teams/543.jpg",
+    543: "https://www.api-football.com/public/teams/543.png",
     545: "https://www.api-football.com/public/teams/545.svg",
     546: "https://www.api-football.com/public/teams/546.png",
     547: "https://www.api-football.com/public/teams/547.png",
