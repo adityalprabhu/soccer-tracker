@@ -19,9 +19,9 @@ export class Utils {
 
   public static COUNTRYFLAGS = {
     2: 'https://www.api-football.com/public/teams/10.png',
-    87: 'https://www.api-football.com/public/teams/9.jpg',
+    87: 'https://www.api-football.com/public/teams/9.png',
     4: 'https://www.api-football.com/public/teams/2.png',
-    8: 'https://www.api-football.com/public/teams/25.jpg',
+    8: 'https://www.api-football.com/public/teams/25.png',
     94: 'https://www.api-football.com/public/teams/768.png'
   };
 
