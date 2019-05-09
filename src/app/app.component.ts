@@ -13,7 +13,7 @@ export class AppComponent implements OnInit{
   title = 'soccer-tracker';
   loggedIn: boolean;
   isManager: boolean;
-  leagues = {2: 'English', 87: 'Spanish', 4: 'French', 8: 'German', 94: 'Italian'};
+  leagues = {2: 'English', 87: 'Spanish', 4: 'French', 8: 'German', 94: 'Italian', 294: 'American'};
   searchField = "";
 
   constructor(private router: Router,
