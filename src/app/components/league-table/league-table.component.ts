@@ -21,14 +21,16 @@ export class LeagueTableComponent implements OnInit {
   leagueNames;
   leagueSeasonNext;
   leagueStandings;
+  leagueStandingsOther;
   leagueLogos;
   teamLogos;
   comments: any;
   newComment: string;
   user: any;
   userId: string;
-  userName: String;
+  userName: string;
   loggedIn: boolean;
+  isAmerican: boolean;
 
   constructor(private route: ActivatedRoute,
               private location: Location,
@@ -41,7 +43,9 @@ export class LeagueTableComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.leagueId = params.leagueId;
+      this.findIsAmerican(this.leagueId);
       this.findLeagueStandings(this.leagueId);
+      this.findLeagueStandingsOther(this.leagueId);
       this.findLeagueDetails(this.leagueId);
       this.getCurrentUser();
       this.findAllComments();
@@ -56,6 +60,16 @@ export class LeagueTableComponent implements OnInit {
     this.teamService.findLeagueStandings(leagueId).subscribe(res => {
       this.leagueStandings = res['api'].standings[0];
     });
+  }
+
+  findLeagueStandingsOther(leagueId) {
+    this.teamService.findLeagueStandings(leagueId).subscribe(res => {
+      this.leagueStandingsOther = res['api'].standings[1];
+    });
+  }
+
+  findIsAmerican(leagueId) {
+    this.isAmerican = leagueId === '294';
   }
 
   findLeagueDetails(leagueId) {
