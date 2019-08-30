@@ -8,26 +8,17 @@ export class Utils {
 
   public static LEAGUEIDS = {'english': 524, 'spanish': 775, 'french': 525, 'german': 754, 'italy': 891};
   public static LEAGUENAMES = {
-<<<<<<< HEAD
     524: 'English',
     775: 'Spanish',
     525: 'French',
     754: 'German',
     891: 'Italian'
-=======
-    2: 'English',
-    87: 'Spanish',
-    4: 'French',
-    8: 'German',
-    94: 'Italian',
-    294: 'American'
->>>>>>> 11499f749d3e8ee15dd833fd89abe2c97a3e75bc
   };
   public static SUPPORTEDLEAGUES = [Utils.LEAGUEIDS.english, Utils.LEAGUEIDS.spanish, Utils.LEAGUEIDS.french,
     Utils.LEAGUEIDS.german, Utils.LEAGUEIDS.italy];
 
   public static COUNTRYFLAGS = {
-<<<<<<< HEAD
+
     524: 'https://www.api-football.com/public/teams/10.png',
     775: 'https://www.api-football.com/public/teams/9.png',
     525: 'https://www.api-football.com/public/teams/2.png',
@@ -41,23 +32,11 @@ export class Utils {
     525: ["77", "78", "79", "80", "81", "82", "83", "84", "85", "87", "88", "89", "90", "91", "92", "93", "94", "95", "96", "1063"],
     754: ["157", "158", "159", "160", "161", "162", "163", "164", "165", "166", "167", "168", "169", "170", "171", "172", "173", "174"],
     891: ["487", "488", "489", "490", "491", "492", "493", "494", "495", "496", "497", "498", "499", "500", "502", "503", "505", "511", "512", "523"]
-=======
-    2: 'https://www.api-football.com/public/teams/10.png',
-    87: 'https://www.api-football.com/public/teams/9.png',
-    4: 'https://www.api-football.com/public/teams/2.png',
-    8: 'https://www.api-football.com/public/teams/25.png',
-    94: 'https://www.api-football.com/public/teams/768.png',
-    294: 'https://www.api-football.com/public/flags/us.svg',
+
+
   };
 
-  public static TEAMSBYLEAGUEID = {
-    2: ['33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50', '51', '52'],
-    87: ['529', '530', '531', '532', '533', '536', '537', '538', '539', '540', '541', '542', '543', '545', '546', '547', '548', '720', '726', '728'],
-    4: ['77', '78', '79', '80', '81', '82', '83', '84', '85', '87', '88', '89', '90', '91', '92', '93', '94', '95', '96', '1063'],
-    8: ['157', '158', '159', '160', '161', '162', '163', '164', '165', '166', '167', '168', '169', '170', '171', '172', '173', '174'],
-    94: ['487', '488', '489', '490', '491', '492', '493', '494', '495', '496', '497', '498', '499', '500', '502', '503', '505', '511', '512', '523']
->>>>>>> 11499f749d3e8ee15dd833fd89abe2c97a3e75bc
-  };
+
 
   public static TEAMLOGOS = {
     33: 'https://www.api-football.com/public/teams/33.png',
@@ -185,20 +164,7 @@ export class Utils {
   };
 
   public static LEAGUELOGOS = {
-<<<<<<< HEAD
-    524: "https://www.api-football.com/public/leagues/2.png",
-    87: "https://www.api-football.com/public/leagues/87.png",
-    4: "https://www.api-football.com/public/leagues/4.svg",
-    8: "https://www.api-football.com/public/leagues/8.png",
-    94: "https://www.api-football.com/public/leagues/94.png"
-=======
-    2: 'https://www.api-football.com/public/leagues/2.png',
-    87: 'https://www.api-football.com/public/leagues/87.png',
-    4: 'https://www.api-football.com/public/leagues/4.svg',
-    8: 'https://www.api-football.com/public/leagues/8.png',
-    94: 'https://www.api-football.com/public/leagues/94.png',
-    294: 'https://www.api-football.com/public/leagues/294.png'
->>>>>>> 11499f749d3e8ee15dd833fd89abe2c97a3e75bc
+
   };
 
   public static FIVEDAYSMS = 1000 * 60 * 60 * 24 * 5;
