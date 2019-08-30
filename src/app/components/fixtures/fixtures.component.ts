@@ -78,19 +78,19 @@ export class FixturesComponent implements OnInit {
       this.today.setHours(0, 0, 0, 0);
       this.countryFlags = Utils.COUNTRYFLAGS;
       this.showLeagues = {
-        '2': this.englishLeague,
-        '87': this.spanishLeague,
-        '4': this.frenchLeague,
-        '8': this.germanLeague,
-        '94': this.italianLeague
+        '524': this.englishLeague,
+        '775': this.spanishLeague,
+        '525': this.frenchLeague,
+        '891': this.germanLeague,
+        '754': this.italianLeague
       };
 
       this.leagueGames = {
-        2: [],
-        87: [],
-        4: [],
-        8: [],
-        94: []
+        524: [],
+        775: [],
+        525: [],
+        891: [],
+        754: []
       };
 
       this.earlierGames = [];
@@ -139,6 +139,7 @@ export class FixturesComponent implements OnInit {
         this.loadCount += 1;
       });
     }
+    console.log(this.matches)
   }
 
 
@@ -146,6 +147,8 @@ export class FixturesComponent implements OnInit {
     let updatedEarlierGames = [];
     let updatedLaterGames = [];
     let updatedLiveGames = [];
+
+
 
     let dateString = this.today.getFullYear() + '-' + (this.today.getMonth() + 1) + '-' + this.today.getDate();
     this.fixtureService.findTodaysFixtures(dateString).subscribe(res => {
@@ -195,6 +198,7 @@ export class FixturesComponent implements OnInit {
 
       // refreshes today's scores every minute
       this.subscribeToData();
+      console.log(this.matches)
     });
   }
 
@@ -311,7 +315,9 @@ export class FixturesComponent implements OnInit {
   }
 
   filterBy(prop: string, num: number) {
+
     return this.matches[num].sort((a, b) => a[prop] > b[prop] ? 1 : a[prop] === b[prop] ? 0 : -1);
+
   }
 
   toggleEnglishLeague() {

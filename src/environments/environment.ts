@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   apiURL: '',
   domain: 'http://localhost:3000',
-  fdomain: 'https://api-football-v1.p.rapidapi.com',
+  fdomain: 'https://api-football-v1.p.rapidapi.com/v2/',
   local5000: 'http://localhost:5000'
 };
 

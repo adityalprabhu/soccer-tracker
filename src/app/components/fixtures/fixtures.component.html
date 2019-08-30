@@ -48,17 +48,17 @@
           <td><img class="countryFlag" src="{{countryFlags[fixture['league_id']]}}"
                    style="width:35px;height:35;">
 
-          <td><a routerLink="/team/{{fixture.homeTeam_id}}">{{fixture.homeTeam}}</a></td>
-          <td><img class="logo" src="{{logos[fixture['homeTeam_id']]}}"
+          <td><a routerLink="/team/{{fixture.homeTeam_id}}">{{fixture.homeTeam.team_name}}</a></td>
+          <td><img class="logo" src="{{fixture.homeTeam.logo}}"
                    style="width:35px;height:35;"></td>
           <td>
             <div class="score" style="align-content: center"><b>{{fixture.goalsHomeTeam}}
               -  {{fixture.goalsAwayTeam}}</b></div>
             <div class="score" style="align-content: center">{{getTime(fixture)}}</div>
           </td>
-          <td><img class="logo" src="{{logos[fixture['awayTeam_id']]}}"
+          <td><img class="logo" src="{{fixture.awayTeam.logo}}"
                    style="width:35px;height:35;"></td>
-          <td><a routerLink="/team/{{fixture.awayTeam_id}}">{{fixture.awayTeam}}</a></td>
+          <td><a routerLink="/team/{{fixture.awayTeam_id}}">{{fixture.awayTeam.team_name}}</a></td>
         </tr>
         </ng-container>
         </tbody>
@@ -91,15 +91,15 @@
           <tr *ngIf="checkIfDone(fixture) && leagueShowing(fixture['league_id'])"
               class="{{isHypeFixture(fixture)}}">
             <td><img class="countryFlag" src="{{countryFlags[fixture['league_id']]}}"></td>
-            <td><a routerLink="/team/{{fixture.homeTeam_id}}">{{fixture.homeTeam}}</a></td>
-            <td class="logotd"><img class="logo" src="{{findLogo(fixture['homeTeam_id'])}}"></td>
+            <td><a routerLink="/team/{{fixture.homeTeam_id}}">{{fixture.homeTeam.team_name}}</a></td>
+            <td class="logotd"><img class="logo" src="{{fixture.homeTeam.logo}}"></td>
             <td>
               <div class="score" style="align-content: center"><b>{{fixture.goalsHomeTeam}}
                 -  {{fixture.goalsAwayTeam}}</b></div>
               <div class="score" style="align-content: center">{{fixture['statusShort']}}</div>
             </td>
-            <td class="logotd"><img class="logo" src="{{findLogo(fixture['awayTeam_id'])}}"></td>
-            <td><a routerLink="/team/{{fixture.awayTeam_id}}">{{fixture.awayTeam}}</a></td>
+            <td class="logotd"><img class="logo" src="{{fixture.awayTeam.logo}}"></td>
+            <td><a routerLink="/team/{{fixture.awayTeam_id}}">{{fixture.homeTeam.team_name}}</a></td>
           </tr>
         </ng-container>
         </tbody>
@@ -154,11 +154,11 @@
                   <td><img class="countryFlag" src="{{countryFlags[fixture['league_id']]}}"
                            style="width:35px;height:35;">
                   </td>
-                  <td><a routerLink="/team/{{fixture.homeTeam_id}}">{{fixture.homeTeam}}</a></td>
-                  <td class="logotd"><img class="logo" src="{{findLogo(fixture['homeTeam_id'])}}"></td>
+                  <td><a routerLink="/team/{{fixture.homeTeam_id}}">{{fixture.homeTeam.team_name}}</a></td>
+                  <td class="logotd"><img class="logo" src="{{fixture.homeTeam.logo}}"></td>
                   <td>{{getTime(fixture)}}</td>
-                  <td class="logotd"><img class="logo" src="{{findLogo(fixture['awayTeam_id'])}}"></td>
-                  <td><a routerLink="/team/{{fixture.awayTeam_id}}">{{fixture.awayTeam}}</a></td>
+                  <td class="logotd"><img class="logo" src="{{fixture.awayTeam.logo}}"></td>
+                  <td><a routerLink="/team/{{fixture.awayTeam_id}}">{{fixture.awayTeam.team_name}}</a></td>
                 </tr>
               </ng-container>
               </tbody>
@@ -195,11 +195,11 @@
                       <img class="countryFlag"
                            src="{{countryFlags[fixture['league_id']]}}">
                     </td>
-                    <td><a routerLink="/team/{{fixture.homeTeam_id}}">{{fixture.homeTeam}}</a></td>
-                    <td class="logotd"><img class="logo" src="{{findLogo(fixture['homeTeam_id'])}}"></td>
+                    <td><a routerLink="/team/{{fixture.homeTeam_id}}">{{fixture.homeTeam.team_name}}</a></td>
+                    <td class="logotd"><img class="logo" src="{{fixture.homeTeam.logo}}"></td>
                     <td>{{getTime(fixture)}}</td>
-                    <td class="logotd"><img class="logo" src="{{findLogo(fixture['awayTeam_id'])}}"></td>
-                    <td><a routerLink="/team/{{fixture.awayTeam_id}}">{{fixture.awayTeam}}</a></td>
+                    <td class="logotd"><img class="logo" src="{{fixture.awayTeam.logo}}"></td>
+                    <td><a routerLink="/team/{{fixture.awayTeam_id}}">{{fixture.awayTeam.team_name}}</a></td>
                   </tr>
                 </ng-container>
                 </tbody>
@@ -252,15 +252,15 @@
                         <td></td>
                       </ng-template>
                       <td><img class="countryFlag" src="{{countryFlags[fixture['league_id']]}}"></td>
-                      <td><a routerLink="/team/{{fixture.homeTeam_id}}">{{fixture.homeTeam}}</a></td>
-                      <td class="logotd"><img class="logo" src="{{findLogo(fixture['homeTeam_id'])}}"></td>
+                      <td><a routerLink="/team/{{fixture.homeTeam_id}}">{{fixture.homeTeam.team_name}}</a></td>
+                      <td class="logotd"><img class="logo" src="{{fixture.homeTeam.logo}}"></td>
                       <td>
                         <div class="score" style="align-content: center"><b>{{fixture.goalsHomeTeam}}
                           -  {{fixture.goalsAwayTeam}}</b></div>
                         <div class="score" style="align-content: center">{{fixture['statusShort']}}</div>
                       </td>
-                      <td class="logotd"><img class="logo" src="{{findLogo(fixture['awayTeam_id'])}}"></td>
-                      <td><a routerLink="/team/{{fixture.awayTeam_id}}">{{fixture.awayTeam}}</a></td>
+                      <td class="logotd"><img class="logo" src="{{fixture.awayTeam.logo}}"></td>
+                      <td><a routerLink="/team/{{fixture.awayTeam_id}}">{{fixture.awayTeam.team_name}}</a></td>
                     </tr>
                   </ng-container>
                   </tbody>
