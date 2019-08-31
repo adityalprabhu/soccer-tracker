@@ -6,19 +6,19 @@ export class Utils {
 
   public static RAPIDKEY = '2c4a4fc99amshe50fdd337dd7144p16d624jsn64cd58af65a9';
 
-  public static LEAGUEIDS = {'english': 524, 'spanish': 775, 'french': 525, 'german': 754, 'italy': 891};
+  public static LEAGUEIDS = {'english': 524, 'spanish': 775, 'french': 525, 'german': 754, 'italy': 891, 'american': 294};
   public static LEAGUENAMES = {
     524: 'English',
     775: 'Spanish',
     525: 'French',
     754: 'German',
-    891: 'Italian'
+    891: 'Italian',
+    294: 'American'
   };
   public static SUPPORTEDLEAGUES = [Utils.LEAGUEIDS.english, Utils.LEAGUEIDS.spanish, Utils.LEAGUEIDS.french,
     Utils.LEAGUEIDS.german, Utils.LEAGUEIDS.italy];
 
   public static COUNTRYFLAGS = {
-
     524: 'https://www.api-football.com/public/teams/10.png',
     775: 'https://www.api-football.com/public/teams/9.png',
     525: 'https://www.api-football.com/public/teams/2.png',
@@ -32,8 +32,6 @@ export class Utils {
     525: ["77", "78", "79", "80", "81", "82", "83", "84", "85", "87", "88", "89", "90", "91", "92", "93", "94", "95", "96", "1063"],
     754: ["157", "158", "159", "160", "161", "162", "163", "164", "165", "166", "167", "168", "169", "170", "171", "172", "173", "174"],
     891: ["487", "488", "489", "490", "491", "492", "493", "494", "495", "496", "497", "498", "499", "500", "502", "503", "505", "511", "512", "523"]
-
-
   };
 
 

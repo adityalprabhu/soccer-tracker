@@ -16,14 +16,12 @@ import {isNullOrUndefined} from 'util';
 })
 export class LeagueTableComponent implements OnInit {
 
-  leagueDetails;
-  leagueId;
-  leagueNames;
-  leagueSeasonNext;
-  leagueStandings;
-  leagueStandingsOther;
-  leagueLogos;
-  teamLogos;
+  leagueDetails: any;
+  leagueId: any;
+  leagueSeasonNext: any;
+  leagueStandings: any;
+  leagueStandingsOther: any;
+  teamLogos: any;
   comments: any;
   newComment: string;
   user: any;
@@ -50,10 +48,6 @@ export class LeagueTableComponent implements OnInit {
       this.getCurrentUser();
       this.findAllComments();
     });
-
-    this.teamLogos = Utils.TEAMLOGOS;
-    this.leagueLogos = Utils.LEAGUELOGOS;
-    this.leagueNames = Utils.LEAGUENAMES;
   }
 
   findLeagueStandings(leagueId) {
@@ -69,12 +63,13 @@ export class LeagueTableComponent implements OnInit {
   }
 
   findIsAmerican(leagueId) {
-    this.isAmerican = leagueId === '294';
+    this.isAmerican = leagueId === Utils.LEAGUEIDS['american'];
   }
 
   findLeagueDetails(leagueId) {
     this.teamService.findLeagueDetails(leagueId).subscribe(res => {
-      this.leagueDetails = res['api']['leagues'][leagueId];
+      this.leagueDetails = res['api']['leagues'][0];
+      console.log(this.leagueDetails);
       this.leagueSeasonNext = parseInt(this.leagueDetails.season, 10) + 1;
     });
   }
