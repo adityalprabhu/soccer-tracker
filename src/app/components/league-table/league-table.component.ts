@@ -16,7 +16,7 @@ import {isNullOrUndefined} from 'util';
 })
 export class LeagueTableComponent implements OnInit {
 
-  leagueDetails: any;
+  leagueDetails: any = {};
   leagueId: any;
   leagueSeasonNext: any;
   leagueStandings: any;
